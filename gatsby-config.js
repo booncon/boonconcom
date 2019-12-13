@@ -1,8 +1,8 @@
 module.exports = {
   siteMetadata: {
-    title: `Gatsby Default Starter`,
-    description: `Kick off your next, great Gatsby project with this default starter. This barebones starter ships with the main Gatsby configuration files you might need.`,
-    author: `@gatsbyjs`,
+    title: `booncon`,
+    description: `We are booncon, we are changing the way people experience work. As the lines between life and work are blurring, it’s important for everybody to love what they are doing. We are on a mission to make work lovable.`,
+    author: `@sftsk`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -13,18 +13,40 @@ module.exports = {
         path: `${__dirname}/src/images`,
       },
     },
+    `gatsby-plugin-sass`,
+    `gatsby-plugin-theme-ui`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
     {
+      resolve: "gatsby-plugin-web-font-loader",
+      options: {
+        typekit: {
+          id: "ong3eiq",
+        },
+        custom: {
+          families: ["Helia"],
+          urls: ["/fonts/helia.css"],
+        },
+      },
+    },
+    {
+      resolve: "gatsby-plugin-react-svg",
+      options: {
+        rule: {
+          include: /\.inline\.svg$/, // See below to configure properly
+        },
+      },
+    },
+    {
       resolve: `gatsby-plugin-manifest`,
       options: {
-        name: `gatsby-starter-default`,
-        short_name: `starter`,
+        name: `booncon`,
+        short_name: `booncon`,
         start_url: `/`,
         background_color: `#663399`,
         theme_color: `#663399`,
         display: `minimal-ui`,
-        icon: `src/images/gatsby-icon.png`, // This path is relative to the root of the site.
+        icon: `static/images/logo_bc-main-square.png`, // This path is relative to the root of the site.
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality

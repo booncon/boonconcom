@@ -1,0 +1,61 @@
+/**
+ * @license
+ * MyFonts Webfont Build ID 3847245, 2019-12-13T04:44:38-0500
+ * 
+ * The fonts listed in this notice are subject to the End User License
+ * Agreement(s) entered into by the website owner. All other parties are 
+ * explicitly restricted from using the Licensed Helia(s).
+ * 
+ * You may obtain a valid license at the URLs below.
+ * 
+ * Webfont: Helia-Light by Nootype
+ * URL: https://www.myfonts.com/fonts/nootype/helia/light/
+ * 
+ * Webfont: Helia-Medium by Nootype
+ * URL: https://www.myfonts.com/fonts/nootype/helia/medium/
+ * 
+ * Webfont: Helia-Regular by Nootype
+ * URL: https://www.myfonts.com/fonts/nootype/helia/regular/
+ * 
+ * 
+ * Licensed pageviews: 10,000
+ * Helia copyright: Copyright (c) 2013 by Nico Inosanto. All rights reserved.
+ * 
+ * © 2019 MyFonts Inc
+*/
+
+/* @import must be at top of file, otherwise CSS will not work */
+@import url("//hello.myfonts.net/count/3ab44d");
+
+@font-face {
+  font-family: "Helia";
+  src: url("Helia/3AB44D_0_0.eot");
+  src: url("Helia/3AB44D_0_0.eot?#iefix") format("embedded-opentype"),
+    url("Helia/3AB44D_0_0.woff2") format("woff2"),
+    url("Helia/3AB44D_0_0.woff") format("woff"),
+    url("Helia/3AB44D_0_0.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 200;
+}
+
+@font-face {
+  font-family: "Helia";
+  src: url("Helia/3AB44D_1_0.eot");
+  src: url("Helia/3AB44D_1_0.eot?#iefix") format("embedded-opentype"),
+    url("Helia/3AB44D_1_0.woff2") format("woff2"),
+    url("Helia/3AB44D_1_0.woff") format("woff"),
+    url("Helia/3AB44D_1_0.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 600;
+}
+
+@font-face {
+  font-family: "Helia";
+  src: url("Helia/3AB44D_2_0.eot");
+  src: url("Helia/3AB44D_2_0.eot?#iefix") format("embedded-opentype"),
+    url("Helia/3AB44D_2_0.woff2") format("woff2"),
+    url("Helia/3AB44D_2_0.woff") format("woff"),
+    url("Helia/3AB44D_2_0.ttf") format("truetype");
+  font-style: normal;
+  font-weight: 400;
+}
