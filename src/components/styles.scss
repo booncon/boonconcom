@@ -27,6 +27,24 @@ a {
   }
 }
 
+blockquote {
+  font-style: italic;
+  font-weight: 200;
+  footer {
+    font-style: normal;
+    font-size: 1rem;
+    margin-top: 0.4rem;
+    text-align: right;
+  }
+}
+
+footer {
+  a {
+    display: inline-block;
+    margin-bottom: 6px;
+  }
+}
+
 // COMPONENTS
 
 .main-logo {
@@ -35,12 +53,18 @@ a {
   top: 20px;
   svg {
     height: 48px;
+    #bc-logo-main-circle-bg {
+      stroke: #fff;
+      stroke-width: 3px;
+    }
+    #bc-logo-main-text-wrap {
+      // display: none;
+    }
   }
 }
 
 .hero-img {
-  height: 100vh;
-  background: #888 url(/images/office-work-b+w.jpeg) no-repeat;
+  background: #888 url(/images/office-work-b+w.jpeg) 60% 50% no-repeat;
   background-size: cover;
   background-attachment: fixed;
   &::after {
@@ -60,6 +84,16 @@ a {
 .hero-title {
   color: #fff;
   animation: color-change 2s;
+}
+
+.fact-box {
+  color: $primary;
+  text-align: center;
+  font-size: 1.6rem;
+  .fancy-number {
+    margin-top: -1.6rem;
+    font-size: 4.4rem;
+  }
 }
 
 // ANIMATIONS

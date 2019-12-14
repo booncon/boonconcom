@@ -11,7 +11,7 @@ import { useStaticQuery, graphql } from "gatsby"
 
 import { ThemeProvider } from "theme-ui"
 import theme from "./base-theme.js"
-import { Flex, Box, Text, Heading } from "rebass"
+import { Flex, Box, Image, Text, Heading } from "rebass"
 
 import "./reset.css"
 import "./styles.scss"
@@ -38,31 +38,33 @@ const Layout = ({ children }) => {
       <main>{children}</main>
       <footer>
         <Flex
-          sx={{ backgroundColor: "secondary", color: "#fff" }}
+          sx={{ backgroundColor: "tertiary", color: "#fff" }}
           fontFamily="body"
           fontWeight="body"
+          flexWrap="wrap"
         >
-          <Box p={5} width={1 / 3} style={{ textAlign: "left" }}>
+          <Box p={[3, 5]} width={[1 / 2, 1 / 3]} style={{ textAlign: "left" }}>
             © {new Date().getFullYear()} booncon oy
             <br />
             VAT: FI24323170
-            <br />
-            <br />
-            <img
-              style={{ maxWidth: 100 }}
-              src="/images/SV_AA_LOGO_booncon_oy_EN_394547_web.jpg"
-              ytunnus="24323170"
-              title="More Info"
-              alt="Asiakastieto AA Certificate"
-            />
           </Box>
-          <Box p={5} width={1 / 3} style={{ textAlign: "center" }}>
-            <div style={{ maxWidth: 60, margin: "0 auto 6px" }}>
+          <Box
+            p={[3, 5]}
+            width={[1 / 2, 1 / 3]}
+            style={{ textAlign: "center" }}
+          >
+            <Box sx={{ maxWidth: ["48px", "60px"], margin: "0 auto 0" }}>
               <SquareBrandIcon></SquareBrandIcon>
-            </div>
-            <small>Working with friends.</small>
+            </Box>
+            <Text fontSize={[1, 2, 3]} color="white" textAlign="center">
+              Working with friends.
+            </Text>
           </Box>
-          <Box p={5} width={1 / 3} style={{ textAlign: "right" }}>
+          <Box
+            p={[3, 5]}
+            width={[1 / 2, 1 / 3]}
+            sx={{ textAlign: ["left", "right"] }}
+          >
             <a
               href="//facebook.com/booncon"
               target="_blank"
@@ -80,6 +82,13 @@ const Layout = ({ children }) => {
             </a>
             <br />
             <a href="/privacy">Privacy Policy</a>
+          </Box>
+          <Box width={[1 / 2, 1]} sx={{ paddingTop: [3, 0], paddingBottom: 4 }}>
+            <Image
+              sx={{ maxWidth: [60, 100], margin: "0 auto" }}
+              src="/images/SV_AA_LOGO_booncon_oy_EN_394547_web.jpg"
+              alt="Asiakastieto AA Certificate"
+            />
           </Box>
         </Flex>
       </footer>
