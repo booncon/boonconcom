@@ -1,6 +1,7 @@
 module.exports = {
   siteMetadata: {
     title: `booncon`,
+    slogan: `Working with friends.`,
     description: `We are booncon, we are changing the way people experience work. As the lines between life and work are blurring, it’s important for everybody to love what they are doing. We are on a mission to make work lovable.`,
     author: `@sftsk`,
   },
@@ -43,8 +44,6 @@ module.exports = {
         name: `booncon`,
         short_name: `booncon`,
         start_url: `/`,
-        background_color: `#663399`,
-        theme_color: `#663399`,
         display: `minimal-ui`,
         icon: `static/images/logo_bc-main-square.png`, // This path is relative to the root of the site.
       },

@@ -1,42 +1,22 @@
 // VARIABLES
-$primary: #2a9bda;
 $secondary: #4c5966;
 
-// GENERAL
-
-body,
-html {
-  letter-spacing: -0.2px;
-  color: $secondary;
-}
-
-a {
-  &:link,
-  &:visited {
-    border-bottom: 2px solid $primary;
-    text-decoration: none;
-    box-shadow: inset 0 -2px 0 $primary;
-    color: inherit;
-    transition: all 0.1s cubic-bezier(0.33, 0.66, 0.66, 1);
-  }
-  &:hover,
-  &:focus {
-    background: $primary;
-    color: #fff;
-    transition: all 0.1s cubic-bezier(0.33, 0.66, 0.66, 1);
-  }
-}
-
-blockquote {
-  font-style: italic;
-  font-weight: 200;
-  footer {
-    font-style: normal;
-    font-size: 1rem;
-    margin-top: 0.4rem;
-    text-align: right;
-  }
-}
+// a {
+//   &:link,
+//   &:visited {
+//     border-bottom: 2px solid $primary;
+//     text-decoration: none;
+//     box-shadow: inset 0 -2px 0 $primary;
+//     color: inherit;
+//     transition: all 0.1s cubic-bezier(0.33, 0.66, 0.66, 1);
+//   }
+//   &:hover,
+//   &:focus {
+//     background: $primary;
+//     color: #fff;
+//     transition: all 0.1s cubic-bezier(0.33, 0.66, 0.66, 1);
+//   }
+// }
 
 footer {
   a {
@@ -64,7 +44,7 @@ footer {
 }
 
 .hero-img {
-  background: #888 url(/images/office-work-b+w.jpeg) 60% 50% no-repeat;
+  background: #888 url("/images/office-work-b+w.jpeg") 60% 50% no-repeat;
   background-size: cover;
   background-attachment: fixed;
   &::after {
@@ -84,16 +64,6 @@ footer {
 .hero-title {
   color: #fff;
   animation: color-change 2s;
-}
-
-.fact-box {
-  color: $primary;
-  text-align: center;
-  font-size: 1.6rem;
-  .fancy-number {
-    margin-top: -1.6rem;
-    font-size: 4.4rem;
-  }
 }
 
 // ANIMATIONS
