@@ -60,11 +60,11 @@ export default {
       letterSpacing: "0.1px",
     },
     a: {
-      color: "red",
-      bg: "blue",
+      color: "#111",
+      bg: "#ccc",
       "&:link,&:visited": {
-        color: "red",
-        bg: "blue",
+        color: "#111",
+        bg: "#ccc",
       },
     },
   },

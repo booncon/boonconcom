@@ -65,12 +65,20 @@ const Layout = ({ children }) => {
           >
             © {new Date().getFullYear()} booncon oy
             <br />
-            VAT: FI24323170<br/>
-            <Image
-              sx={{ maxWidth: [60, 100], marginTop: [2, 3] }}
-              src="/images/SV_AA_LOGO_booncon_oy_EN_394547_web.jpg"
-              alt="Asiakastieto AA Certificate"
-            />
+            VAT: FI24323170
+            <br />
+            <Link
+              sx={{ marginTop: [2, 3] }}
+              href="https://www.asiakastieto.fi/yritykset/fi/booncon-oy/24323170/yleiskuva"
+              target="_blank"
+              rel="noopener noreferrer"
+            >
+              <Image
+                sx={{ maxWidth: [60, 100] }}
+                src="/images/SV_LOGO_booncon_oy_EN_409937_web.jpg"
+                alt="Asiakastieto AA Certificate"
+              />
+            </Link>
           </Box>
           <Box
             sx={{
