@@ -13,19 +13,27 @@ import {
 } from "@theme-ui/components"
 import { jsx } from "theme-ui"
 import Img from "gatsby-image"
+import BackgroundImage from "gatsby-background-image"
+
+import Tippy from "@tippyjs/react"
+import "tippy.js/dist/tippy.css"
 
 import { useStaticQuery, graphql } from "gatsby"
 
 const IndexPage = () => {
-  const instagram = useStaticQuery(graphql`
-    query getInstaPics {
+  const queryData = useStaticQuery(graphql`
+    query getQueryData {
       allInstaNode {
         edges {
           node {
             localFile {
               uid
               childImageSharp {
-                fixed(width: 500, height: 500) {
+                fixed(
+                  width: 502
+                  height: 502
+                  duotone: { highlight: "#ffffff", shadow: "#3b454f" }
+                ) {
                   base64
                   width
                   height
@@ -37,20 +45,47 @@ const IndexPage = () => {
           }
         }
       }
+      staticMap {
+        childFile {
+          childImageSharp {
+            fluid(
+              maxWidth: 1200
+              duotone: { highlight: "#ffffff", shadow: "#3b454f" }
+            ) {
+              # or fixed
+              ...GatsbyImageSharpFluid
+            }
+          }
+        }
+      }
+      desktop: file(relativePath: { eq: "office-work-b+w.jpeg" }) {
+        childImageSharp {
+          fluid(
+            quality: 88
+            maxWidth: 1920
+            duotone: { highlight: "#ffffff", shadow: "#3b454f" }
+          ) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
     }
-  `).allInstaNode.edges.reverse()
+  `)
+
+  const instagram = queryData.allInstaNode.edges.reverse()
 
   return (
     <Layout>
       <SEO title="Working with friends." />
-      <Box
-        as="header"
-        className="hero-img"
+      <BackgroundImage
+        Tag={`header`}
+        fluid={queryData.desktop.childImageSharp.fluid}
         sx={{
           display: "flex",
           alignItems: "center",
           justifyContent: "center",
           height: ["70vh", "100vh"],
+          zIndex: -1,
         }}
       >
         <Heading
@@ -60,8 +95,7 @@ const IndexPage = () => {
         >
           Working with friends.
         </Heading>
-      </Box>
-
+      </BackgroundImage>
       <Box
         sx={{
           variant: "contentWrap",
@@ -72,7 +106,8 @@ const IndexPage = () => {
           gap={3}
           sx={{
             padding: [3, 4],
-            gridTemplateColumns: "2fr 1fr",
+            gridTemplateColumns: ["1fr", "2fr 1fr"],
+            marginBottom: [-3, -4],
           }}
         >
           <Box
@@ -110,25 +145,18 @@ const IndexPage = () => {
               We strongly believe in mixing people from different backgrounds
               and blending startup ideology with the power of established
               companies.
-              {/* mehr menschlich weil mehr verantwortung von jedem
-              digitalisation to transform their culture and working efficiency. */}
             </Text>
           </Box>
           <Box>
-            <Link
-              href="https://www.instagram.com/p/BfyB5J8HHsW/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <AspectRatio ratio={1 / 1}>
-                <Img
-                  fixed={instagram[0].node.localFile.childImageSharp.fixed}
-                  sx={{
-                    objectFit: "cover",
-                  }}
-                />
-              </AspectRatio>
-            </Link>
+            <AspectRatio ratio={1 / 1}>
+              <Img
+                fixed={instagram[0].node.localFile.childImageSharp.fixed}
+                sx={{
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                }}
+              />
+            </AspectRatio>
           </Box>
         </Grid>
         <Grid
@@ -155,7 +183,7 @@ const IndexPage = () => {
               as="section"
               gap={3}
               sx={{
-                gridTemplateColumns: "3fr 1fr",
+                gridTemplateColumns: ["1fr", "3fr 1fr"],
               }}
             >
               <Box>
@@ -214,22 +242,26 @@ const IndexPage = () => {
           gap={3}
           sx={{
             padding: [3, 4],
-            gridTemplateColumns: "1fr 1fr",
+            marginTop: [-4, -5],
+            gridTemplateColumns: ["1fr", "1fr 1fr"],
           }}
         >
           <Box p={[3, 4]}>
-            <Image
-              variant="avatar"
-              src="/images/tobi-square.jpg"
-              alt="Portrait Tobi"
-            />
-            <Heading sx={{ fontSize: [2, 3, 4] }}>Tobias Johannes</Heading>
-            <Heading
-              sx={{ fontSize: [1, 2, 3], fontWeight: 200, marginTop: 1 }}
-            >
-              Master Planner
-            </Heading>
-            <br />
+            <Flex sx={{ alignItems: "center", marginBottom: 3 }}>
+              <Image
+                variant="avatar"
+                src="/images/tobi-square.jpg"
+                alt="Portrait Tobi"
+              />
+              <Box>
+                <Heading sx={{ fontSize: [2, 3, 4] }}>Tobias Johannes</Heading>
+                <Heading
+                  sx={{ fontSize: [1, 2, 3], fontWeight: 200, marginTop: 1 }}
+                >
+                  Master Planner
+                </Heading>
+              </Box>
+            </Flex>
             <Text sx={{ fontSize: [1, 2, 3] }}>
               Master Planner Tobias is an entrepreneur at heart, always bustling
               with new ways of doing things. Having worked closely with all
@@ -251,30 +283,35 @@ const IndexPage = () => {
             </Link>
           </Box>
           <Box p={[3, 4]}>
-            <Image
-              variant="avatar"
-              src="/images/luki-square.jpg"
-              alt="Portrait Luki"
-            />
-            <Heading sx={{ fontSize: [2, 3, 4] }}>Lukas Jakob Hafner</Heading>
-            <Heading
-              sx={{ fontSize: [1, 2, 3], fontWeight: 200, marginTop: 1 }}
-            >
-              Master Maker
-            </Heading>
-            <br />
+            <Flex sx={{ alignItems: "center", marginBottom: 3 }}>
+              <Image
+                variant="avatar"
+                src="/images/luki-square.jpg"
+                alt="Portrait Luki"
+              />
+              <Box>
+                <Heading sx={{ fontSize: [2, 3, 4] }}>
+                  Lukas Jakob Hafner
+                </Heading>
+                <Heading
+                  sx={{ fontSize: [1, 2, 3], fontWeight: 200, marginTop: 1 }}
+                >
+                  Master Maker
+                </Heading>
+              </Box>
+            </Flex>
             <Text sx={{ fontSize: [1, 2, 3] }}>
-              Lukas has a strong background in technology mixed with a degree in
-              design. His analytical thinking helps him to get to the bottom of
-              challenges and his excessive news-reading helps him to always know
-              something about everything.
+              Lukas has an educational background in technology and design. Over
+              ten years of working in the crossover of these two disciplines
+              have helped him to create a unique toolset for analysing complex
+              processes and implementing holistic user-centred solutions.
               <br />
               He is passionate about creating great user experiences and adores
               simplicity.
               <br />
-              When he is not working or tinkering he is probably busy trying out
-              new gadgets, playing basketball, throwing frisbees, cooking or
-              working on the next batch of craft-beer.
+              When he is not working or tinkering he is probably trying out new
+              gadgets, throwing frisbees, cooking or working on his next batch
+              of craft-beer.
             </Text>
             <Link fontSize={[3, 4, 5]} href="https://www.twitter.com/saftsaak">
               @saftsaak
@@ -286,7 +323,7 @@ const IndexPage = () => {
           sx={{
             padding: [3, 4],
             marginTop: [-4, -5],
-            gridTemplateColumns: "1fr 1fr 1fr 1fr",
+            gridTemplateColumns: ["1fr 1fr", "1fr 1fr 1fr 1fr"],
           }}
         >
           <Box sx={{ variant: "factBox" }}>
@@ -311,35 +348,34 @@ const IndexPage = () => {
           </Box>
         </Grid>
       </Box>
-      <Box
-        as="section"
-        bg="primary"
-        color="#fff"
-        sx={{ py: [4, 5], paddingBottom: [4, 6] }}
+      <BackgroundImage
+        Tag={`section`}
+        fluid={queryData.desktop.childImageSharp.fluid}
+        sx={{
+          py: [4, 5],
+          paddingBottom: [4, 6],
+          zIndex: -1,
+          color: "#fff",
+        }}
       >
         <Flex variant="contentWrap" flexWrap="wrap">
           <Grid
             gap={3}
             sx={{
               padding: [3, 4],
-              gridTemplateColumns: "1fr 2fr",
+              gridTemplateColumns: ["1fr", "1fr 2fr"],
             }}
           >
-            <Box>
-              <Link
-                href="https://www.instagram.com/p/BfyB5J8HHsW/"
-                target="_blank"
-                rel="noopener noreferrer"
-              >
-                <AspectRatio ratio={1 / 1}>
-                  <Img
-                    fixed={instagram[1].node.localFile.childImageSharp.fixed}
-                    sx={{
-                      objectFit: "cover",
-                    }}
-                  />
-                </AspectRatio>
-              </Link>
+            <Box sx={{ display: ["none", "block"] }}>
+              <AspectRatio ratio={1 / 1}>
+                <Img
+                  fixed={instagram[1].node.localFile.childImageSharp.fixed}
+                  sx={{
+                    maxWidth: "100%",
+                    maxHeight: "100%",
+                  }}
+                />
+              </AspectRatio>
             </Box>
             <Box px={[3, 4]} py={0}>
               <Heading as="h2" sx={{ fontSize: [3, 4, 5] }}>
@@ -365,7 +401,7 @@ const IndexPage = () => {
             </Box>
           </Grid>
         </Flex>
-        <Flex variant="contentWrap" flexWrap="wrap">
+        <Flex variant="contentWrap" flexWrap="wrap" sx={{ px: [3, 4] }}>
           <Box p={[3, 4]}>
             <Heading as="h3">We are awesome in:</Heading>
             <ul>
@@ -383,7 +419,7 @@ const IndexPage = () => {
         <Flex
           variant="contentWrap"
           flexWrap="wrap"
-          sx={{ justifyContent: "center" }}
+          sx={{ justifyContent: "center", px: [3, 4] }}
         >
           <Text sx={{ mx: [3, 4], alignSelf: "center", fontSize: [3, 4, 5] }}>
             Interested? Drop us a line, your{" "}
@@ -391,156 +427,158 @@ const IndexPage = () => {
             our day!
           </Text>
         </Flex>
-      </Box>
+      </BackgroundImage>
       <Flex as="section" variant="contentWrap" flexWrap="wrap">
         <Grid
           gap={3}
           sx={{
             padding: [3, 4],
-            gridTemplateColumns: "1fr 1fr",
+            gridTemplateColumns: ["1fr", "1.111fr 1fr"],
           }}
         >
           <Box p={[3, 4]}>
             <Heading as="h2" sx={{ fontSize: [3, 4, 5], marginBottom: [3, 4] }}>
               Stay in the loop:
             </Heading>
-            <Flex>
-              <a
-                sx={{ width: "20%" }}
-                href="podcast"
-                data-toggle="tooltip"
-                data-placement="top"
-                title=""
-                data-original-title='Listen to our podcast "bits &amp; pieces"'
-              >
-                <img
-                  src="https://booncon.com/app/themes/bc-new/assets/images/logos/bp.jpg"
-                  alt="Logo podcast bits &amp; pieces"
-                  scale="0"
-                />
+            <Flex
+              sx={{
+                flexFlow: ["row nowrap", "column wrap"],
+                maxHeight: ["auto", "200px", "300px"],
+                margin: -2,
+              }}
+            >
+              <a sx={{ variant: "linkBox" }} className="big" href="podcast">
+                <Tippy
+                  content='Listen to our podcast "bits &amp; pieces"'
+                  offset={[0, 20]}
+                >
+                  <img
+                    src="https://booncon.com/app/themes/bc-new/assets/images/logos/bp.jpg"
+                    alt="Logo podcast bits &amp; pieces"
+                  />
+                </Tippy>
               </a>
               <a
-                sx={{ width: "20%" }}
+                sx={{ variant: "linkBox" }}
                 href="//instagram.com/booncon"
                 rel="noreferrer"
                 target="_blank"
-                data-toggle="tooltip"
-                data-placement="top"
-                title=""
-                data-original-title="See our life on Instagram"
               >
-                <img
-                  src="https://booncon.com/app/themes/bc-new/assets/images/logos/instagram.svg"
-                  alt="Logo instagram"
-                  scale="0"
-                />
+                <Tippy content="See our life on Instagram" offset={[0, 14]}>
+                  <img
+                    src="https://booncon.com/app/themes/bc-new/assets/images/logos/instagram.svg"
+                    alt="Logo instagram"
+                  />
+                </Tippy>
               </a>
               <a
-                sx={{ width: "20%" }}
+                sx={{ variant: "linkBox" }}
                 href="//linkedin.com/company/booncon"
                 rel="noreferrer"
                 target="_blank"
-                data-toggle="tooltip"
-                data-placement="top"
-                title=""
-                data-original-title="Connect with us on LinkedIn"
               >
-                <img
-                  src="https://booncon.com/app/themes/bc-new/assets/images/logos/linked_in.svg"
-                  alt="Logo LinkedIn"
-                  scale="0"
-                />
+                <Tippy content="Connect with us on LinkedIn" offset={[0, 14]}>
+                  <img
+                    src="https://booncon.com/app/themes/bc-new/assets/images/logos/linked_in.svg"
+                    alt="Logo LinkedIn"
+                  />
+                </Tippy>
               </a>
               <a
-                sx={{ width: "20%" }}
+                sx={{ variant: "linkBox" }}
                 href="//twitter.com/booncon"
                 rel="noreferrer"
                 target="_blank"
-                data-toggle="tooltip"
-                data-placement="top"
-                title=""
-                data-original-title="Follow us on Twitter"
               >
-                <img
-                  src="https://booncon.com/app/themes/bc-new/assets/images/logos/twitter.svg"
-                  alt="Logo twitter"
-                  scale="0"
-                />
+                <Tippy content="Follow us on Twitter" offset={[0, 14]}>
+                  <img
+                    src="https://booncon.com/app/themes/bc-new/assets/images/logos/twitter.svg"
+                    alt="Logo twitter"
+                  />
+                </Tippy>
               </a>
               <a
-                sx={{ width: "20%" }}
+                sx={{ variant: "linkBox" }}
                 href="//facebook.com/booncon"
                 rel="noreferrer"
                 target="_blank"
-                data-toggle="tooltip"
-                data-placement="top"
-                title=""
-                data-original-title="Check us out on Facebook"
               >
-                <img
-                  src="https://booncon.com/app/themes/bc-new/assets/images/logos/facebook.svg"
-                  alt="Logo facebook"
-                  scale="0"
-                />
+                <Tippy content="Check us out on Facebook" offset={[0, 14]}>
+                  <img
+                    src="https://booncon.com/app/themes/bc-new/assets/images/logos/facebook.svg"
+                    alt="Logo facebook"
+                    scale="0"
+                  />
+                </Tippy>
               </a>
             </Flex>
           </Box>
-          <Box p={[3, 4]} sx={{ marginTop: [0, -6], backgroundColor: "#fff" }}>
-            <Link
-              href="https://www.instagram.com/p/BfyB5J8HHsW/"
-              target="_blank"
-              rel="noopener noreferrer"
-            >
-              <AspectRatio ratio={1 / 1}>
-                <Img
-                  fixed={instagram[2].node.localFile.childImageSharp.fixed}
-                  sx={{
-                    objectFit: "cover",
-                  }}
-                />
-              </AspectRatio>
-            </Link>
+          <Box
+            p={[3, 4]}
+            sx={{
+              display: ["none", "block"],
+              marginTop: -6,
+              backgroundColor: "#fff",
+            }}
+          >
+            <AspectRatio ratio={1 / 1}>
+              <Img
+                fixed={instagram[2].node.localFile.childImageSharp.fixed}
+                sx={{
+                  maxWidth: "100%",
+                  maxHeight: "100%",
+                }}
+              />
+            </AspectRatio>
           </Box>
         </Grid>
       </Flex>
-      <Box
-        as="section"
-        bg="primary"
-        color="#fff"
-        sx={{ py: [4, 5], paddingBottom: [4, 6] }}
-      >
-        <Flex variant="contentWrap" flexWrap="wrap">
-          <Grid
-            gap={3}
+      <Box as="section" bg="quaternary" color="#fff">
+        <Grid
+          gap={3}
+          sx={{
+            gridTemplateColumns: ["1fr", "1fr 1fr"],
+          }}
+        >
+          <Flex sx={{ justifyContent: "stretch" }}>
+            <Box sx={{ width: "100%", maxHeight: [128, 512] }}>
+              <Img
+                fluid={queryData.staticMap.childFile.childImageSharp.fluid}
+                sx={{ objectFit: "cover", width: "100%", height: "100%" }}
+              />
+            </Box>
+          </Flex>
+          <Flex
             sx={{
-              padding: [3, 4],
-              gridTemplateColumns: "1fr 1fr",
+              my: [4, 5],
+              justifyContent: "space-around",
+              alignItems: "center",
             }}
           >
-            <Box>
-              <Link
-                href="https://www.instagram.com/p/BfyB5J8HHsW/"
-                target="_blank"
-                rel="noopener noreferrer"
+            <Box sx={{ maxWidth: ["100%", "50%"], px: [4, 0], py: [2, 0] }}>
+              <Heading
+                as="h2"
+                sx={{
+                  fontSize: [4, 5],
+                  fontFamily: "body",
+                  textTransform: "uppercase",
+                  marginBottom: [2, 3],
+                }}
               >
-                <AspectRatio ratio={1 / 1}>
-                  <Img
-                    fixed={instagram[3].node.localFile.childImageSharp.fixed}
-                    sx={{
-                      objectFit: "cover",
-                    }}
-                  />
-                </AspectRatio>
-              </Link>
-            </Box>
-            <Box px={[3, 4]} py={0}>
-              <Box>
-                <Heading as="h2">Get in touch.</Heading>
-                <Text>
-                  We would love to hear from you and work on something together!
-                </Text>
+                Get in touch.
+              </Heading>
+              <Text sx={{ fontSize: [3, 4], marginBottom: [2, 3] }}>
+                We would love to hear from you and work on something together!
+              </Text>
+              <Grid
+                gap={3}
+                sx={{
+                  gridTemplateColumns: ["1fr", "1fr 1fr"],
+                  fontSize: [2],
+                }}
+              >
                 <address>
-                  <strong>booncon oy</strong>
+                  booncon oy
                   <br />
                   Suvilahdenkatu 4 B 42
                   <br />
@@ -551,12 +589,12 @@ const IndexPage = () => {
                 <address>
                   +358 45 8980609
                   <br />
-                  <a href="mailto:hello@booncon.com">hello@booncon.com</a>
+                  <Link href="mailto:hello@booncon.com">hello@booncon.com</Link>
                 </address>
-              </Box>
+              </Grid>
             </Box>
-          </Grid>
-        </Flex>
+          </Flex>
+        </Grid>
       </Box>
     </Layout>
   )

@@ -9,6 +9,8 @@ import { jsx, Styled } from "theme-ui"
 import { Flex, Box, Image, Text, Link } from "@theme-ui/components"
 
 import "./styles.scss"
+import Tippy from "@tippyjs/react"
+import CookieConsent from "react-cookie-consent"
 
 import BrandIcon from "../../static/svgs/logo_bc-main.inline.svg"
 import SquareBrandIcon from "../../static/svgs/logo_bc-main-square.inline.svg"
@@ -55,7 +57,8 @@ const Layout = ({ children }) => {
             padding: [3, 5],
             display: "grid",
             gridGap: 3,
-            gridTemplateColumns: ["1fr", "1fr 1fr 1fr"],
+            fontSize: [1, 2],
+            gridTemplateColumns: ["1fr 1fr 1fr"],
           }}
         >
           <Box
@@ -65,7 +68,8 @@ const Layout = ({ children }) => {
           >
             © {new Date().getFullYear()} booncon oy
             <br />
-            VAT: FI24323170
+            <span sx={{ display: ["none", "inline-block"] }}>VAT:</span>{" "}
+            FI24323170
             <br />
             <Link
               sx={{ marginTop: [2, 3] }}
@@ -86,7 +90,20 @@ const Layout = ({ children }) => {
             }}
           >
             <Box sx={{ maxWidth: ["48px", "60px"], margin: "0 auto 0" }}>
-              <SquareBrandIcon></SquareBrandIcon>
+              <Tippy
+                offset={[0, 54]}
+                content={
+                  <span>
+                    Happy{" "}
+                    {new Date().toLocaleString("en-uk", { weekday: "long" })}{" "}
+                    😃!
+                  </span>
+                }
+              >
+                <span>
+                  <SquareBrandIcon></SquareBrandIcon>
+                </span>
+              </Tippy>
             </Box>
             <Text fontSize={[1, 2, 3]} color="white" textAlign="center">
               {data.site.siteMetadata.slogan}
@@ -94,7 +111,7 @@ const Layout = ({ children }) => {
           </Box>
           <Box
             sx={{
-              textAlign: ["left", "right"],
+              textAlign: "right",
             }}
           >
             <Link
@@ -109,12 +126,39 @@ const Layout = ({ children }) => {
               href="//twitter.com/booncon"
               target="_blank"
               rel="noopener noreferrer"
+              sx={{ marginTop: 1 }}
             >
               @booncon
             </Link>
             <br />
-            <Link href="/privacy">Privacy Policy</Link>
+            <Link href="privacy" sx={{ marginTop: 1 }}>
+              Privacy Policy
+            </Link>
           </Box>
+
+          <CookieConsent
+            location="bottom"
+            buttonText="Accept"
+            enableDeclineButton
+            declineButtonText="Decline"
+            cookieName="gatsby-gdpr-google-analytics"
+            sx={{ background: "#3b454f" }}
+            buttonStyle={{
+              color: "#fff",
+              background: "#2A9BDA",
+              fontSize: "13px",
+            }}
+            declineButtonStyle={{
+              color: "#fff",
+              background: "#677889",
+              fontSize: "13px",
+            }}
+            expires={150}
+          >
+            This website uses cookies to enhance the user experience. To find
+            out more, plaese read our <Link href="privacy">Privacy Policy</Link>
+            .
+          </CookieConsent>
         </Flex>
       </Flex>
     </Styled.root>

@@ -1,4 +1,5 @@
 module.exports = {
+  pathPrefix: "/boonconcom",
   siteMetadata: {
     title: `booncon`,
     slogan: `Working with friends.`,
@@ -11,7 +12,14 @@ module.exports = {
       resolve: `gatsby-source-filesystem`,
       options: {
         name: `images`,
-        path: `${__dirname}/src/images`,
+        path: `${__dirname}/static/images`,
+      },
+    },
+    {
+      resolve: `gatsby-source-filesystem`,
+      options: {
+        name: `fonts`,
+        path: `${__dirname}/static/fonts`,
       },
     },
     `gatsby-plugin-sass`,
@@ -67,7 +75,7 @@ module.exports = {
         Hosted by Lukas Jakob Hafner and Tobias Johannes.`,
         podcastType: `episodic`,
         siteUrl: `https://booncon.com`,
-        imageUrl: `https://booncon.com/podcast-image/png`,
+        imageUrl: `https://booncon-blahh.s3-eu-west-1.amazonaws.com/bp-cover-shaded.jpg`,
         feedUrl: `https://podcast.com/pocast-rss-feed.xml`,
         language: `en-us`,
         copyright: `Copyright © 2020 booncon`,
@@ -89,9 +97,44 @@ module.exports = {
         username: `3902564718`,
       },
     },
-    `gatsby-plugin-sharp`,
+    {
+      resolve: `gatsby-plugin-sharp`,
+      options: {
+        useMozJpeg: process.env.GATSBY_JPEG_ENCODER === `MOZJPEG`,
+        stripMetadata: true,
+        defaultQuality: 60,
+        failOnError: true,
+      },
+    },
     `gatsby-transformer-sharp`,
     `gatsby-image`,
+    {
+      resolve: `@ccalamos/gatsby-source-googlemaps-static`,
+      options: {
+        key: `AIzaSyB-05KKr3aIvThEeKi2no_g_tFMgZCd8ZY`,
+        center: `60.1869092,24.9652834`,
+        size: "1200",
+        zoom: 13,
+        markers: [
+          {
+            location: `60.1869092,24.9652834`,
+          },
+        ],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-gdpr-cookies`,
+      options: {
+        googleAnalytics: {
+          trackingId: "UA-38942381-2", // leave empty if you want to disable the tracker
+          cookieName: "gatsby-gdpr-google-analytics", // default
+          anonymize: true, // default
+          allowAdFeatures: false, // default
+        },
+        // defines the environments where the tracking should be available  - default is ["production"]
+        environments: ["production", "development"],
+      },
+    },
     // this (optional) plugin enables Progressive Web App + Offline functionality
     // To learn more, visit: https://gatsby.dev/offline
     // `gatsby-plugin-offline`,
