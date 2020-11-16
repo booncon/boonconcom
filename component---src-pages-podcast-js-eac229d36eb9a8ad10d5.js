@@ -1,0 +1,2 @@
+(window.webpackJsonp=window.webpackJsonp||[]).push([[7],{uQrM:function(e,t,c){"use strict";c.r(t);var n=c("Wbzz"),a=c("izhR"),i=c("Bl7J"),o=c("vrFN"),b=c("2A+t");t.default=function(){return Object(b.c)(i.a,null,Object(b.c)(o.a,{title:"bits & pieces"}),Object(b.c)(a.b,{sx:{variant:"contentWrap",marginTop:[2,4,6]}},Object(b.c)(a.e,{as:"h1"},"bits & pieces"),Object(b.c)("p",null,"Welcome to page 2"),Object(b.c)(n.Link,{to:"/"},"Go back to the homepage")))}}}]);
+//# sourceMappingURL=component---src-pages-podcast-js-eac229d36eb9a8ad10d5.js.map
