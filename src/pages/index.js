@@ -231,17 +231,14 @@ const IndexPage = () => {
             </Heading>
             <br />
             <Text sx={{ fontSize: [1, 2, 3] }}>
-              Master Planner Tobias is an entrepreneur at heart, always bustling
-              with new ways of doing things. Having worked closely with all
-              functions of companies in different sectors truly makes him a
-              business allrounder – be it marketing or finance.
+              Tobias has years of practical experience in the fields of change management and corporate restructuring. Starting from strategy development he is used to taking bold decisions and seeing their execution through. Furthermore he negotiated several M&A projects.
               <br />
               His passion lies in transforming ideas into working concepts and
               business plans.
               <br />
               In his spare time he enjoys laughing at silly things on the web,
-              playing board games, keeping tabs on what's going on around the
-              globe and practising martial arts.
+              playing board games and keeping tabs on what's going on around the
+              globe.
             </Text>
             <Link
               fontSize={[3, 4, 5]}
