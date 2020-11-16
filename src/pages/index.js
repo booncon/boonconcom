@@ -13,6 +13,7 @@ import {
 } from "@theme-ui/components"
 import { jsx } from "theme-ui"
 import Img from "gatsby-image"
+import { Link as GatsbyLink } from "gatsby"
 import BackgroundImage from "gatsby-background-image"
 
 import Tippy from "@tippyjs/react"
@@ -23,7 +24,7 @@ import { useStaticQuery, graphql } from "gatsby"
 const IndexPage = () => {
   const queryData = useStaticQuery(graphql`
     query getQueryData {
-      allInstaNode {
+      allInstaNode(limit: 3) {
         edges {
           node {
             localFile {
@@ -58,12 +59,23 @@ const IndexPage = () => {
           }
         }
       }
-      desktop: file(relativePath: { eq: "office-work-b+w.jpeg" }) {
+      hero: file(relativePath: { eq: "office-work-b+w.jpeg" }) {
         childImageSharp {
           fluid(
-            quality: 88
+            quality: 85
             maxWidth: 1920
             duotone: { highlight: "#ffffff", shadow: "#3b454f" }
+          ) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+      workWithUs: file(relativePath: { eq: "laptops-blurred.jpg" }) {
+        childImageSharp {
+          fluid(
+            quality: 83
+            maxWidth: 1920
+            duotone: { highlight: "#cccccc", shadow: "#3b454f" }
           ) {
             ...GatsbyImageSharpFluid_withWebp
           }
@@ -79,7 +91,7 @@ const IndexPage = () => {
       <SEO title="Working with friends." />
       <BackgroundImage
         Tag={`header`}
-        fluid={queryData.desktop.childImageSharp.fluid}
+        fluid={queryData.hero.childImageSharp.fluid}
         sx={{
           display: "flex",
           alignItems: "center",
@@ -175,7 +187,7 @@ const IndexPage = () => {
               We met a long time ago in a place far, far away…
             </Heading>
             <Text sx={{ fontSize: [2, 3, 4] }}>
-              …and today we couldn't be happier working together. Our different
+              …and couldn't be happier working together. Our different
               backgrounds enable us to work efficiently on a wide array of
               projects.
             </Text>
@@ -263,7 +275,10 @@ const IndexPage = () => {
               </Box>
             </Flex>
             <Text sx={{ fontSize: [1, 2, 3] }}>
-              Tobias has years of practical experience in the fields of change management and corporate restructuring. Starting from strategy development he is used to taking bold decisions and seeing their execution through. Furthermore he negotiated several M&A projects.
+              Tobias has years of practical experience in the fields of change
+              management and corporate restructuring. Starting from strategy
+              development he is used to taking bold decisions and seeing their
+              execution through. Furthermore he negotiated several M&A projects.
               <br />
               His passion lies in transforming ideas into working concepts and
               business plans.
@@ -273,7 +288,7 @@ const IndexPage = () => {
               globe.
             </Text>
             <Link
-              fontSize={[3, 4, 5]}
+              sx={{ fontSize: [3, 4], marginTop: [1, 2] }}
               href="https://www.twitter.com/metzelfetz"
             >
               @metzelfetz
@@ -310,7 +325,10 @@ const IndexPage = () => {
               gadgets, throwing frisbees, cooking or working on his next batch
               of craft-beer.
             </Text>
-            <Link fontSize={[3, 4, 5]} href="https://www.twitter.com/saftsaak">
+            <Link
+              sx={{ fontSize: [3, 4], marginTop: [1, 2] }}
+              href="https://www.twitter.com/saftsaak"
+            >
               @saftsaak
             </Link>
           </Box>
@@ -347,11 +365,10 @@ const IndexPage = () => {
       </Box>
       <BackgroundImage
         Tag={`section`}
-        fluid={queryData.desktop.childImageSharp.fluid}
+        fluid={queryData.workWithUs.childImageSharp.fluid}
         sx={{
           py: [4, 5],
           paddingBottom: [4, 6],
-          zIndex: -1,
           color: "#fff",
         }}
       >
@@ -363,7 +380,12 @@ const IndexPage = () => {
               gridTemplateColumns: ["1fr", "1fr 2fr"],
             }}
           >
-            <Box sx={{ display: ["none", "block"] }}>
+            <Box
+              sx={{
+                display: ["none", "block"],
+                boxShadow: "0 0 8px 2px rgba(0, 0, 0, 0.05)",
+              }}
+            >
               <AspectRatio ratio={1 / 1}>
                 <Img
                   fixed={instagram[1].node.localFile.childImageSharp.fixed}
@@ -399,18 +421,18 @@ const IndexPage = () => {
           </Grid>
         </Flex>
         <Flex variant="contentWrap" flexWrap="wrap" sx={{ px: [3, 4] }}>
-          <Box p={[3, 4]}>
-            <Heading as="h3">We are awesome in:</Heading>
-            <ul>
-              <li>evaluating and analysing existing products</li>
-              <li>developing ideas into concepts</li>
-              <li>writing business plans</li>
-              <li>building prototypes</li>
-              <li>consulting in brand development</li>
-              <li>teaching project management</li>
-              <li>refining work methods &amp; environments</li>
-              <li>being happy</li>
-            </ul>
+          <Box sx={{ width: "100%" }}>
+            <Grid
+              gap={3}
+              sx={{
+                padding: [3, 4],
+                gridTemplateColumns: ["1fr", "1fr 1fr 1fr"],
+              }}
+            >
+              <Box>Service One</Box>
+              <Box>Service Two</Box>
+              <Box>Service Three</Box>
+            </Grid>
           </Box>
         </Flex>
         <Flex
@@ -420,8 +442,10 @@ const IndexPage = () => {
         >
           <Text sx={{ mx: [3, 4], alignSelf: "center", fontSize: [3, 4, 5] }}>
             Interested? Drop us a line, your{" "}
-            <Link href="mailto:hello@booncon.com">email</Link> is going to make
-            our day!
+            <Link href="mailto:hello@booncon.com?subject=Hi booncon!">
+              email
+            </Link>{" "}
+            is going to make our day!
           </Text>
         </Flex>
       </BackgroundImage>
@@ -444,7 +468,11 @@ const IndexPage = () => {
                 margin: -2,
               }}
             >
-              <a sx={{ variant: "linkBox" }} className="big" href="podcast">
+              <GatsbyLink
+                sx={{ variant: "linkBox" }}
+                className="big"
+                to="/podcast"
+              >
                 <Tippy
                   content='Listen to our podcast "bits &amp; pieces"'
                   offset={[0, 20]}
@@ -454,7 +482,7 @@ const IndexPage = () => {
                     alt="Logo podcast bits &amp; pieces"
                   />
                 </Tippy>
-              </a>
+              </GatsbyLink>
               <a
                 sx={{ variant: "linkBox" }}
                 href="//instagram.com/booncon"
@@ -516,6 +544,7 @@ const IndexPage = () => {
               display: ["none", "block"],
               marginTop: -6,
               backgroundColor: "#fff",
+              zIndex: 3,
             }}
           >
             <AspectRatio ratio={1 / 1}>
@@ -538,12 +567,15 @@ const IndexPage = () => {
           }}
         >
           <Flex sx={{ justifyContent: "stretch" }}>
-            <Box sx={{ width: "100%", maxHeight: [128, 512] }}>
-              <Img
-                fluid={queryData.staticMap.childFile.childImageSharp.fluid}
-                sx={{ objectFit: "cover", width: "100%", height: "100%" }}
-              />
-            </Box>
+            <BackgroundImage
+              Tag={`div`}
+              fluid={queryData.staticMap.childFile.childImageSharp.fluid}
+              sx={{
+                width: "100%",
+                height: "100%",
+                minHeight: [222, 420],
+              }}
+            ></BackgroundImage>
           </Flex>
           <Flex
             sx={{
@@ -586,7 +618,9 @@ const IndexPage = () => {
                 <address>
                   +358 45 8980609
                   <br />
-                  <Link href="mailto:hello@booncon.com">hello@booncon.com</Link>
+                  <Link href="mailto:hello@booncon.com?subject=Hi booncon!">
+                    hello@booncon.com
+                  </Link>
                 </address>
               </Grid>
             </Box>

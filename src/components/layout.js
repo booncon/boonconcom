@@ -2,7 +2,7 @@
 
 // import React from "react"
 import PropTypes from "prop-types"
-import { useStaticQuery, graphql } from "gatsby"
+import { useStaticQuery, graphql, Link as GatsbyLink } from "gatsby"
 
 import "./reset.css"
 import { jsx, Styled } from "theme-ui"
@@ -34,8 +34,10 @@ const Layout = ({ children }) => {
           minHeight: "100vh",
         }}
       >
-        <Box className="main-logo">
-          <BrandIcon></BrandIcon>
+        <Box className="main-logo" sx={{ zIndex: 5 }}>
+          <GatsbyLink to="/">
+            <BrandIcon></BrandIcon>
+          </GatsbyLink>
         </Box>
 
         <Box
@@ -131,7 +133,7 @@ const Layout = ({ children }) => {
               @booncon
             </Link>
             <br />
-            <Link href="privacy" sx={{ marginTop: 1 }}>
+            <Link to="/privacy" as={GatsbyLink} sx={{ marginTop: 1 }}>
               Privacy Policy
             </Link>
           </Box>
@@ -156,7 +158,10 @@ const Layout = ({ children }) => {
             expires={150}
           >
             This website uses cookies to enhance the user experience. To find
-            out more, plaese read our <Link href="privacy">Privacy Policy</Link>
+            out more, plaese read our{" "}
+            <Link to="/privacy" as={GatsbyLink}>
+              Privacy Policy
+            </Link>
             .
           </CookieConsent>
         </Flex>
