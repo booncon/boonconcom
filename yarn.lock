@@ -1719,6 +1719,11 @@
     schema-utils "^2.6.5"
     source-map "^0.7.3"
 
+"@podlove/web-player@^5.3.0":
+  version "5.3.0"
+  resolved "https://registry.yarnpkg.com/@podlove/web-player/-/web-player-5.3.0.tgz#4b702a41e289910f901daf5d5ea46c6c595a4fe9"
+  integrity sha512-4XozuD4CexVDLq6pLu06GinkeJtrUzuW/S5li0bXIWUI6Tc9F8nzcSTWg4AEucWWndrbxnyKkdZF83iRGoXnoQ==
+
 "@popperjs/core@^2.4.4":
   version "2.5.4"
   resolved "https://registry.yarnpkg.com/@popperjs/core/-/core-2.5.4.tgz#de25b5da9f727985a3757fd59b5d028aba75841a"

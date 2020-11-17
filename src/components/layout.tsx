@@ -1,10 +1,9 @@
 /** @jsx jsx */
 
-// import React from "react"
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql, Link as GatsbyLink } from "gatsby"
 
-import "./reset.css"
+import "../../static/css/reset.css"
 import { jsx, Styled } from "theme-ui"
 import { Flex, Box, Image, Text, Link } from "@theme-ui/components"
 
@@ -99,7 +98,7 @@ const Layout = ({ children }) => {
             >
               <Image
                 sx={{ maxWidth: [60, 100] }}
-                src={"images/SV_LOGO_booncon_oy_EN_409937_web.jpg"}
+                src={"/images/SV_LOGO_booncon_oy_EN_409937_web.jpg"}
                 alt="Asiakastieto AA Certificate"
               />
             </Link>

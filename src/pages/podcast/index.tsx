@@ -3,17 +3,17 @@ import { useStaticQuery, graphql, Link as GatsbyLink } from "gatsby"
 
 import { Box, Heading, Text, Link } from "@theme-ui/components"
 
-import Layout from "../components/layout"
-import SEO from "../components/seo"
+import Layout from "../../components/layout"
+import SEO from "../../components/seo"
 import { jsx } from "theme-ui"
 
-const formatDurationNicely = (seconds: number) => {
+export const formatDurationNicely = (seconds: number) => {
   var date = new Date(0)
   date.setSeconds(seconds) // specify value for SECONDS here
   return date.toISOString().substr(11, 8)
 }
 
-const formatDate = function (timestamp: string) {
+export const formatDate = function (timestamp: string) {
   // Create a date object from the timestamp
   var date = new Date(timestamp)
 
@@ -72,6 +72,7 @@ const PodcastPage = () => {
       >
         <Heading as="h1">bits & pieces</Heading>
         <br />
+        {/* <script>window.podcastData={"title":"bits & pieces","subtitle":"How to get things done & love your work.","description":"A show about why work is not a job, friendships and riding unicorns. Hosted by Lukas Jakob Hafner and Tobias Johannes.","cover":"","feeds":[{"type":"audio","format":"mp3","url":"https://booncon.github.io/boonconcom/podcast-rss-feed.xml","directory-url-itunes":"https://podcasts.apple.com/us/podcast/bits-pieces/"}]}</script><script class="podlove-subscribe-button" src="https://cdn.podlove.org/subscribe-button/javascripts/app.js" data-language="en" data-size="big" data-json-data="podcastData" data-color="#469cd1" data-format="cover" data-style="filled"></script><noscript><a href="https://booncon.github.io/boonconcom/podcast-rss-feed.xml">Subscribe to feed</a></noscript> */}
         <br />
         {queryData.allMdx.nodes.reverse().map((episode) => {
           return (
@@ -86,9 +87,14 @@ const PodcastPage = () => {
                 </Heading>
               </Link>
               <Text>
-                {formatDate(episode.frontmatter.publicationDate)}
-                &nbsp;&nbsp;&nbsp;&nbsp;
+                Date: {formatDate(episode.frontmatter.publicationDate)}
+                &nbsp;&nbsp;&nbsp;&nbsp; Duration:{" "}
                 {formatDurationNicely(episode.frontmatter.duration)}
+                &nbsp;&nbsp;&nbsp;&nbsp; Season: {episode.frontmatter.season}
+                &nbsp;&nbsp;&nbsp;&nbsp; Episode:{" "}
+                {episode.frontmatter.episodeNumber}
+                &nbsp;&nbsp;&nbsp;&nbsp; Tags:{" "}
+                {episode.frontmatter.categories.join(", ")}
               </Text>
               <Text sx={{ marginTop: [1, 2], fontSize: [2, 3] }}>
                 {episode.frontmatter.excerpt}

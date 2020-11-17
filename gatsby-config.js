@@ -62,7 +62,14 @@ module.exports = {
         path: `${__dirname}/src/pages/podcast/`,
       },
     },
-    `gatsby-plugin-mdx`,
+    {
+      resolve: `gatsby-plugin-mdx`,
+      options: {
+        defaultLayouts: {
+          default: require.resolve("./src/components/podcasts-layout.tsx"),
+        },
+      },
+    },
     {
       resolve: `gatsby-plugin-podcast-feed-mdx`,
       options: {
@@ -75,7 +82,7 @@ module.exports = {
         podcastType: `episodic`,
         siteUrl: `https://booncon.com`,
         imageUrl: `https://booncon-blahh.s3-eu-west-1.amazonaws.com/bp-cover-shaded.jpg`,
-        feedUrl: `https://podcast.com/pocast-rss-feed.xml`,
+        feedUrl: `http://booncon.com/pocast-rss-feed.xml`,
         language: `en-us`,
         copyright: `Copyright © 2020 booncon`,
         authorName: `booncon`,

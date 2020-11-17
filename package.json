@@ -2,13 +2,14 @@
   "name": "booncon-gatsby-theme",
   "private": true,
   "description": "Gatsby Theme UI Theme for booncon.com",
-  "version": "0.1.0",
+  "version": "1.0.0-beta-1",
   "author": "Lukas Jakob Hafner <luki@booncon.com>",
   "dependencies": {
     "@ccalamos/gatsby-source-googlemaps-static": "^1.4.9",
     "@emotion/core": "^10.1.1",
     "@mdx-js/mdx": "^1.6.21",
     "@mdx-js/react": "^1.6.21",
+    "@podlove/web-player": "^5.3.0",
     "@rebass/preset": "^4.0.5",
     "@theme-ui/components": "^0.3.3",
     "@tippyjs/react": "^4.2.0",
@@ -59,9 +60,9 @@
   },
   "repository": {
     "type": "git",
-    "url": "https://github.com/gatsbyjs/gatsby-starter-default"
+    "url": "https://github.com/booncon/boonconcom"
   },
   "bugs": {
-    "url": "https://github.com/gatsbyjs/gatsby/issues"
+    "url": "https://github.com/booncon/boonconcom/issues"
   }
 }
