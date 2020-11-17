@@ -99,7 +99,7 @@ const Layout = ({ children }) => {
             >
               <Image
                 sx={{ maxWidth: [60, 100] }}
-                src="/images/SV_LOGO_booncon_oy_EN_409937_web.jpg"
+                src={"images/SV_LOGO_booncon_oy_EN_409937_web.jpg"}
                 alt="Asiakastieto AA Certificate"
               />
             </Link>

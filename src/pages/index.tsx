@@ -283,7 +283,7 @@ const IndexPage = () => {
             <Flex sx={{ alignItems: "center", marginBottom: 3 }}>
               <Image
                 variant="avatar"
-                src="/images/tobi.jpg"
+                src={"images/tobi.jpg"}
                 alt="Portrait Tobi"
               />
               <Box>
@@ -320,7 +320,7 @@ const IndexPage = () => {
             <Flex sx={{ alignItems: "center", marginBottom: 3 }}>
               <Image
                 variant="avatar"
-                src="/images/luki-square.jpg"
+                src={"images/luki-square.jpg"}
                 alt="Portrait Luki"
               />
               <Box>
@@ -442,34 +442,6 @@ const IndexPage = () => {
                 We do this by collaborating with your decision makers in
                 efficient workshops and create a final report and action plan
                 for you to follow.
-                {/* We gain insight through efficient workshops with your decision
-                makers and create a final report and action plan for you to
-                follow. */}
-                {/* 
-                Our mission is to enable change in as many companies as possible and that is why we focus on kicking-off   
-
-
-
-
-                We love to dive into challenging projects and meet interesting
-                people. 
-                
-                
-                
-                Therefore we focus on kicking off change digi projects
-                but rely on partners when it comes to their implementation.
-                <br />
-                We gain insight through efficient workshops with your decision
-                makers and create a final report with an action plan for you to
-                follow. */}
-                {/* To
-                give you the most value out of our time we offer workshop
-                packages.
-                <br />
-                <br />
-                After a brief analysis we will prepare a workshop with your
-                decision makers to create a report with an action plan for you
-                to follow. */}
               </Text>
             </Box>
           </Grid>
@@ -556,7 +528,7 @@ const IndexPage = () => {
                   offset={[0, 20]}
                 >
                   <img
-                    src="https://booncon.com/app/themes/bc-new/assets/images/logos/bp.jpg"
+                    src={"images/bp.jpg"}
                     alt="Logo podcast bits &amp; pieces"
                   />
                 </Tippy>
@@ -568,10 +540,7 @@ const IndexPage = () => {
                 target="_blank"
               >
                 <Tippy content="See our life on Instagram" offset={[0, 14]}>
-                  <img
-                    src="https://booncon.com/app/themes/bc-new/assets/images/logos/instagram.svg"
-                    alt="Logo instagram"
-                  />
+                  <img src={"svgs/instagram.svg"} alt="Logo instagram" />
                 </Tippy>
               </a>
               <a
@@ -581,10 +550,7 @@ const IndexPage = () => {
                 target="_blank"
               >
                 <Tippy content="Connect with us on LinkedIn" offset={[0, 14]}>
-                  <img
-                    src="https://booncon.com/app/themes/bc-new/assets/images/logos/linked_in.svg"
-                    alt="Logo LinkedIn"
-                  />
+                  <img src={"svgs/linked_in.svg"} alt="Logo LinkedIn" />
                 </Tippy>
               </a>
               <a
@@ -594,10 +560,7 @@ const IndexPage = () => {
                 target="_blank"
               >
                 <Tippy content="Follow us on Twitter" offset={[0, 14]}>
-                  <img
-                    src="https://booncon.com/app/themes/bc-new/assets/images/logos/twitter.svg"
-                    alt="Logo twitter"
-                  />
+                  <img src={"svgs/twitter.svg"} alt="Logo twitter" />
                 </Tippy>
               </a>
               <a
@@ -607,10 +570,7 @@ const IndexPage = () => {
                 target="_blank"
               >
                 <Tippy content="Check us out on Facebook" offset={[0, 14]}>
-                  <img
-                    src="https://booncon.com/app/themes/bc-new/assets/images/logos/facebook.svg"
-                    alt="Logo facebook"
-                  />
+                  <img src={"svgs/facebook.svg"} alt="Logo facebook" />
                 </Tippy>
               </a>
             </Flex>
