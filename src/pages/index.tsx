@@ -81,6 +81,28 @@ const IndexPage = () => {
           }
         }
       }
+      luki: file(relativePath: { eq: "luki.jpg" }) {
+        childImageSharp {
+          fluid(
+            quality: 83
+            maxWidth: 500
+            duotone: { highlight: "#ffffff", shadow: "#3b454f" }
+          ) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
+      tobi: file(relativePath: { eq: "tobi.jpg" }) {
+        childImageSharp {
+          fluid(
+            quality: 83
+            maxWidth: 500
+            duotone: { highlight: "#ffffff", shadow: "#3b454f" }
+          ) {
+            ...GatsbyImageSharpFluid_withWebp
+          }
+        }
+      }
     }
   `)
 
@@ -281,9 +303,11 @@ const IndexPage = () => {
         >
           <Box p={[3, 4]}>
             <Flex sx={{ alignItems: "center", marginBottom: 3 }}>
-              <Image
-                variant="avatar"
-                src={"images/tobi.jpg"}
+              <Img
+                sx={{
+                  variant: "avatar",
+                }}
+                fluid={queryData.tobi.childImageSharp.fluid}
                 alt="Portrait Tobi"
               />
               <Box>
@@ -310,7 +334,7 @@ const IndexPage = () => {
               globe.
             </Text>
             <Link
-              sx={{ fontSize: [3, 4], marginTop: [1, 2] }}
+              sx={{ fontSize: [3, 4], marginTop: [1, 2], float: "right" }}
               href="https://www.twitter.com/metzelfetz"
             >
               @metzelfetz
@@ -318,9 +342,11 @@ const IndexPage = () => {
           </Box>
           <Box p={[3, 4]}>
             <Flex sx={{ alignItems: "center", marginBottom: 3 }}>
-              <Image
-                variant="avatar"
-                src={"images/luki-square.jpg"}
+              <Img
+                sx={{
+                  variant: "avatar",
+                }}
+                fluid={queryData.luki.childImageSharp.fluid}
                 alt="Portrait Luki"
               />
               <Box>
@@ -348,7 +374,7 @@ const IndexPage = () => {
               of craft-beer.
             </Text>
             <Link
-              sx={{ fontSize: [3, 4], marginTop: [1, 2] }}
+              sx={{ fontSize: [3, 4], marginTop: [1, 2], float: "right" }}
               href="https://www.twitter.com/saftsaak"
             >
               @saftsaak
@@ -392,6 +418,7 @@ const IndexPage = () => {
           py: [4, 5],
           paddingBottom: [4, 6],
           color: "#fff",
+          textShadow: "0 0 3px rgba(0, 0, 0, 0.25)",
         }}
       >
         <Flex variant="contentWrap" flexWrap="wrap">
@@ -419,7 +446,7 @@ const IndexPage = () => {
                 </AspectRatio>
               </Box>
             </Box>
-            <Box px={[3, 4]} py={0}>
+            <Box px={[3, 4]}>
               <Heading as="h2" sx={{ fontSize: [3, 4, 5] }}>
                 Let's work together!
               </Heading>
@@ -460,7 +487,9 @@ const IndexPage = () => {
               }}
             >
               <Box>
-                <Heading as="h3">Strategy Audit</Heading>
+                <Heading as="h3" sx={{ marginBottom: [1, 2] }}>
+                  Strategy Audit
+                </Heading>
                 We are analysing your current business model to rate how it
                 supports your future plans. We also evaluate your strategic
                 potential through digitalisation and service based income
@@ -468,14 +497,18 @@ const IndexPage = () => {
                 towards your goals.
               </Box>
               <Box>
-                <Heading as="h3">Culture & Working Methods</Heading>
+                <Heading as="h3" sx={{ marginBottom: [1, 2] }}>
+                  Culture & Working Methods
+                </Heading>
                 We are diving into you organisation to evaluate the current
                 corporate culture and wellbeing of your employees. We use our
                 experience from working with startups to introduce new tools and
                 working methods to empower your digital transformation.
               </Box>
               <Box>
-                <Heading as="h3">Tech Audit</Heading>
+                <Heading as="h3" sx={{ marginBottom: [1, 2] }}>
+                  Tech Audit
+                </Heading>
                 We are looking at your IT department and the different systems
                 your company is using and rate how well they support your future
                 growth plans. This includes looking at core systems like ERP,
