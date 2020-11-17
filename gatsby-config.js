@@ -22,7 +22,6 @@ module.exports = {
         path: `${__dirname}/static/fonts`,
       },
     },
-    `gatsby-plugin-sass`,
     `gatsby-plugin-theme-ui`,
     `gatsby-transformer-sharp`,
     `gatsby-plugin-sharp`,
