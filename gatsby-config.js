@@ -1,10 +1,10 @@
 module.exports = {
-  pathPrefix: "/boonconcom",
   siteMetadata: {
     title: `booncon`,
     slogan: `Working with friends.`,
     description: `We are booncon, we are changing the way people experience work. As the lines between life and work are blurring, it’s important for everybody to love what they are doing. We are on a mission to make work lovable.`,
     author: `@sftsk`,
+    siteUrl: `https://booncon.com`,
   },
   plugins: [
     `gatsby-plugin-react-helmet`,
@@ -139,6 +139,12 @@ module.exports = {
         },
         // defines the environments where the tracking should be available  - default is ["production"]
         environments: ["production", "development"],
+      },
+    },
+    {
+      resolve: `gatsby-plugin-disqus`,
+      options: {
+        shortname: `bitsandpieces-podcast`,
       },
     },
     // this (optional) plugin enables Progressive Web App + Offline functionality
