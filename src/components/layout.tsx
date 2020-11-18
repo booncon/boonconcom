@@ -42,15 +42,17 @@ const Layout = ({ children }) => {
     setScrolledToTop(currPos.y >= -10)
   })
 
-  const ref = useRef(document.documentElement)
-
   const path = globalHistory.location.pathname
 
-  const { scrollTo } = useSmoothScroll({
-    ref,
-    speed: 100,
-    direction: "y",
-  })
+  if (typeof document !== `undefined`) {
+    const ref = useRef(document.documentElement)
+
+    const { scrollTo } = useSmoothScroll({
+      ref,
+      speed: 100,
+      direction: "y",
+    })
+  }
 
   // const ref = useRef(document.documentElement)
 
