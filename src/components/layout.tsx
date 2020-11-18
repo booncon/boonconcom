@@ -2,10 +2,11 @@
 
 import PropTypes from "prop-types"
 import { useStaticQuery, graphql, Link as GatsbyLink } from "gatsby"
+import useScrollInfo from "react-element-scroll-hook"
 
 import "../../static/css/reset.css"
 import { jsx, Styled } from "theme-ui"
-import { Flex, Box, Image, Text, Link } from "@theme-ui/components"
+import { Flex, Box, Image, Text, Link, NavLink } from "@theme-ui/components"
 
 import Tippy from "@tippyjs/react"
 import CookieConsent from "react-cookie-consent"
@@ -14,6 +15,8 @@ import CookieConsent from "react-cookie-consent"
 import BrandIcon from "../../static/svgs/logo_bc-main.inline.svg"
 //@ts-ignore
 import SquareBrandIcon from "../../static/svgs/logo_bc-main-square.inline.svg"
+// import { useEffect, useRef } from "react"
+// import { useScrollWatch } from "react-smooth-scroll-hook"
 
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
@@ -26,6 +29,23 @@ const Layout = ({ children }) => {
     }
   `)
 
+  // const ref = useRef(document.documentElement)
+  // const { scrollTop, curIndex, curItem } = useScrollWatch({
+  //   ref,
+  //   list: [
+  //     {
+  //       href: "#mainSlogan",
+  //     },
+  //     {
+  //       href: "#footer",
+  //     },
+  //   ],
+  // })
+
+  // useEffect(() => {
+  //   console.log(curIndex)
+  // }, [curIndex])
+
   return (
     <Styled.root>
       <Flex
@@ -35,40 +55,69 @@ const Layout = ({ children }) => {
         }}
       >
         <Box
-          sx={{
-            position: "fixed",
-            left: [2, 3],
-            top: [2, 3],
-            zIndex: 5,
-            svg: {
-              height: "48px",
-              "#bc-logo-main-circle-bg": {
-                stroke: "#fff",
-                strokeWidth: "3px",
-              },
-              "#bc-logo-main-text-wrap": {
-                display: "none",
-              },
-            },
-          }}
-        >
-          <GatsbyLink to="/">
-            <BrandIcon></BrandIcon>
-          </GatsbyLink>
-        </Box>
-
-        <Box
           as="main"
           sx={{
             width: "100%",
             flex: "1 1 auto",
           }}
         >
-          {children}
+          <Box sx={{ height: ["32px"], width: "100%" }}></Box>
+          <Flex
+            sx={{
+              zIndex: 5,
+              position: "sticky",
+              top: [2, 3],
+              px: [2, 3],
+              height: "48px",
+              justifyContent: "space-between",
+            }}
+          >
+            <Box
+              sx={{
+                svg: {
+                  height: "48px",
+                  "#bc-logo-main-circle-bg": {
+                    stroke: "#fff",
+                    strokeWidth: "3px",
+                  },
+                  "#bc-logo-main-text-wrap": {
+                    // display: "none",
+                  },
+                },
+              }}
+            >
+              <GatsbyLink to="/">
+                <BrandIcon></BrandIcon>
+              </GatsbyLink>
+            </Box>
+
+            <Flex as="nav" sx={{ marginLeft: [4, 5] }}>
+              <NavLink to="/" as={GatsbyLink}>
+                Home
+              </NavLink>
+              <NavLink to="/#team" as={GatsbyLink}>
+                Team
+              </NavLink>
+              <NavLink to="/#work" as={GatsbyLink}>
+                Work With Us
+              </NavLink>
+              <NavLink to="/#loop" as={GatsbyLink}>
+                Stay In The Loop
+              </NavLink>
+              <NavLink to="/#contact" as={GatsbyLink}>
+                Contact
+              </NavLink>
+              <NavLink to="/podcast" as={GatsbyLink}>
+                Podcast
+              </NavLink>
+            </Flex>
+          </Flex>
+          <Box sx={{ marginTop: ["-80px"] }}>{children}</Box>
         </Box>
 
         <Flex
           as="footer"
+          id="footer"
           sx={{
             width: "100%",
             backgroundColor: "tertiary",

@@ -19,6 +19,8 @@ import BackgroundImage from "gatsby-background-image"
 import Tippy from "@tippyjs/react"
 import "tippy.js/dist/tippy.css"
 
+import { Waypoint } from "react-waypoint"
+
 import { useStaticQuery, graphql } from "gatsby"
 
 const IndexPage = () => {
@@ -50,10 +52,10 @@ const IndexPage = () => {
         childFile {
           childImageSharp {
             fluid(
-              maxWidth: 1200
+              maxWidth: 1600
+              quality: 83
               duotone: { highlight: "#ffffff", shadow: "#3b454f" }
             ) {
-              # or fixed
               ...GatsbyImageSharpFluid
             }
           }
@@ -133,6 +135,7 @@ const IndexPage = () => {
       >
         <Heading
           as="h1"
+          id="home"
           sx={{
             variant: "text.heading",
             fontSize: [4, 5, 6],
@@ -180,6 +183,11 @@ const IndexPage = () => {
             </Text>
             <br />
             <Text sx={{ fontSize: [1, 2, 3] }}>
+              {/* <Waypoint
+                onEnter={({ previousPosition, currentPosition, event }) => {
+                  console.log(previousPosition)
+                }}
+              /> */}
               Experiences from our work and cooperations with different
               companies have proven we are on the right track. Work is not a job
               and working with friends is awesome. booncon is all about learning
@@ -220,6 +228,7 @@ const IndexPage = () => {
             padding: [3, 4],
             gridTemplateColumns: "1fr",
           }}
+          id="team"
         >
           <Box
             sx={{
@@ -413,6 +422,7 @@ const IndexPage = () => {
       </Box>
       <BackgroundImage
         Tag={`section`}
+        id="work"
         fluid={queryData.workWithUs.childImageSharp.fluid}
         sx={{
           py: [4, 5],
@@ -532,7 +542,7 @@ const IndexPage = () => {
           </Text>
         </Flex>
       </BackgroundImage>
-      <Flex as="section" variant="contentWrap" flexWrap="wrap">
+      <Flex as="section" variant="contentWrap" flexWrap="wrap" id="loop">
         <Grid
           gap={3}
           sx={{
@@ -629,7 +639,7 @@ const IndexPage = () => {
           </Box>
         </Grid>
       </Flex>
-      <Box as="section" bg="quaternary" color="#fff">
+      <Box as="section" bg="quaternary" color="#fff" id="contact">
         <Grid
           gap={3}
           sx={{

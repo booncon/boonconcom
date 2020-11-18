@@ -95,6 +95,19 @@ export default {
         height: "0.26em",
       },
     },
+    nav: {
+      background: "none"
+    }
+  },
+  links: {
+    nav: {
+      px: [2, 3],
+      py: 2,
+      color: "tertiary",
+      fontSize: [2, 3],
+      fontWeight: "heading",
+      textShadow: "0 0 3px rgba(255, 255, 255, 0.25)"
+    }
   },
   text: {
     heading: {

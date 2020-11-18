@@ -4,7 +4,7 @@ import { useEffect, useRef } from "react"
 import { jsx } from "theme-ui"
 
 const SubscribeButton = () => {
-  const feedUrl = "http://booncon.com/pocast-rss-feed.xml"
+  const feedUrl = "http://feed.booncon.com/bitsandpieces"
 
   if (typeof window === "undefined") {
     return <div></div>

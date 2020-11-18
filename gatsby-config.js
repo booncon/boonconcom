@@ -82,7 +82,7 @@ module.exports = {
         podcastType: `episodic`,
         siteUrl: `https://booncon.com`,
         imageUrl: `https://booncon-blahh.s3-eu-west-1.amazonaws.com/bp-cover-shaded.jpg`,
-        feedUrl: `http://booncon.com/pocast-rss-feed.xml`,
+        feedUrl: `http://feed.booncon.com/bitsandpieces`,
         language: `en-us`,
         copyright: `Copyright © 2020 booncon`,
         authorName: `booncon`,
@@ -119,8 +119,8 @@ module.exports = {
       options: {
         key: `AIzaSyB-05KKr3aIvThEeKi2no_g_tFMgZCd8ZY`,
         center: `60.1869092,24.9652834`,
-        size: "1200",
-        zoom: 13,
+        size: "2000x1000",
+        zoom: 12,
         markers: [
           {
             location: `60.1869092,24.9652834`,
@@ -137,8 +137,7 @@ module.exports = {
           anonymize: true, // default
           allowAdFeatures: false, // default
         },
-        // defines the environments where the tracking should be available  - default is ["production"]
-        environments: ["production", "development"],
+        environments: ["production"],
       },
     },
     {
@@ -147,8 +146,5 @@ module.exports = {
         shortname: `bitsandpieces-podcast`,
       },
     },
-    // this (optional) plugin enables Progressive Web App + Offline functionality
-    // To learn more, visit: https://gatsby.dev/offline
-    // `gatsby-plugin-offline`,
   ],
 }
