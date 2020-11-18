@@ -13,7 +13,7 @@ const PodcastPage = () => (
     <Box
       sx={{
         variant: "contentWrap",
-        marginTop: [4, 5],
+        marginTop: [5, 6],
       }}
     >
       <Grid

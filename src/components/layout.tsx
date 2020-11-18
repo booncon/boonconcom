@@ -18,6 +18,13 @@ import SquareBrandIcon from "../../static/svgs/logo_bc-main-square.inline.svg"
 // import { useEffect, useRef } from "react"
 // import { useScrollWatch } from "react-smooth-scroll-hook"
 
+import Scrollspy from "react-scrollspy"
+import { useSmoothScroll } from "react-smooth-scroll-hook"
+import { useEffect, useRef, useState } from "react"
+import { useScrollPosition } from "@n8tb1t/use-scroll-position"
+
+import { globalHistory } from "@reach/router"
+
 const Layout = ({ children }) => {
   const data = useStaticQuery(graphql`
     query SiteSloganQuery {
@@ -29,8 +36,25 @@ const Layout = ({ children }) => {
     }
   `)
 
+  const [scrolledToTop, setScrolledToTop] = useState(true)
+
+  useScrollPosition(({ prevPos, currPos }) => {
+    setScrolledToTop(currPos.y >= -10)
+  })
+
+  const ref = useRef(document.documentElement)
+
+  const path = globalHistory.location.pathname
+
+  const { scrollTo } = useSmoothScroll({
+    ref,
+    speed: 100,
+    direction: "y",
+  })
+
   // const ref = useRef(document.documentElement)
-  // const { scrollTop, curIndex, curItem } = useScrollWatch({
+
+  // const { scrollTop } = useScrollWatch({
   //   ref,
   //   list: [
   //     {
@@ -42,9 +66,21 @@ const Layout = ({ children }) => {
   //   ],
   // })
 
+  // const handleScroll = (e) => {
+  //   console.log(e)
+  // }
+
   // useEffect(() => {
-  //   console.log(curIndex)
-  // }, [curIndex])
+  //   const el = ref.current
+  //   el.addEventListener("scroll", handleScroll, {
+  //     passive: true,
+  //   })
+  //   return () => el.removeEventListener("scroll", handleScroll)
+  // }, [])
+
+  // useEffect(() => {
+  //   console.log(scrollTop)
+  // }, [scrollTop])
 
   return (
     <Styled.root>
@@ -56,32 +92,43 @@ const Layout = ({ children }) => {
       >
         <Box
           as="main"
+          id="scroll"
           sx={{
             width: "100%",
             flex: "1 1 auto",
           }}
         >
-          <Box sx={{ height: ["32px"], width: "100%" }}></Box>
+          <Box sx={{ height: ["6px", "20px"], width: "100%" }}></Box>
           <Flex
+            className={scrolledToTop ? "" : "hasScrolled"}
             sx={{
               zIndex: 5,
               position: "sticky",
-              top: [2, 3],
-              px: [2, 3],
-              height: "48px",
+              top: 0,
+              py: [2, 3],
+              px: 3,
+              height: ["48px", "80px"],
               justifyContent: "space-between",
+              "&.hasScrolled": {
+                background: ["none", "rgba(255, 255, 255, 0.54)"],
+                transition: "all 0.4s",
+                height: ["48px", "64px"],
+                backdropFilter: ["", "blur(6px)"],
+                py: [1, 2],
+              },
             }}
           >
             <Box
               sx={{
                 svg: {
-                  height: "48px",
+                  height: ["36px", "48px"],
                   "#bc-logo-main-circle-bg": {
                     stroke: "#fff",
                     strokeWidth: "3px",
                   },
                   "#bc-logo-main-text-wrap": {
-                    // display: "none",
+                    opacity: scrolledToTop ? 1 : 0,
+                    transition: "all 0.2s",
                   },
                 },
               }}
@@ -91,28 +138,79 @@ const Layout = ({ children }) => {
               </GatsbyLink>
             </Box>
 
-            <Flex as="nav" sx={{ marginLeft: [4, 5] }}>
-              <NavLink to="/" as={GatsbyLink}>
+            <Scrollspy
+              items={["home", "team", "projects", "loop", "contact", "podcast"]}
+              currentClassName="is-current"
+              componentTag="nav"
+              offset={-100}
+              sx={{ marginLeft: [4, 5], display: ["none", "block"] }}
+            >
+              <NavLink
+                to="/"
+                as={GatsbyLink}
+                onClick={(e) => {
+                  if (path === "/") {
+                    e.preventDefault()
+                    scrollTo("#home")
+                  }
+                }}
+              >
                 Home
               </NavLink>
-              <NavLink to="/#team" as={GatsbyLink}>
+              <NavLink
+                to="/#team"
+                as={GatsbyLink}
+                onClick={(e) => {
+                  if (path === "/") {
+                    e.preventDefault()
+                    scrollTo("#team")
+                  }
+                }}
+              >
                 Team
               </NavLink>
-              <NavLink to="/#work" as={GatsbyLink}>
-                Work With Us
+              <NavLink
+                to="/#projects"
+                as={GatsbyLink}
+                onClick={(e) => {
+                  if (path === "/") {
+                    e.preventDefault()
+                    scrollTo("#projects")
+                  }
+                }}
+              >
+                Projects
               </NavLink>
-              <NavLink to="/#loop" as={GatsbyLink}>
+              <NavLink
+                to="/#loop"
+                as={GatsbyLink}
+                onClick={(e) => {
+                  if (path === "/") {
+                    e.preventDefault()
+                    scrollTo("#loop")
+                  }
+                }}
+              >
                 Stay In The Loop
               </NavLink>
-              <NavLink to="/#contact" as={GatsbyLink}>
+              <NavLink
+                to="/#contact"
+                as={GatsbyLink}
+                onClick={(e) => {
+                  if (path === "/") {
+                    e.preventDefault()
+                    scrollTo("#contact")
+                  }
+                }}
+              >
                 Contact
               </NavLink>
               <NavLink to="/podcast" as={GatsbyLink}>
                 Podcast
               </NavLink>
-            </Flex>
+            </Scrollspy>
           </Flex>
-          <Box sx={{ marginTop: ["-80px"] }}>{children}</Box>
+          <Box sx={{ marginTop: ["-54px", "-100px"] }}>{children}</Box>
         </Box>
 
         <Flex

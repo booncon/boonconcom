@@ -3,7 +3,8 @@
 import { useEffect, useRef } from "react"
 import { jsx } from "theme-ui"
 
-const SubscribeButton = () => {
+const SubscribeButton = (props: { isSmall?: boolean }) => {
+  const { isSmall } = props
   const feedUrl = "http://feed.booncon.com/bitsandpieces"
 
   if (typeof window === "undefined") {
@@ -38,7 +39,7 @@ const SubscribeButton = () => {
   script.setAttribute("data-size", "big")
   script.setAttribute("data-json-data", dataKey)
   script.setAttribute("data-color", "#2A9BDA")
-  script.setAttribute("data-format", "cover")
+  script.setAttribute("data-format", isSmall ? "rectangle" : "cover")
   script.setAttribute("data-style", "filled")
 
   const span = useRef<HTMLSpanElement>(null)

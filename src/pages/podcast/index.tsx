@@ -7,38 +7,7 @@ import Layout from "../../components/layout"
 import SEO from "../../components/seo"
 import SubscribeButton from "../../components/SubscribeButton"
 import { jsx } from "theme-ui"
-
-export const formatDurationNicely = (seconds: number) => {
-  var date = new Date(0)
-  date.setSeconds(seconds) // specify value for SECONDS here
-  return date.toISOString().substr(11, 8)
-}
-
-export const formatDate = function (timestamp: string) {
-  // Create a date object from the timestamp
-  var date = new Date(timestamp)
-
-  // Create a list of names for the months
-  var months = [
-    "January",
-    "February",
-    "March",
-    "April",
-    "May",
-    "June",
-    "July",
-    "August",
-    "September",
-    "October",
-    "November",
-    "December",
-  ]
-
-  // return a formatted date
-  return (
-    months[date.getMonth()] + " " + date.getDate() + ", " + date.getFullYear()
-  )
-}
+import EpisodeMeta from "../../components/EpisodeMeta"
 
 const PodcastPage = () => {
   const queryData = useStaticQuery(graphql`
@@ -68,7 +37,7 @@ const PodcastPage = () => {
       <Box
         sx={{
           variant: "contentWrap",
-          marginTop: [4, 5],
+          marginTop: [5, 6],
         }}
       >
         <Grid
@@ -79,9 +48,24 @@ const PodcastPage = () => {
           }}
         >
           <Box px={[3, 4]}>
-            <Heading as="h1" sx={{ marginBottom: [2, 3] }}>
-              bits & pieces
-            </Heading>
+            <Grid
+              gap={3}
+              sx={{
+                gridTemplateColumns: ["1fr", "2fr 1fr"],
+              }}
+            >
+              <Box>
+                <Heading as="h1" sx={{ marginBottom: [2, 3] }}>
+                  bits & pieces
+                </Heading>
+                <Text sx={{ marginBottom: [3, 4], fontSize: [3, 4] }}>
+                  A show about how to get things done & love your work.
+                </Text>
+              </Box>
+              <Box sx={{ textAlign: "right", marginTop: [0, 2] }}>
+                <SubscribeButton isSmall />
+              </Box>
+            </Grid>
             <iframe
               src="https://embed.podcasts.apple.com/us/podcast/bits-pieces/id967039989?itsct=podcast_box&amp;itscg=30200"
               height="450px"
@@ -96,7 +80,7 @@ const PodcastPage = () => {
           </Box>
           <Box px={[3, 4]}>
             <Heading as="h2" sx={{ marginTop: [2, 3], marginBottom: [3, 4] }}>
-              Shownotes & Comments:
+              Episodes:
             </Heading>
             {queryData.allMdx.nodes.map((episode) => {
               return (
@@ -108,20 +92,7 @@ const PodcastPage = () => {
                   >
                     <Heading as="h3">{episode.frontmatter.title}</Heading>
                   </Link>
-                  <Text>
-                    Season: <b>{episode.frontmatter.season}</b>
-                    &nbsp;&nbsp;&nbsp;&nbsp;Episode:{" "}
-                    <b>{episode.frontmatter.episodeNumber}</b>
-                    &nbsp;&nbsp;&nbsp;&nbsp;Date:{" "}
-                    <b>{formatDate(episode.frontmatter.publicationDate)}</b>
-                    &nbsp;&nbsp;&nbsp;&nbsp; Duration:{" "}
-                    <b>{formatDurationNicely(episode.frontmatter.duration)}</b>
-                    <br />
-                    Tags: <b>{episode.frontmatter.categories.join(", ")}</b>
-                  </Text>
-                  <Text sx={{ marginTop: [1, 2], fontSize: [2, 3] }}>
-                    {episode.frontmatter.excerpt}
-                  </Text>
+                  <EpisodeMeta frontmatter={episode.frontmatter} />
                 </Box>
               )
             })}

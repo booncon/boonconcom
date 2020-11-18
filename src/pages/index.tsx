@@ -114,6 +114,7 @@ const IndexPage = () => {
     <Layout>
       <SEO title="Working with friends." />
       <BackgroundImage
+        id="home"
         Tag={`header`}
         fluid={queryData.hero.childImageSharp.fluid}
         sx={{
@@ -135,7 +136,6 @@ const IndexPage = () => {
       >
         <Heading
           as="h1"
-          id="home"
           sx={{
             variant: "text.heading",
             fontSize: [4, 5, 6],
@@ -183,11 +183,6 @@ const IndexPage = () => {
             </Text>
             <br />
             <Text sx={{ fontSize: [1, 2, 3] }}>
-              {/* <Waypoint
-                onEnter={({ previousPosition, currentPosition, event }) => {
-                  console.log(previousPosition)
-                }}
-              /> */}
               Experiences from our work and cooperations with different
               companies have proven we are on the right track. Work is not a job
               and working with friends is awesome. booncon is all about learning
@@ -422,7 +417,7 @@ const IndexPage = () => {
       </Box>
       <BackgroundImage
         Tag={`section`}
-        id="work"
+        id="projects"
         fluid={queryData.workWithUs.childImageSharp.fluid}
         sx={{
           py: [4, 5],

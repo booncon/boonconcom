@@ -101,12 +101,15 @@ export default {
   },
   links: {
     nav: {
-      px: [2, 3],
+      px: [1, 1, 3],
       py: 2,
       color: "tertiary",
-      fontSize: [2, 3],
+      fontSize: [1, 2, 3],
       fontWeight: "heading",
-      textShadow: "0 0 3px rgba(255, 255, 255, 0.25)"
+      textShadow: "0 0 3px rgba(255, 255, 255, 0.25)",
+      "&.is-current, &.active": {
+        color: "primary"
+      }
     }
   },
   text: {

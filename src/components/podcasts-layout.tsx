@@ -7,6 +7,7 @@ import Layout from "./layout"
 import SEO from "./seo"
 import SubscribeButton from "./SubscribeButton"
 import { Disqus } from "gatsby-plugin-disqus"
+import EpisodeMeta from "./EpisodeMeta"
 
 const PodcastTemplate = ({ children, pageContext }) => {
   const {
@@ -50,8 +51,6 @@ const PodcastTemplate = ({ children, pageContext }) => {
     (episode) => episode.frontmatter.slug === slug
   )[0]?.frontmatter
 
-  console.log(episodeData)
-
   let disqusConfig = {
     url: `${queryData.site.siteMetadata.siteUrl + slug}`,
     identifier: guid,
@@ -64,7 +63,7 @@ const PodcastTemplate = ({ children, pageContext }) => {
       <Box
         sx={{
           variant: "contentWrap",
-          marginTop: [4, 5],
+          marginTop: [5, 6],
           p: {
             marginBottom: [2, 3],
           },
@@ -79,7 +78,9 @@ const PodcastTemplate = ({ children, pageContext }) => {
         >
           <Box px={[3, 4]}>
             <Heading as="h1">{title}</Heading>
-            <br />
+            <Box sx={{ my: [2, 3] }}>
+              <EpisodeMeta frontmatter={episodeData} />
+            </Box>
             <Box>
               {episodeData?.iuid && (
                 <iframe
