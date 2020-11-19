@@ -15,8 +15,6 @@ import CookieConsent from "react-cookie-consent"
 import BrandIcon from "../../static/svgs/logo_bc-main.inline.svg"
 //@ts-ignore
 import SquareBrandIcon from "../../static/svgs/logo_bc-main-square.inline.svg"
-// import { useEffect, useRef } from "react"
-// import { useScrollWatch } from "react-smooth-scroll-hook"
 
 import Scrollspy from "react-scrollspy"
 import { useSmoothScroll } from "react-smooth-scroll-hook"
@@ -44,45 +42,17 @@ const Layout = ({ children }) => {
 
   const path = globalHistory.location.pathname
 
-  if (typeof document !== `undefined`) {
-    const ref = useRef(document.documentElement)
+  const ref = useRef(
+    typeof document !== `undefined` ? document.documentElement : null
+  )
 
-    const { scrollTo } = useSmoothScroll({
-      ref,
-      speed: 100,
-      direction: "y",
-    })
-  }
+  const { scrollTo } = useSmoothScroll({
+    ref,
+    speed: 100,
+    direction: "y",
+  })
 
-  // const ref = useRef(document.documentElement)
-
-  // const { scrollTop } = useScrollWatch({
-  //   ref,
-  //   list: [
-  //     {
-  //       href: "#mainSlogan",
-  //     },
-  //     {
-  //       href: "#footer",
-  //     },
-  //   ],
-  // })
-
-  // const handleScroll = (e) => {
-  //   console.log(e)
-  // }
-
-  // useEffect(() => {
-  //   const el = ref.current
-  //   el.addEventListener("scroll", handleScroll, {
-  //     passive: true,
-  //   })
-  //   return () => el.removeEventListener("scroll", handleScroll)
-  // }, [])
-
-  // useEffect(() => {
-  //   console.log(scrollTop)
-  // }, [scrollTop])
+  // console.log(path)
 
   return (
     <Styled.root>
@@ -207,7 +177,11 @@ const Layout = ({ children }) => {
               >
                 Contact
               </NavLink>
-              <NavLink to="/podcast" as={GatsbyLink}>
+              <NavLink
+                to="/podcast"
+                as={GatsbyLink}
+                className={path.indexOf("podcast") >= 0 ? "active" : ""}
+              >
                 Podcast
               </NavLink>
             </Scrollspy>

@@ -103,7 +103,10 @@ const PodcastTemplate = ({ children, pageContext }) => {
             <Box sx={{ my: [3, 4] }}>
               <SubscribeButton />
             </Box>
-            <Box sx={{ my: [3, 4] }}>
+            <Heading as="h2" sx={{ marginBottom: [2, 3] }}>
+              Comments:
+            </Heading>
+            <Box sx={{ marginBottom: [3, 4] }}>
               {/* <CommentCount config={disqusConfig} placeholder={"..."} /> */}
               <Disqus config={disqusConfig} />
             </Box>
@@ -112,7 +115,7 @@ const PodcastTemplate = ({ children, pageContext }) => {
               sx={{ fontSize: [2, 3, 4], marginBottom: [2, 3] }}
               as={GatsbyLink}
             >
-              Check out our other episodes..
+              → Check out our other episodes
             </Link>
           </Box>
         </Grid>

@@ -98,11 +98,6 @@ const PodcastPage = () => {
             })}
             <br />
             <SubscribeButton />
-            <br />
-            <br />
-            <Link to="/" sx={{ fontSize: [2, 3, 4] }} as={GatsbyLink}>
-              Go back to the homepage
-            </Link>
           </Box>
         </Grid>
       </Box>

@@ -82,7 +82,7 @@ module.exports = {
         podcastType: `episodic`,
         siteUrl: `https://booncon.com`,
         imageUrl: `https://booncon-blahh.s3-eu-west-1.amazonaws.com/bp-cover-shaded.jpg`,
-        feedUrl: `http://feed.booncon.com/bitsandpieces`,
+        feedUrl: `https://feed.booncon.com/bitsandpieces`,
         language: `en-us`,
         copyright: `Copyright © 2020 booncon`,
         authorName: `booncon`,

@@ -5,7 +5,7 @@ import { jsx } from "theme-ui"
 
 const SubscribeButton = (props: { isSmall?: boolean }) => {
   const { isSmall } = props
-  const feedUrl = "http://feed.booncon.com/bitsandpieces"
+  const feedUrl = "https://feed.booncon.com/bitsandpieces"
 
   if (typeof window === "undefined") {
     return <div></div>
