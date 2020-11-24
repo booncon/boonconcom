@@ -283,7 +283,7 @@ const Layout = ({ children }) => {
             buttonText="Accept"
             enableDeclineButton
             declineButtonText="Decline"
-            cookieName="gatsby-gdpr-google-analytics"
+            cookieName="gatsby-gdpr-google-tagmanager"
             sx={{ background: "#3b454f" }}
             buttonStyle={{
               color: "#fff",
