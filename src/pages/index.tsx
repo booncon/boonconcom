@@ -83,7 +83,7 @@ const IndexPage = () => {
           }
         }
       }
-      luki: file(relativePath: { eq: "luki.jpg" }) {
+      luki: file(relativePath: { eq: "luki.jpeg" }) {
         childImageSharp {
           fluid(
             quality: 83

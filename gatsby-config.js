@@ -128,19 +128,26 @@ module.exports = {
         ],
       },
     },
-    {
-      resolve: `gatsby-plugin-gdpr-cookies`,
-      options: {
-        googleTagManager: {
-          trackingId: "GTM-NHBMPPT",
-        },
-        environments: ["production"],
-      },
-    },
+    // {
+    //   resolve: `gatsby-plugin-gdpr-cookies`,
+    //   options: {
+    //     googleTagManager: {
+    //       trackingId: "GTM-NHBMPPT",
+    //     },
+    //     environments: ["production"],
+    //   },
+    // },
     {
       resolve: `gatsby-plugin-disqus`,
       options: {
         shortname: `bitsandpieces-podcast`,
+      },
+    },
+    {
+      resolve: `gatsby-plugin-plausible`,
+      options: {
+        domain: `booncon.com`,
+        customDomain: `stats.booncon.com`,
       },
     },
   ],

@@ -278,7 +278,7 @@ const Layout = ({ children }) => {
             </Link>
           </Box>
 
-          <CookieConsent
+          {/* <CookieConsent
             location="bottom"
             buttonText="Accept"
             enableDeclineButton
@@ -303,7 +303,7 @@ const Layout = ({ children }) => {
               Privacy Policy
             </Link>
             .
-          </CookieConsent>
+          </CookieConsent> */}
         </Flex>
       </Flex>
     </Styled.root>
