@@ -1983,56 +1983,6 @@
                   { sx: { alignItems: "center", marginBottom: 3 } },
                   Object(o.c)(i.f, {
                     variant: "avatar",
-                    src: "/images/tobi-square.jpg",
-                    alt: "Portrait Tobi",
-                  }),
-                  Object(o.c)(
-                    i.b,
-                    null,
-                    Object(o.c)(
-                      i.e,
-                      { sx: { fontSize: [2, 3, 4] } },
-                      "Tobias Johannes"
-                    ),
-                    Object(o.c)(
-                      i.e,
-                      {
-                        sx: {
-                          fontSize: [1, 2, 3],
-                          fontWeight: 200,
-                          marginTop: 1,
-                        },
-                      },
-                      "Master Planner"
-                    )
-                  )
-                ),
-                Object(o.c)(
-                  i.h,
-                  { sx: { fontSize: [1, 2, 3] } },
-                  "Master Planner Tobias is an entrepreneur at heart, always bustling with new ways of doing things. Having worked closely with all functions of companies in different sectors truly makes him a business allrounder – be it marketing or finance.",
-                  Object(o.c)("br", null),
-                  "His passion lies in transforming ideas into working concepts and business plans.",
-                  Object(o.c)("br", null),
-                  "In his spare time he enjoys laughing at silly things on the web, playing board games, keeping tabs on what's going on around the globe and practising martial arts."
-                ),
-                Object(o.c)(
-                  i.g,
-                  {
-                    fontSize: [3, 4, 5],
-                    href: "https://www.twitter.com/metzelfetz",
-                  },
-                  "@metzelfetz"
-                )
-              ),
-              Object(o.c)(
-                i.b,
-                { p: [3, 4] },
-                Object(o.c)(
-                  i.c,
-                  { sx: { alignItems: "center", marginBottom: 3 } },
-                  Object(o.c)(i.f, {
-                    variant: "avatar",
                     src: "/images/luki-square.jpg",
                     alt: "Portrait Luki",
                   }),

@@ -1839,56 +1839,6 @@
                   { sx: { alignItems: "center", marginBottom: 3 } },
                   Object(o.c)(c.a, {
                     sx: { variant: "avatar" },
-                    fluid: e.tobi.childImageSharp.fluid,
-                    alt: "Portrait Tobi",
-                  }),
-                  Object(o.c)(
-                    i.b,
-                    null,
-                    Object(o.c)(
-                      i.e,
-                      { sx: { fontSize: [2, 3, 4] } },
-                      "Tobias Johannes"
-                    ),
-                    Object(o.c)(
-                      i.e,
-                      {
-                        sx: {
-                          fontSize: [1, 2, 3],
-                          fontWeight: 200,
-                          marginTop: 1,
-                        },
-                      },
-                      "Master Planner"
-                    )
-                  )
-                ),
-                Object(o.c)(
-                  i.h,
-                  { sx: { fontSize: [1, 2, 3], display: "none" } },
-                  "Tobias has a degree in International Business and years of practical experience in the fields of change management and corporate restructuring. In tough situations he keeps a level head and takes bold decisions empowering people to become change initiators.",
-                  Object(o.c)("br", null),
-                  "His passion lies in transforming ideas into working concepts and business plans.",
-                  Object(o.c)("br", null),
-                  "In his spare time he enjoys laughing at silly things on the web, playing board games and keeping tabs on what's going on around the globe."
-                ),
-                Object(o.c)(
-                  i.g,
-                  {
-                    sx: { fontSize: [3, 4], marginTop: [1, 2], float: "right" },
-                    href: "https://www.twitter.com/metzelfetz",
-                  },
-                  "@metzelfetz"
-                )
-              ),
-              Object(o.c)(
-                i.b,
-                { p: [3, 4] },
-                Object(o.c)(
-                  i.c,
-                  { sx: { alignItems: "center", marginBottom: 3 } },
-                  Object(o.c)(c.a, {
-                    sx: { variant: "avatar" },
                     fluid: e.luki.childImageSharp.fluid,
                     alt: "Portrait Luki",
                   }),
