@@ -7,15 +7,20 @@
     "node": ">=20.19.0 || >=22.12.0"
   },
   "scripts": {
-    "sync-content": "node scripts/sync-content.mjs",
-    "dev": "vite --clearScreen false",
-    "predev": "npm run sync-content",
+    "dev": "vite dev",
     "build": "vite build",
-    "prebuild": "npm run sync-content",
+    "check": "svelte-kit sync && svelte-check --tsconfig ./tsconfig.json",
     "postbuild": "node scripts/postbuild.mjs",
-    "preview": "vite preview --host 0.0.0.0"
+    "preview": "vite preview"
   },
   "devDependencies": {
+    "@sveltejs/adapter-static": "^3.0.10",
+    "@sveltejs/kit": "^2.55.0",
+    "@sveltejs/vite-plugin-svelte": "^7.0.0",
+    "@types/node": "^25.5.0",
+    "mdsvex": "^0.12.7",
+    "svelte": "^5.53.11",
+    "svelte-check": "^4.4.5",
     "typescript": "^5.9.3",
     "vite": "^8.0.0"
   },

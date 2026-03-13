@@ -1,0 +1,53 @@
+<script lang="ts">
+  import ContactPanel from '$lib/components/ContactPanel.svelte';
+  import ExperienceGrid from '$lib/components/ExperienceGrid.svelte';
+  import FounderPanel from '$lib/components/FounderPanel.svelte';
+  import Hero from '$lib/components/Hero.svelte';
+  import SectionBlock from '$lib/components/SectionBlock.svelte';
+  import ServicesGrid from '$lib/components/ServicesGrid.svelte';
+  import { organizationJsonLd, site } from '$lib/content/site';
+  import { escapeInlineScript } from '$lib/utils/head';
+
+  const title = site.meta.defaultTitle;
+  const description = site.meta.defaultDescription;
+  const canonical = `${site.meta.url}/`;
+  const organizationJson = escapeInlineScript(JSON.stringify(organizationJsonLd));
+</script>
+
+<svelte:head>
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={site.meta.ogImage} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={site.meta.ogImage} />
+  <link rel="canonical" href={canonical} />
+  {@html `<script type="application/ld+json">${organizationJson}</script>`}
+</svelte:head>
+
+<Hero hero={site.hero} />
+
+<SectionBlock id="overview" eyebrow="Overview" title="A small studio with a systems view" variant="intro">
+  booncon is the consulting practice of Lukas Hafner, a Helsinki-based strategist and maker working
+  across business, product, technology and ways of working.
+
+  The studio grew out of years spent co-founding ventures, advising companies in transition and
+  translating between leadership, operations and digital teams. Today the work is focused on making
+  AI and automation genuinely useful instead of decorative.
+
+  When change needs both clarity and someone who can help make it real, that is where booncon fits
+  best.
+</SectionBlock>
+
+<ServicesGrid content={site.services} />
+
+<ExperienceGrid content={site.experience} />
+
+<FounderPanel founder={site.founder} />
+
+<ContactPanel contact={site.contact} />

@@ -1,0 +1,92 @@
+<script lang="ts">
+  import PrivacyArticle from '$lib/components/PrivacyArticle.svelte';
+  import { site } from '$lib/content/site';
+
+  const title = site.meta.privacyTitle;
+  const description = site.meta.privacyDescription;
+  const canonical = `${site.meta.url}/privacy/`;
+</script>
+
+<svelte:head>
+  <title>{title}</title>
+  <meta name="description" content={description} />
+  <meta property="og:type" content="website" />
+  <meta property="og:title" content={title} />
+  <meta property="og:description" content={description} />
+  <meta property="og:url" content={canonical} />
+  <meta property="og:image" content={site.meta.ogImage} />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content={title} />
+  <meta name="twitter:description" content={description} />
+  <meta name="twitter:image" content={site.meta.ogImage} />
+  <link rel="canonical" href={canonical} />
+</svelte:head>
+
+<PrivacyArticle>
+
+# Privacy policy
+
+This website is a small, mostly static company site for booncon oy. It does not have user accounts,
+newsletters or a contact form. The only personal data handled is what is needed to operate the site,
+understand aggregate traffic and respond if you contact booncon directly.
+
+## Controller
+
+booncon oy is the controller for personal data processed through this website.
+
+Address: Suvilahdenkatu 4 B 24, 00500 Helsinki, Finland.
+
+Email: [hello@booncon.com](mailto:hello@booncon.com?subject=Hi%20booncon!)
+
+Website: <https://booncon.com>
+
+## What is collected
+
+If you browse this site, the hosting provider may process standard technical request data such as IP
+address, user agent, requested URL and timestamp in server logs.
+
+The site also uses self-hosted Plausible Analytics to understand aggregate traffic and page usage.
+Plausible is configured without cross-site tracking cookies and is used to see general trends rather
+than identify individual visitors.
+
+If you contact booncon by email or through LinkedIn, the information you send is processed so your
+message can be handled and replied to.
+
+- Hosting and security logs
+- Anonymous or aggregate analytics data
+- Contact details and message content you send voluntarily
+
+## Why it is processed
+
+The data is processed to keep the website available and secure, understand which pages are useful,
+and respond to inbound questions or project enquiries.
+
+The legal basis is usually legitimate interest for running and improving the website, and
+pre-contractual steps or legitimate interest when responding to direct enquiries.
+
+## Processors and third parties
+
+The website is intended to be hosted on GitHub Pages, which means GitHub may process technical
+request data as part of delivering the site.
+
+Analytics data is processed through Plausible at `stats.booncon.com`. If you leave this site through
+an external link such as LinkedIn, the privacy practices of that external service apply from that
+point onward.
+
+## Retention
+
+Server log retention is determined by the hosting setup and kept only as long as needed for
+operations and security.
+
+Analytics data is reviewed in aggregate. Direct email correspondence is retained only as long as
+needed to handle the conversation, the business relationship or applicable legal obligations.
+
+## Your rights
+
+You may request access to, correction of or deletion of personal data relating to you, as well as
+object to or restrict processing where applicable under data protection law.
+
+If you have any privacy-related questions, contact
+[hello@booncon.com](mailto:hello@booncon.com?subject=Hi%20booncon!).
+
+</PrivacyArticle>

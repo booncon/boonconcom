@@ -1,0 +1,29 @@
+<script lang="ts">
+  import type { FounderContent } from '$lib/content/site';
+
+  export let founder: FounderContent;
+</script>
+
+<section class="founder" id="lukas">
+  <div class="founder__media">
+    <img src={founder.imageSrc} alt={founder.imageAlt} width="1200" height="1200" />
+  </div>
+
+  <div class="founder__body">
+    <p class="eyebrow">Founder</p>
+    <h2>{founder.name}</h2>
+    <p class="founder__meta">{founder.role} / {founder.location}</p>
+
+    <ul class="founder__focus" aria-label="Founder focus areas">
+      {#each founder.focus as item}
+        <li>{item}</li>
+      {/each}
+    </ul>
+
+    <div class="prose-card">
+      {#each founder.body as paragraph}
+        <p>{paragraph}</p>
+      {/each}
+    </div>
+  </div>
+</section>
