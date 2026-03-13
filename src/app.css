@@ -143,11 +143,22 @@ h3 {
   width: var(--header-width);
   margin: 0 auto;
   padding: 0.9rem 1rem;
-  border: 1px solid rgba(19, 34, 43, 0.08);
+  border: 1px solid transparent;
   border-radius: calc(var(--radius) + 8px);
+  box-shadow: none;
+  transition:
+    border-color 180ms ease,
+    background-color 180ms ease,
+    box-shadow 180ms ease,
+    backdrop-filter 180ms ease;
+}
+
+.site-header--scrolled {
+  border-color: rgba(19, 34, 43, 0.08);
   background: rgba(247, 242, 232, 0.72);
   backdrop-filter: blur(14px);
   box-shadow: 0 10px 32px rgba(19, 34, 43, 0.08);
+  background: rgba(247, 242, 232, 0.92);
 }
 
 .header-inner {
@@ -271,7 +282,7 @@ h3 {
 .hero {
   display: grid;
   align-items: start;
-  grid-template-columns: minmax(0, 1fr) minmax(300px, 23rem);
+  grid-template-columns: minmax(0, 1fr) minmax(280px, 20.5rem);
   gap: 1.5rem;
   padding: clamp(1.3rem, 2vw, 1.8rem);
   background:
@@ -362,6 +373,8 @@ h3 {
   display: grid;
   gap: 1rem;
   align-self: start;
+  justify-self: end;
+  max-width: 20.5rem;
   padding: 1rem;
   border-radius: calc(var(--radius) - 8px);
   background: rgba(15, 31, 40, 0.94);
@@ -370,12 +383,14 @@ h3 {
 
 .hero__aside-media {
   overflow: hidden;
+  aspect-ratio: 6 / 5;
+  max-height: 20rem;
   border-radius: calc(var(--radius) - 12px);
 }
 
 .hero__aside-media img {
   width: 100%;
-  aspect-ratio: 4 / 3;
+  height: 100%;
   object-fit: cover;
   mix-blend-mode: luminosity;
   opacity: 0.88;
@@ -614,6 +629,11 @@ h3 {
 
   .cards-grid--two {
     grid-template-columns: 1fr;
+  }
+
+  .hero__aside {
+    max-width: none;
+    justify-self: stretch;
   }
 
   .site-footer__links {
