@@ -10,7 +10,7 @@
   </div>
 
   <div class="founder__body">
-    <p class="eyebrow">Founder</p>
+    <p class="eyebrow">{founder.title}</p>
     <h2>{founder.name}</h2>
     <p class="founder__meta">{founder.role} / {founder.location}</p>
 

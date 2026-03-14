@@ -6,7 +6,6 @@
 
 <section class="hero" id="top">
   <div class="hero__copy">
-    <p class="eyebrow">{hero.eyebrow}</p>
     <h1>{hero.title}</h1>
     <p class="hero__summary">{hero.summary}</p>
 
@@ -21,7 +20,6 @@
     </div>
 
     <div class="hero__aside-body">
-      <p class="eyebrow">{hero.panel.eyebrow}</p>
       <p class="hero__aside-note">{hero.panel.summary}</p>
       <ul class="hero__tags" aria-label="Focus areas">
         {#each hero.panel.items as item}

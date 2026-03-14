@@ -37,6 +37,7 @@ export interface ExperienceItem {
 }
 
 export interface FounderContent {
+  title: string;
   name: string;
   role: string;
   location: string;
@@ -53,6 +54,12 @@ export interface ContactContent {
   linkedin: ActionLink;
 }
 
+export interface OverviewContent {
+  eyebrow: string;
+  title: string;
+  body: string[];
+}
+
 export interface SiteContent {
   meta: {
     url: string;
@@ -65,11 +72,11 @@ export interface SiteContent {
   };
   brand: {
     name: string;
-    byline: string;
     markSrc: string;
   };
   nav: NavItem[];
   hero: HeroContent;
+  overview: OverviewContent;
   services: {
     title: string;
     intro: string;
@@ -100,9 +107,9 @@ export const site: SiteContent = {
   meta: {
     url: "https://booncon.com",
     domain: "booncon.com",
-    defaultTitle: "booncon | AI, automation and digital change",
+    defaultTitle: "Working with friends. | booncon",
     defaultDescription:
-      "booncon is the Helsinki-based studio of Lukas Hafner. Pragmatic AI, automation and digital change work for companies that need sharper systems and better ways of working.",
+      "booncon is the Helsinki-based studio of Lukas Jakob Hafner. Pragmatic AI, automation and digital change work for companies that need sharper systems and better ways of working.",
     privacyTitle: "Privacy policy | booncon",
     privacyDescription:
       "Privacy information for booncon.com, including controller details, hosting, analytics and direct contact handling.",
@@ -110,13 +117,12 @@ export const site: SiteContent = {
   },
   brand: {
     name: "booncon",
-    byline: "Lukas Hafner",
     markSrc: "/icon-192x192.png",
   },
   nav: [
     { label: "Services", href: "#services" },
     { label: "Experience", href: "#experience" },
-    { label: "Lukas", href: "#lukas" },
+    { label: "Team", href: "#team" },
     { label: "Contact", href: "#contact" },
   ],
   hero: {
@@ -124,7 +130,7 @@ export const site: SiteContent = {
     title:
       "AI, automation and digital change with less theatre and more traction.",
     summary:
-      "booncon helps companies make better decisions about how work gets done, where automation belongs, and which digital bets are actually worth making.",
+      "booncon helps companies make better decisions about how work gets done and where automation belongs. We turn complex digital investments into tangible results. When the technology delivers, the professional experience becomes something people can actually love.",
     primaryCta: {
       label: "Start a conversation",
       href: "mailto:hello@booncon.com?subject=Hi%20booncon!",
@@ -142,6 +148,15 @@ export const site: SiteContent = {
         "Founder-level advisory",
       ],
     },
+  },
+  overview: {
+    eyebrow: "Overview",
+    title: "A small studio with a systems view",
+    body: [
+      "booncon is the consulting practice lead by Lukas Jakob Hafner, a Helsinki-based strategist and maker working across business, product, technology and ways of working.",
+      "The studio grew out of years spent co-founding ventures, advising companies in transition and translating between leadership, operations and digital teams. Today the work is focused on making AI and automation genuinely useful instead of decorative.",
+      "When change needs both clarity and someone who can help make it real, that is where booncon fits best.",
+    ],
   },
   services: {
     title: "Where booncon can help",
@@ -188,7 +203,7 @@ export const site: SiteContent = {
       "booncon draws on founder, operator and advisory work across digital products, service design and business transformation.",
     items: [
       {
-        name: "Pixels Helsinki",
+        name: "booncon Pixels",
         href: "https://pixels.fi",
         role: "Co-founder",
         summary:
@@ -199,7 +214,7 @@ export const site: SiteContent = {
         href: "https://tinytinbox.com",
         role: "Venture builder",
         summary:
-          "Helped launch an interactive children's publishing concept that blended storytelling, product and digital production.",
+          "Launched an interactive children's publishing concept that blended storytelling, product and digital production.",
       },
       {
         name: "SelectAM",
@@ -218,6 +233,7 @@ export const site: SiteContent = {
     ],
   },
   founder: {
+    title: "Master Maker",
     name: "Lukas Jakob Hafner",
     role: "Founder, advisor and builder",
     location: "Helsinki, Finland",

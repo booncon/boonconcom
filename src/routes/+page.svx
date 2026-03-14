@@ -32,17 +32,7 @@
 
 <Hero hero={site.hero} />
 
-<SectionBlock id="overview" eyebrow="Overview" title="A small studio with a systems view" variant="intro">
-  booncon is the consulting practice of Lukas Hafner, a Helsinki-based strategist and maker working
-  across business, product, technology and ways of working.
-
-  The studio grew out of years spent co-founding ventures, advising companies in transition and
-  translating between leadership, operations and digital teams. Today the work is focused on making
-  AI and automation genuinely useful instead of decorative.
-
-  When change needs both clarity and someone who can help make it real, that is where booncon fits
-  best.
-</SectionBlock>
+<SectionBlock id="overview" variant="intro" content={site.overview} />
 
 <ServicesGrid content={site.services} />
 
