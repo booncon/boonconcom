@@ -4,7 +4,7 @@
   export let founder: FounderContent;
 </script>
 
-<section class="founder" id="lukas">
+<section class="founder" id="team">
   <div class="founder__media">
     <img src={founder.imageSrc} alt={founder.imageAlt} width="1200" height="1200" />
   </div>

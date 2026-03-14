@@ -128,7 +128,7 @@ export const site: SiteContent = {
   hero: {
     eyebrow: "booncon / Lukas Hafner",
     title:
-      "AI, automation and digital change with less theatre and more traction.",
+      "AI, automation, and digital change with less noise and more momentum.",
     summary:
       "booncon helps companies make better decisions about how work gets done and where automation belongs. We turn complex digital investments into tangible results. When the technology delivers, the professional experience becomes something people can actually love.",
     primaryCta: {

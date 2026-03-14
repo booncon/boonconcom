@@ -17,7 +17,7 @@
         <p class="card__meta">{item.role}</p>
         <h3>{item.name}</h3>
         <p>{item.summary}</p>
-        <a href={item.href} target="_blank" rel="noreferrer noopener">Visit site</a>
+        <a href={item.href} target="_blank" rel="noreferrer noopener">Visit site <span class="card__link-icon">↗</span></a>
       </article>
     {/each}
   </div>

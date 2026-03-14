@@ -15,6 +15,7 @@
   --line: rgba(19, 34, 43, 0.12);
   --accent: #0c95b8;
   --accent-strong: #0b7396;
+  --accent-light: #2a9bda;
   --accent-warm: #f07f49;
   --shadow: 0 22px 60px rgba(19, 34, 43, 0.12);
   --radius: 12px;
@@ -397,6 +398,7 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  align-self: end;
 }
 
 .card--link {
@@ -406,15 +408,31 @@ h3 {
     gap: 0.45rem;
     margin-top: auto;
     font-weight: 750;
+    position: relative;
+    text-decoration: none;
+    color: inherit;
+    z-index: 1;
+    justify-self: start;
 
     &::after {
-      content: "->";
-      transition: transform 180ms ease;
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: 0.04em;
+      height: 0.14em;
+      width: 100%;
+      background: linear-gradient(
+        110deg,
+        var(--accent-strong),
+        var(--accent-light)
+      );
+      z-index: -1;
+      transition: height 0.25s cubic-bezier(0.6, 0, 0.4, 1);
     }
 
     &:hover::after,
     &:focus-visible::after {
-      transform: translateX(0.2rem);
+      height: 0.26em;
     }
   }
 }
@@ -422,7 +440,7 @@ h3 {
 .hero__tags li,
 .founder__focus li,
 .card__tags li {
-  padding: 0.5rem 0.75rem;
+  padding: 0.2rem 0.45rem 0.35rem;
   border-radius: 999px;
   font-size: 0.84rem;
   font-weight: 650;
@@ -438,6 +456,12 @@ h3 {
 .privacy-content a,
 .prose-card a {
   color: var(--accent-strong);
+}
+
+.card__link-icon {
+  position: relative;
+  top: 1px;
+  font-size: 0.55rem;
 }
 
 /* Feature Blocks */
@@ -561,6 +585,7 @@ h3 {
   border-radius: var(--radius);
   background: var(--surface);
   box-shadow: var(--shadow);
+  overflow: clip;
 }
 
 .founder__media {
@@ -587,6 +612,7 @@ h3 {
   display: flex;
   flex-wrap: wrap;
   gap: 0.5rem;
+  align-self: start;
 }
 
 .contact {
