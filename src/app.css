@@ -188,46 +188,66 @@ h3 {
   border-color: transparent;
   background: linear-gradient(
     135deg,
-    rgba(19, 34, 43, 0.12),
-    rgba(246, 241, 231, 0.5)
+    rgba(19, 34, 43, 0.18),
+    rgba(246, 241, 231, 0.4)
   );
   backdrop-filter: blur(18px) saturate(1.3);
   box-shadow:
     0 8px 28px rgba(19, 34, 43, 0.1),
     0 2px 4px rgba(19, 34, 43, 0.04);
+  /* Clip rim paint to rounded shape to avoid corner artifacts */
+  overflow: hidden;
 }
 
-/* Reflective sheen that sweeps across the glass surface as you scroll */
-/* Gradient border: a conic-gradient concentrates the bright catch-point on one
-   arc of the border ring. As --reflect goes 0→1, the from-angle rotates the
-   highlight around the rim — unlike linear-gradient which fills each edge
-   uniformly and makes the rotation invisible. The mask trick (content-box xor
-   border-box) restricts the gradient to just the 2px border, following the
-   border-radius without needing border-image. */
+/* Reflective sheen that sweeps across the glass rim as you scroll (edge-only).
+   Inset box-shadows keep the highlight on the rim only (no fill); opacity per
+   edge is driven by --reflect so the bright spot moves top → right → bottom → left. */
 .site-header--scrolled::after {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
-  padding: 2px;
-  background: conic-gradient(
-    from calc(-45deg + var(--reflect, 0) * 270deg),
-    rgba(255, 255, 255, 0.95) 0deg,
-    rgba(255, 255, 255, 0.25) 30deg,
-    rgba(19, 34, 43, 0.06) 70deg,
-    rgba(19, 34, 43, 0.04) 290deg,
-    rgba(255, 255, 255, 0.12) 330deg,
-    rgba(255, 255, 255, 0.95) 360deg
-  );
-  mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  mask-composite: exclude;
-  -webkit-mask:
-    linear-gradient(#fff 0 0) content-box,
-    linear-gradient(#fff 0 0);
-  -webkit-mask-composite: xor;
   pointer-events: none;
+  /* Strong rim; steep falloff (×8) keeps the bright spot short along each edge */
+  --rim-base: 0.35;
+  --rim-peak: 0.82;
+  --t: clamp(0, 1 - 8 * abs(0.125 - var(--reflect, 0)), 1);
+  --r: clamp(0, 1 - 8 * abs(0.375 - var(--reflect, 0)), 1);
+  --b: clamp(0, 1 - 8 * abs(0.625 - var(--reflect, 0)), 1);
+  --l: clamp(0, 1 - 8 * abs(0.875 - var(--reflect, 0)), 1);
+  /* Crisp layer to reduce corner/edge artifacts and subpixel blur */
+  transform: translateZ(0);
+  -webkit-backface-visibility: hidden;
+  backface-visibility: hidden;
+  box-shadow:
+    inset 0 1px 0 0
+      rgba(
+        255,
+        255,
+        255,
+        calc(var(--rim-base) + (var(--rim-peak) - var(--rim-base)) * var(--t))
+      ),
+    inset -1px 0 0 0
+      rgba(
+        255,
+        255,
+        255,
+        calc(var(--rim-base) + (var(--rim-peak) - var(--rim-base)) * var(--r))
+      ),
+    inset 0 -1px 0 0
+      rgba(
+        255,
+        255,
+        255,
+        calc(var(--rim-base) + (var(--rim-peak) - var(--rim-base)) * var(--b))
+      ),
+    inset 1px 0 0 0
+      rgba(
+        255,
+        255,
+        255,
+        calc(var(--rim-base) + (var(--rim-peak) - var(--rim-base)) * var(--l))
+      );
 }
 
 .header-inner {

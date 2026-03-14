@@ -22,7 +22,7 @@
   <div class="site-footer__brand">
     <p class="site-footer__meta">© {year} {legal.companyName}</p>
     <p class="site-footer__meta">VAT {legal.vatId}</p>
-    <a href={legal.asiakastieto.href} target="_blank" rel="noreferrer noopener" class="footer-cert-badge">
+    <a href={legal.asiakastieto.href} target="_blank" rel="noreferrer noopener" class="footer-cert-badge" aria-label="View Asiakastieto AA certificate">
       <enhanced:img src={certBadgeImg} alt="Asiakastieto AA certificate" class="footer-cert-badge__img" loading="lazy" />
     </a>
   </div>
