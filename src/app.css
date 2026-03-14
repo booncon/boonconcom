@@ -20,8 +20,8 @@
   --shadow: 0 22px 60px rgba(19, 34, 43, 0.12);
   --radius: 12px;
   --radius-sm: 8px;
-  --content-width: min(1280px, calc(100vw - 2rem));
-  --header-width: min(1320px, calc(100vw - 1.5rem));
+  --content-width: min(1520px, calc(100vw - 2rem));
+  --header-width: min(1520px, calc(100vw - 1.5rem));
   font-family: "freight-sans-pro", sans-serif;
   font-size: 16px;
   line-height: 1.5;
@@ -385,13 +385,26 @@ h3 {
 }
 
 .card {
-  display: grid;
+  display: flex;
+  flex-direction: column;
   gap: 0.95rem;
   padding: 1.25rem;
   border: 1px solid var(--line);
   border-radius: calc(var(--radius) - 10px);
   background: rgba(255, 255, 255, 0.62);
   min-height: 100%;
+  overflow: hidden;
+  isolation: isolate;
+}
+
+.card > h3 {
+  flex: 0 0 auto;
+}
+
+.card > p {
+  flex: 1 1 auto;
+  min-height: 0;
+  overflow: hidden;
 }
 
 .card__tags {
@@ -399,6 +412,9 @@ h3 {
   flex-wrap: wrap;
   gap: 0.5rem;
   align-self: end;
+  align-content: flex-end;
+  margin-top: auto;
+  flex-shrink: 0;
 }
 
 .card--link {
@@ -686,6 +702,10 @@ h3 {
     grid-template-columns: 1fr;
   }
 
+  .cards-grid--two .card {
+    min-height: 0;
+  }
+
   .hero__aside {
     max-width: none;
     justify-self: stretch;
@@ -717,7 +737,9 @@ h3 {
   }
 
   .site-nav {
-    max-width: 12.5rem;
+    flex-direction: column;
+    align-items: flex-end;
+    gap: 0.25rem;
   }
 
   .hero,
