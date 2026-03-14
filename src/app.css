@@ -181,6 +181,24 @@ h3 {
   box-shadow: 0 10px 32px rgba(19, 34, 43, 0.08);
 }
 
+.site-header__progress {
+  position: absolute;
+  left: 0;
+  right: 0;
+  bottom: 0;
+  height: 3px;
+  border-radius: 0 0 calc(var(--radius) + 8px) calc(var(--radius) + 8px);
+  background: rgba(19, 34, 43, 0.08);
+  overflow: hidden;
+}
+
+.site-header__progress-bar {
+  height: 100%;
+  background: var(--accent-strong);
+  border-radius: 0 2px 2px 0;
+  transition: width 120ms ease-out;
+}
+
 .header-inner {
   display: flex;
   align-items: center;
@@ -227,13 +245,25 @@ h3 {
 }
 
 .site-nav {
+  position: relative;
   display: flex;
   flex-wrap: wrap;
   justify-content: flex-end;
   gap: 0.35rem;
 }
 
+.site-nav__indicator {
+  position: absolute;
+  background: rgba(12, 149, 184, 0.14);
+  border-radius: 999px;
+  transition: left 220ms ease-out, top 220ms ease-out, width 220ms ease-out, height 220ms ease-out;
+  pointer-events: none;
+  z-index: 0;
+}
+
 .site-nav__link {
+  position: relative;
+  z-index: 1;
   padding: 0.65rem 0.95rem;
   border-radius: 999px;
   font-size: 1.14rem;
@@ -246,6 +276,11 @@ h3 {
     color: var(--accent-strong);
     background: rgba(12, 149, 184, 0.1);
   }
+}
+
+.site-nav__link--active {
+  color: var(--accent-strong);
+  font-weight: 600;
 }
 
 @media (min-width: 760px) {
