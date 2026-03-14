@@ -1,6 +1,7 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte';
   import { page } from '$app/state';
+  import { replaceState } from '$app/navigation';
   import BoonconLogo from '$lib/components/BoonconLogo.svelte';
   import type { NavItem } from '$lib/content/site';
 
@@ -66,7 +67,7 @@
     const sectionId = hashOnly.slice(1);
     activeId = sectionId;
     lastNavClickTime = Date.now();
-    history.replaceState(null, '', hashOnly);
+    replaceState(hashOnly, {});
 
     const headerHeight = headerEl.getBoundingClientRect().height;
     const gap = 12;
