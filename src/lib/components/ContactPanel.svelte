@@ -2,6 +2,7 @@
   import type { ContactContent } from '$lib/content/site';
 
   export let contact: ContactContent;
+  $: addressLines = contact.address.split(',').map((part) => part.trim());
 </script>
 
 <section class="section section--contact" id="contact">
@@ -12,11 +13,17 @@
       <p class="contact__summary">{contact.summary}</p>
     </div>
 
+    <address class="contact__address">
+      {#each addressLines as line, i}
+        {line}{#if i < addressLines.length - 1}<br />{/if}
+      {/each}
+      <br />
+      <br />
+      <a href="tel:{contact.phone}">{contact.phone}</a>
+    </address>
+
     <div class="contact__actions">
       <a class="button button--primary" href={contact.email.href}>{contact.email.label}</a>
-      <a class="button button--ghost" href={contact.linkedin.href} target="_blank" rel="noreferrer noopener">
-        {contact.linkedin.label}
-      </a>
     </div>
   </div>
 </section>

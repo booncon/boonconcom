@@ -50,6 +50,8 @@ export interface FounderContent {
 export interface ContactContent {
   title: string;
   summary: string;
+  address: string;
+  phone: string;
   email: ActionLink;
   linkedin: ActionLink;
 }
@@ -93,9 +95,12 @@ export interface SiteContent {
     companyName: string;
     vatId: string;
     location: string;
+    tagline: string;
     email: ActionLink;
     linkedin: ActionLink;
     podcast: ActionLink;
+    github: ActionLink;
+    asiakastieto: ActionLink;
   };
   plausible: {
     domain: string;
@@ -254,8 +259,11 @@ export const site: SiteContent = {
     title: "Need a clearer next step?",
     summary:
       "If you are exploring AI, rethinking the way work flows through the company or trying to make digital change less vague, Lukas is happy to talk.",
+    address:
+      "booncon oy, Suvilahdenkatu 4 B 24, c/o Hafner, 00500 Helsinki, Finland",
+    phone: "+358 45 8980609",
     email: {
-      label: "Email Lukas",
+      label: "Send an email",
       href: "mailto:hello@booncon.com?subject=Hi%20booncon!",
     },
     linkedin: {
@@ -268,6 +276,7 @@ export const site: SiteContent = {
     companyName: "booncon oy",
     vatId: "FI24323170",
     location: "Helsinki, Finland",
+    tagline: "Working with friends.",
     email: {
       label: "hello@booncon.com",
       href: "mailto:hello@booncon.com?subject=Hi%20booncon!",
@@ -281,6 +290,15 @@ export const site: SiteContent = {
       label: "bitsandpieces.fm",
       href: "https://bitsandpieces.fm",
       external: true,
+    },
+    github: {
+      label: "GitHub",
+      href: "https://github.com/booncon",
+      external: true,
+    },
+    asiakastieto: {
+      label: "Asiakastieto AA",
+      href: "https://www.asiakastieto.fi/web/fi/yritykset/booncon-oy/25484580/luottoluokitus",
     },
   },
   plausible: {
