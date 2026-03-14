@@ -111,7 +111,8 @@ export interface SiteContent {
   };
   plausible: {
     domain: string;
-    src: string;
+    /** Optional proxy API endpoint (e.g. https://stats.example.com/api/event). Omit to use Plausible’s default. */
+    endpoint?: string;
   };
 }
 
@@ -323,7 +324,7 @@ export const site: SiteContent = {
   },
   plausible: {
     domain: "booncon.com",
-    src: "https://stats.booncon.com/js/index.js",
+    endpoint: "https://stats.booncon.com/api/event",
   },
 };
 

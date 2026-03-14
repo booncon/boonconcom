@@ -1,12 +1,13 @@
 <script lang="ts">
   import { onMount, tick } from 'svelte';
   import { page } from '$app/state';
-  import { replaceState } from '$app/navigation';
+  import { goto, replaceState } from '$app/navigation';
   import BoonconLogo from '$lib/components/BoonconLogo.svelte';
   import type { NavItem } from '$lib/content/site';
 
   export let name: string;
   export let nav: NavItem[];
+  export let trackEvent: ((name: string, props?: Record<string, string>) => void) | null = null;
 
   let scrolled = false;
   let menuOpen = false;
@@ -44,7 +45,6 @@
     if (!href.startsWith('#')) {
       return href;
     }
-
     return page.url.pathname === '/' ? href : `/${href}`;
   };
 
@@ -52,12 +52,20 @@
     menuOpen = false;
   }
 
-  function handleNavClick(e: MouseEvent) {
+  function handleNavClick(e: MouseEvent, item: NavItem) {
     const link = e.currentTarget as HTMLAnchorElement;
     const href = link.getAttribute('href');
     const hashOnly = href?.startsWith('#') ? href : href?.includes('#') ? '#' + href.split('#')[1] : null;
-    if (!hashOnly || hashOnly === '#' || !headerEl || page.url.pathname !== '/') return;
+    if (!hashOnly || hashOnly === '#') return;
 
+    if (page.url.pathname !== '/') {
+      e.preventDefault();
+      closeMenu();
+      goto(`/${hashOnly}`);
+      return;
+    }
+
+    if (!headerEl) return;
     const target = document.querySelector(hashOnly);
     if (!target || !(target instanceof HTMLElement)) return;
 
@@ -167,7 +175,10 @@
       class="site-header__menu-btn"
       aria-expanded={menuOpen}
       aria-label={menuOpen ? 'Close menu' : 'Open menu'}
-      on:click={() => (menuOpen = !menuOpen)}
+      on:click={() => {
+        trackEvent?.('Menu toggle', { state: menuOpen ? 'close' : 'open' });
+        menuOpen = !menuOpen;
+      }}
     >
       <span class="site-header__menu-btn-bar" aria-hidden="true"></span>
       <span class="site-header__menu-btn-bar" aria-hidden="true"></span>
@@ -189,8 +200,11 @@
           href={resolveHref(item.href)}
           aria-current={activeId != null && item.href === `#${activeId}` ? 'location' : undefined}
           on:click={(e) => {
-            handleNavClick(e);
-            closeMenu();
+            trackEvent?.('Menu link', {
+              label: item.label,
+              destination: item.href.startsWith('#') ? item.href : item.href,
+            });
+            handleNavClick(e, item);
           }}
         >
           {item.label}

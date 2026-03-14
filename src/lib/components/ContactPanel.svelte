@@ -3,6 +3,12 @@
 
   export let contact: ContactContent;
   $: addressLines = contact.address.split(',').map((part) => part.trim());
+
+  function onEmailClick() {
+    import('@plausible-analytics/tracker').then(({ track }) => {
+      track('Email click', { props: { location: 'contact' } });
+    });
+  }
 </script>
 
 <section class="section section--contact" id="contact">
@@ -27,7 +33,7 @@
         <p class="eyebrow">Get in touch</p>
         <a class="contact__phone" href="tel:{contact.phone}">{contact.phone}</a>
         <div class="contact__actions">
-          <a class="button button--primary" href={contact.email.href}>{contact.email.label}</a>
+          <a class="button button--primary" href={contact.email.href} onclick={onEmailClick}>{contact.email.label}</a>
         </div>
       </div>
     </div>
