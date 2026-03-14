@@ -20,7 +20,7 @@
   --shadow: 0 22px 60px rgba(19, 34, 43, 0.12);
   --radius: 12px;
   --radius-sm: 8px;
-  --content-width: min(1520px, calc(100vw - 2rem));
+  --content-width: min(1480px, calc(100vw - 2rem));
   --header-width: min(1520px, calc(100vw - 1.5rem));
   font-family: "freight-sans-pro", sans-serif;
   font-size: 16px;
@@ -172,34 +172,66 @@ h3 {
     background-color 180ms ease,
     box-shadow 180ms ease,
     backdrop-filter 180ms ease;
+
+  &::after {
+    content: "";
+    opacity: 0;
+    transition: opacity 200ms ease;
+  }
+
+  &.site-header--scrolled::after {
+    opacity: 1;
+  }
 }
 
 .site-header--scrolled {
-  border-color: rgba(19, 34, 43, 0.08);
-  background: rgba(247, 242, 232, 0.92);
-  backdrop-filter: blur(14px);
-  box-shadow: 0 10px 32px rgba(19, 34, 43, 0.08);
+  border-color: transparent;
+  background: linear-gradient(
+    135deg,
+    rgba(19, 34, 43, 0.12),
+    rgba(246, 241, 231, 0.5)
+  );
+  backdrop-filter: blur(18px) saturate(1.3);
+  box-shadow:
+    0 8px 28px rgba(19, 34, 43, 0.1),
+    0 2px 4px rgba(19, 34, 43, 0.04);
 }
 
-.site-header__progress {
+/* Reflective sheen that sweeps across the glass surface as you scroll */
+/* Gradient border: a conic-gradient concentrates the bright catch-point on one
+   arc of the border ring. As --reflect goes 0→1, the from-angle rotates the
+   highlight around the rim — unlike linear-gradient which fills each edge
+   uniformly and makes the rotation invisible. The mask trick (content-box xor
+   border-box) restricts the gradient to just the 2px border, following the
+   border-radius without needing border-image. */
+.site-header--scrolled::after {
+  content: "";
   position: absolute;
-  left: 0;
-  right: 0;
-  bottom: 0;
-  height: 3px;
-  border-radius: 0 0 calc(var(--radius) + 8px) calc(var(--radius) + 8px);
-  background: rgba(19, 34, 43, 0.08);
-  overflow: hidden;
-}
-
-.site-header__progress-bar {
-  height: 100%;
-  background: var(--accent-strong);
-  border-radius: 0 2px 2px 0;
-  transition: width 120ms ease-out;
+  inset: 0;
+  border-radius: inherit;
+  padding: 2px;
+  background: conic-gradient(
+    from calc(-45deg + var(--reflect, 0) * 270deg),
+    rgba(255, 255, 255, 0.95) 0deg,
+    rgba(255, 255, 255, 0.25) 30deg,
+    rgba(19, 34, 43, 0.06) 70deg,
+    rgba(19, 34, 43, 0.04) 290deg,
+    rgba(255, 255, 255, 0.12) 330deg,
+    rgba(255, 255, 255, 0.95) 360deg
+  );
+  mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  mask-composite: exclude;
+  -webkit-mask:
+    linear-gradient(#fff 0 0) content-box,
+    linear-gradient(#fff 0 0);
+  -webkit-mask-composite: xor;
+  pointer-events: none;
 }
 
 .header-inner {
+  position: relative;
   display: flex;
   align-items: center;
   justify-content: space-between;
@@ -254,9 +286,23 @@ h3 {
 
 .site-nav__indicator {
   position: absolute;
-  background: rgba(12, 149, 184, 0.14);
+  background: linear-gradient(
+    160deg,
+    rgba(255, 255, 255, 0.42) 0%,
+    rgba(12, 149, 184, 0.22) 45%,
+    rgba(12, 149, 184, 0.14) 100%
+  );
   border-radius: 999px;
-  transition: left 220ms ease-out, top 220ms ease-out, width 220ms ease-out, height 220ms ease-out;
+  border: 1px solid rgba(255, 255, 255, 0.5);
+  box-shadow:
+    inset 0 1px 0 rgba(255, 255, 255, 0.65),
+    inset 0 -1px 0 rgba(12, 149, 184, 0.12),
+    0 2px 10px rgba(12, 149, 184, 0.18);
+  transition:
+    left 220ms ease-out,
+    top 220ms ease-out,
+    width 220ms ease-out,
+    height 220ms ease-out;
   pointer-events: none;
   z-index: 0;
 }

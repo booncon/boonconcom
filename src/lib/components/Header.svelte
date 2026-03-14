@@ -115,7 +115,7 @@
       // A percentage scales with the screen so every section gets a fair activation window.
       const triggerY = headerEl.getBoundingClientRect().bottom + window.innerHeight * 0.5;
 
-      let current = sectionIds[0] ?? null;
+      let current: string | null = null;
       for (const id of sectionIds) {
         const el = document.getElementById(id);
         if (!el) continue;
@@ -131,6 +131,7 @@
       const max =
         document.documentElement.scrollHeight - window.innerHeight;
       scrollProgress = max > 0 ? Math.min(1, window.scrollY / max) : 0;
+      headerEl?.style.setProperty('--reflect', scrollProgress.toFixed(4));
       updateActiveSection();
     };
 
@@ -173,7 +174,7 @@
     </button>
 
     <nav class="site-nav" aria-label="Primary" bind:this={navEl}>
-      {#if indicatorStyle && page.url.pathname === '/'}
+      {#if indicatorStyle && page.url.pathname === '/' && scrolled}
         <span
           class="site-nav__indicator"
           style="left: {indicatorStyle.left}px; top: {indicatorStyle.top}px; width: {indicatorStyle.width}px; height: {indicatorStyle.height}px"
@@ -196,16 +197,4 @@
       {/each}
     </nav>
   </div>
-  {#if page.url.pathname === '/'}
-    <div
-      class="site-header__progress"
-      role="presentation"
-      aria-hidden="true"
-    >
-      <div
-        class="site-header__progress-bar"
-        style="width: {scrollProgress * 100}%"
-      ></div>
-    </div>
-  {/if}
 </header>
