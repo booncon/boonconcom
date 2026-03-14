@@ -324,7 +324,6 @@ export const site: SiteContent = {
   },
   plausible: {
     domain: "booncon.com",
-    endpoint: "https://stats.booncon.com/api/event",
   },
 };
 
