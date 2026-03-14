@@ -14,10 +14,10 @@
   --accent-strong: #0b7396;
   --accent-warm: #f07f49;
   --shadow: 0 22px 60px rgba(19, 34, 43, 0.12);
-  --radius: 28px;
-  --radius-sm: 18px;
-  --content-width: min(1120px, calc(100vw - 2rem));
-  --header-width: min(1180px, calc(100vw - 1.5rem));
+  --radius: 12px;
+  --radius-sm: 8px;
+  --content-width: min(1280px, calc(100vw - 2rem));
+  --header-width: min(1320px, calc(100vw - 1.5rem));
   font-family: "Manrope Variable", "Manrope", sans-serif;
   font-size: 16px;
   line-height: 1.5;
@@ -155,10 +155,9 @@ h3 {
 
 .site-header--scrolled {
   border-color: rgba(19, 34, 43, 0.08);
-  background: rgba(247, 242, 232, 0.72);
+  background: rgba(247, 242, 232, 0.92);
   backdrop-filter: blur(14px);
   box-shadow: 0 10px 32px rgba(19, 34, 43, 0.08);
-  background: rgba(247, 242, 232, 0.92);
 }
 
 .header-inner {
@@ -169,25 +168,43 @@ h3 {
 }
 
 .brand {
-  display: inline-flex;
-  align-items: center;
-  gap: 0.8rem;
+  --logo-expanded-width: 11.6rem;
+  --logo-collapsed-width: 3.1rem;
+  display: block;
+  flex: 0 0 auto;
+  width: var(--logo-expanded-width);
   min-width: 0;
+  overflow: hidden;
+  transition: width 320ms ease;
 }
 
-.brand__mark {
-  width: 3rem;
-  height: 3rem;
-  border-radius: 50%;
-  box-shadow: 0 8px 18px rgba(19, 34, 43, 0.12);
+.brand--scrolled {
+  width: var(--logo-collapsed-width);
 }
 
-.brand__text-wrap {
-  display: grid;
-  gap: 0.1rem;
+.booncon-logo {
+  display: block;
+  width: var(--logo-expanded-width);
+  height: auto;
 }
 
-.brand__name,
+.booncon-logo #bc-logo-main-circle-bg {
+  stroke: #fff;
+  stroke-width: 3px;
+}
+
+.booncon-logo__text {
+  transform-origin: left center;
+  transition:
+    opacity 180ms ease,
+    transform 240ms ease;
+}
+
+.brand--scrolled .booncon-logo__text {
+  opacity: 0;
+  transform: translateX(-0.35rem);
+}
+
 .eyebrow,
 .card__meta,
 .site-footer__eyebrow {
@@ -197,11 +214,6 @@ h3 {
   font-weight: 760;
 }
 
-.brand__name {
-  letter-spacing: 0.2em;
-}
-
-.brand__meta,
 .site-footer__meta,
 .section__intro,
 .hero__summary,
@@ -224,7 +236,7 @@ h3 {
 .site-nav__link {
   padding: 0.65rem 0.95rem;
   border-radius: 999px;
-  font-size: 0.94rem;
+  font-size: 1.14rem;
   transition:
     color 180ms ease,
     background-color 180ms ease;
@@ -282,7 +294,7 @@ h3 {
 .hero {
   display: grid;
   align-items: start;
-  grid-template-columns: minmax(0, 1fr) minmax(280px, 20.5rem);
+  grid-template-columns: 1.5fr 1fr;
   gap: 1.5rem;
   padding: clamp(1.3rem, 2vw, 1.8rem);
   background:
@@ -374,16 +386,14 @@ h3 {
   gap: 1rem;
   align-self: start;
   justify-self: end;
-  max-width: 20.5rem;
   padding: 1rem;
-  border-radius: calc(var(--radius) - 8px);
+  border-radius: calc(var(--radius) / 2);
   background: rgba(15, 31, 40, 0.94);
   color: #f5f1e8;
 }
 
 .hero__aside-media {
   overflow: hidden;
-  aspect-ratio: 6 / 5;
   max-height: 20rem;
   border-radius: calc(var(--radius) - 12px);
 }
@@ -650,6 +660,11 @@ h3 {
   .site-header {
     top: 0.35rem;
     padding: 0.8rem 0.85rem;
+  }
+
+  .brand {
+    --logo-expanded-width: 9.75rem;
+    --logo-collapsed-width: 2.4rem;
   }
 
   .header-inner {

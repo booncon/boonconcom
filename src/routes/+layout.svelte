@@ -25,8 +25,6 @@
 <div class="site-shell">
   <Header
     name={site.brand.name}
-    byline={site.brand.byline}
-    markSrc={site.brand.markSrc}
     nav={site.nav}
   />
 
