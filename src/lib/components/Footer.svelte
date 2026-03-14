@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { SiteContent } from '$lib/content/site';
+  import certBadgeImg from '$lib/assets/SV_LOGO_booncon_oy_EN_409937_web.jpg?enhanced';
 
   export let legal: SiteContent['legal'];
 
@@ -22,7 +23,7 @@
     <p class="site-footer__meta">© {year} {legal.companyName}</p>
     <p class="site-footer__meta">VAT {legal.vatId}</p>
     <a href={legal.asiakastieto.href} target="_blank" rel="noreferrer noopener" class="footer-cert-badge">
-      <img src="/assets/SV_LOGO_booncon_oy_EN_409937_web.jpg" alt="Asiakastieto AA certificate" class="footer-cert-badge__img" />
+      <enhanced:img src={certBadgeImg} alt="Asiakastieto AA certificate" class="footer-cert-badge__img" loading="lazy" />
     </a>
   </div>
 

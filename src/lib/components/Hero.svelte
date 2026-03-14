@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { HeroContent } from '$lib/content/site';
+  import heroImg from '$lib/assets/hero-office-bw.jpg?enhanced';
 
   export let hero: HeroContent;
 </script>
@@ -16,7 +17,7 @@
 
   <aside class="hero__aside" aria-label="Hero summary">
     <div class="hero__aside-media">
-      <img src={hero.panel.imageSrc} alt={hero.panel.imageAlt} width="1200" height="900" />
+      <enhanced:img src={heroImg} alt={hero.panel.imageAlt} width="1200" height="900" fetchpriority="high" />
     </div>
 
     <div class="hero__aside-body">

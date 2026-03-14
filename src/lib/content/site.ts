@@ -17,7 +17,6 @@ export interface HeroContent {
   panel: {
     eyebrow: string;
     summary: string;
-    imageSrc: string;
     imageAlt: string;
     items: string[];
   };
@@ -49,7 +48,6 @@ export interface FounderContent {
   name: string;
   role: string;
   location: string;
-  imageSrc: string;
   imageAlt: string;
   focus: string[];
   body: string[];
@@ -127,7 +125,7 @@ export const site: SiteContent = {
     privacyTitle: "Privacy policy | booncon",
     privacyDescription:
       "Privacy information for booncon.com, including controller details, hosting, analytics and direct contact handling.",
-    ogImage: "https://booncon.com/assets/lukas.jpg",
+    ogImage: "https://booncon.com/assets/hero-office-bw.jpg",
   },
   brand: {
     name: "booncon",
@@ -153,7 +151,6 @@ export const site: SiteContent = {
       eyebrow: "Typical focus areas",
       summary:
         "Independent strategy and hands-on delivery support for teams that want movement, not more deckware.",
-      imageSrc: "/assets/hero-office-bw.jpg",
       imageAlt: "Desk and office details",
       items: [
         "AI opportunity mapping",
@@ -266,7 +263,6 @@ export const site: SiteContent = {
     name: "Lukas Jakob Hafner",
     role: "Founder, Strategist & Builder",
     location: "Helsinki, Finland",
-    imageSrc: "/assets/lukas.jpg",
     imageAlt: "Portrait of Lukas Hafner",
     focus: [
       "AI and automation",

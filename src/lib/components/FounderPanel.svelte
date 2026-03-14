@@ -1,12 +1,13 @@
 <script lang="ts">
   import type { FounderContent } from '$lib/content/site';
+  import lukasImg from '$lib/assets/lukas.jpg?enhanced';
 
   export let founder: FounderContent;
 </script>
 
 <section class="founder" id="team">
   <div class="founder__media">
-    <img src={founder.imageSrc} alt={founder.imageAlt} width="1200" height="1200" />
+    <enhanced:img src={lukasImg} alt={founder.imageAlt} width="1200" height="1200" loading="lazy" />
   </div>
 
   <div class="founder__body">

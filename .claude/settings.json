@@ -1,0 +1,13 @@
+{
+  "permissions": {
+    "allow": [
+      "Bash(npm install:*)",
+      "Bash(npm run:*)",
+      "Bash(node -e \"require\\(''sharp''\\)\")",
+      "Bash(node -e \"const pkg = require\\(''/Users/sftsk/Dev/boonconcom-new/node_modules/@sveltejs/enhanced-img/package.json''\\); console.log\\(pkg.version\\)\")",
+      "Bash(node -e \"const pkg = require\\(''/Users/sftsk/Dev/boonconcom-new/node_modules/vite-imagetools/package.json''\\); console.log\\(pkg.version\\)\")",
+      "Bash(xargs ls:*)",
+      "Bash(node -e \":*)"
+    ]
+  }
+}
