@@ -7,23 +7,29 @@
 
 <section class="section section--contact" id="contact">
   <div class="contact">
-    <div class="section__header">
-      <p class="eyebrow">Contact</p>
-      <h2>{contact.title}</h2>
-      <p class="contact__summary">{contact.summary}</p>
+    <div class="contact__left">
+      <div class="section__header">
+        <p class="eyebrow">Contact</p>
+        <h2>{contact.title}</h2>
+        <p class="contact__summary">{contact.summary}</p>
+      </div>
     </div>
-
-    <address class="contact__address">
-      {#each addressLines as line, i}
-        {line}{#if i < addressLines.length - 1}<br />{/if}
-      {/each}
-      <br />
-      <br />
-      <a href="tel:{contact.phone}">{contact.phone}</a>
-    </address>
-
-    <div class="contact__actions">
-      <a class="button button--primary" href={contact.email.href}>{contact.email.label}</a>
+    <div class="contact__details">
+      <div class="contact__middle">
+        <p class="eyebrow">Find us here</p>
+        <address class="contact__address">
+          {#each addressLines as line, i}
+            {line}{#if i < addressLines.length - 1}<br />{/if}
+          {/each}
+        </address>
+      </div>
+      <div class="contact__right">
+        <p class="eyebrow">Get in touch</p>
+        <a class="contact__phone" href="tel:{contact.phone}">{contact.phone}</a>
+        <div class="contact__actions">
+          <a class="button button--primary" href={contact.email.href}>{contact.email.label}</a>
+        </div>
+      </div>
     </div>
   </div>
 </section>

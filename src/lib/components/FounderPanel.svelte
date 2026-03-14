@@ -12,7 +12,7 @@
   <div class="founder__body">
     <p class="eyebrow">{founder.title}</p>
     <h2>{founder.name}</h2>
-    <p class="founder__meta">{founder.role} / {founder.location}</p>
+    <p class="founder__meta">{founder.role} | {founder.location}</p>
 
     <ul class="founder__focus" aria-label="Founder focus areas">
       {#each founder.focus as item}

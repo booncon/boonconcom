@@ -61,9 +61,9 @@
   </div>
 
   <div class="site-footer__links">
-    <a href={legal.linkedin.href} target="_blank" rel="noreferrer noopener">{legal.linkedin.label}</a>
     <a href={legal.podcast.href} target="_blank" rel="noreferrer noopener">{legal.podcast.label}</a>
     <a href={legal.github.href} target="_blank" rel="noreferrer noopener">{legal.github.label}</a>
-    <a href="/privacy/">Privacy</a>
+    <a href={legal.linkedin.href} target="_blank" rel="noreferrer noopener" >{legal.linkedin.label}</a>
+    <a href="/privacy/" style="margin-top: 0.6rem;">Privacy</a>
   </div>
 </footer>

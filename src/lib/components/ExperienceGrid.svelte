@@ -1,5 +1,6 @@
 <script lang="ts">
   import type { SiteContent } from '$lib/content/site';
+  import StatsRow from './StatsRow.svelte';
 
   export let content: SiteContent['experience'];
 </script>
@@ -21,4 +22,8 @@
       </article>
     {/each}
   </div>
+
+  {#if content.kpis}
+    <StatsRow items={content.kpis} />
+  {/if}
 </section>

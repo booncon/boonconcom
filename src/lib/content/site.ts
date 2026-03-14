@@ -36,6 +36,14 @@ export interface ExperienceItem {
   summary: string;
 }
 
+export interface KpiItem {
+  base: number;
+  referenceYear: number;
+  label: string;
+  ratePerYear?: number;
+  suffix?: string;
+}
+
 export interface FounderContent {
   title: string;
   name: string;
@@ -88,6 +96,7 @@ export interface SiteContent {
     title: string;
     intro: string;
     items: ExperienceItem[];
+    kpis?: KpiItem[];
   };
   founder: FounderContent;
   contact: ContactContent;
@@ -236,11 +245,26 @@ export const site: SiteContent = {
           "Supported long-term digital transformation work with attention to systems, services and operational fit.",
       },
     ],
+    kpis: [
+      {
+        base: 3100,
+        referenceYear: 2024,
+        ratePerYear: 77,
+        label: "pizzas eaten",
+      },
+      { base: 5, referenceYear: 2024, label: "languages spoken" },
+      {
+        base: 54,
+        referenceYear: 2024,
+        ratePerYear: 3,
+        label: "board games owned",
+      },
+    ],
   },
   founder: {
-    title: "Master Maker",
+    title: "The Bridge Between Strategy and Software",
     name: "Lukas Jakob Hafner",
-    role: "Founder, advisor and builder",
+    role: "Founder, Strategist & Builder",
     location: "Helsinki, Finland",
     imageSrc: "/assets/lukas.jpg",
     imageAlt: "Portrait of Lukas Hafner",
@@ -250,9 +274,9 @@ export const site: SiteContent = {
       "Product and systems thinking",
     ],
     body: [
-      "Lukas brings together a background in technology and design with more than a decade of experience building companies, products and change initiatives.",
-      "His work sits between strategy and implementation: clarifying the direction, pressure-testing the real constraints and helping teams move from intent to action.",
-      "He is especially interested in the point where business design, internal culture and practical automation meet.",
+      "Most digital change gets stuck in the gap between high-level advice and actual implementation. I started booncon to close that gap. With over a decade of experience co-founding ventures and advising companies in transition, I bring a background that merges systems thinking with hands-on technical execution.",
+      "My work is about pressure-testing constraints and helping teams move from intent to action. You don't get a junior account manager or a deck of slides; you get a direct partnership with the person designing and building your automation.",
+      "I am a tinkerer at heart. Whether I'm mapping AI opportunities or refining a workflow, I look for the point where business design, internal culture, and practical automation meet. When I'm not building systems for clients, you'll likely find me trying out new gadgets, throwing a frisbee, or refining my next batch of craft beer.",
     ],
   },
   contact: {
