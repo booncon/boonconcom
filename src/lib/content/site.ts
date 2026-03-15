@@ -120,9 +120,9 @@ export const site: SiteContent = {
   meta: {
     url: "https://booncon.com",
     domain: "booncon.com",
-    defaultTitle: "Working with friends. | booncon",
+    defaultTitle: "AI, automation and digital change. | booncon",
     defaultDescription:
-      "booncon is the Helsinki-based studio lead by Lukas Jakob Hafner. Pragmatic AI, automation and digital change work for companies that need sharper systems and better ways of working.",
+      "booncon is the Helsinki-based studio led by Lukas Jakob Hafner. Pragmatic AI, automation and digital change work for companies that need sharper systems and better ways of working.",
     privacyTitle: "Privacy policy | booncon",
     privacyDescription:
       "Privacy information for booncon.com, including controller details, hosting, analytics and direct contact handling.",
@@ -165,8 +165,9 @@ export const site: SiteContent = {
     eyebrow: "Overview",
     title: "A small studio with a systems view",
     body: [
-      "booncon is the consulting practice lead by Lukas Jakob Hafner, a Helsinki-based strategist and maker working across business, product, technology and ways of working.",
-      "The studio grew out of years spent co-founding ventures, advising companies in transition and translating between leadership, operations and digital teams. Today the work is focused on making AI and automation genuinely useful instead of decorative.",
+      "booncon is the consulting practice led by Lukas Jakob Hafner, a Helsinki-based strategist and maker working across business, product, technology and ways of working.",
+      "The studio grew out of years spent co-founding ventures, advising companies in transition and translating between leadership, operations and digital teams.",
+      "Today the work is focused on making AI and automation genuinely useful instead of decorative. While booncon operates as a lean studio, we regularly orchestrate trusted technical and design partners to scale implementation when a project demands it.",
       "When change needs both clarity and someone who can help make it real, that is where booncon fits best.",
     ],
   },
@@ -272,19 +273,19 @@ export const site: SiteContent = {
     ],
     body: [
       "Most digital change gets stuck in the gap between high-level advice and actual implementation. I started booncon to close that gap. With over a decade of experience co-founding ventures and advising companies in transition, I bring a background that merges systems thinking with hands-on technical execution.",
-      "My work is about pressure-testing constraints and helping teams move from intent to action. You don't get a junior account manager or a deck of slides; you get a direct partnership with the person designing and building your automation.",
+      "My work is about pressure-testing constraints and helping teams move from intent to action. You don't get a junior account manager or a deck of slides; you get a direct partnership with the person designing and building your automation. booncon originally started under the motto 'Working with friends.' While the focus has shifted entirely to AI and digital systems, that ethos hasn't changed. Working with me is highly personal, direct, and built on the kind of trust you’d expect from a good friend.",
       "I am a tinkerer at heart. Whether I'm mapping AI opportunities or refining a workflow, I look for the point where business design, internal culture, and practical automation meet. When I'm not building systems for clients, you'll likely find me trying out new gadgets, throwing a frisbee, or refining my next batch of craft beer.",
     ],
   },
   contact: {
     title: "Need a clearer next step?",
     summary:
-      "If you are exploring AI, rethinking the way work flows through the company or trying to make digital change less vague, Lukas is happy to talk.",
+      "If you are exploring AI, rethinking the way work flows through the company or trying to make digital change less vague, let's grab a coffee or jump on a call. I’m always happy to talk.",
     address:
       "booncon oy, Suvilahdenkatu 4 B 24, c/o Hafner, 00500 Helsinki, Finland",
     phone: "+358 45 8980609",
     email: {
-      label: "Send an email",
+      label: "hello@booncon.com",
       href: "mailto:hello@booncon.com?subject=Hi%20booncon!",
     },
     linkedin: {

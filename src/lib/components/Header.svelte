@@ -18,6 +18,21 @@
   let navEl: HTMLElement | undefined;
   let indicatorStyle: { left: number; top: number; width: number; height: number } | null = null;
   let lastNavClickTime = 0;
+  let headerOnDark = false;
+  // Computed once on mount: sections that have a dark background
+  let darkSections: HTMLElement[] = [];
+
+  function detectHeaderLuminance() {
+    if (!headerEl || darkSections.length === 0) {
+      headerOnDark = false;
+      return;
+    }
+    const headerBottom = headerEl.getBoundingClientRect().bottom;
+    headerOnDark = darkSections.some((el) => {
+      const r = el.getBoundingClientRect();
+      return r.top < headerBottom && r.bottom > 0;
+    });
+  }
 
   $: if (typeof window !== 'undefined' && page.url.pathname === '/' && activeId) {
     tick().then(() => {
@@ -135,6 +150,8 @@
       activeId = current;
     };
 
+    let detectTimeout: ReturnType<typeof setTimeout> | null = null;
+
     const updateScrolled = () => {
       scrolled = window.scrollY > 8;
       const max =
@@ -142,11 +159,25 @@
       scrollProgress = max > 0 ? Math.min(1, window.scrollY / max) : 0;
       headerEl?.style.setProperty('--reflect', scrollProgress.toFixed(4));
       updateActiveSection();
+      // Debounce color detection — only fires 200ms after scrolling stops
+      if (detectTimeout !== null) clearTimeout(detectTimeout);
+      detectTimeout = setTimeout(detectHeaderLuminance, 30);
     };
 
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') menuOpen = false;
     };
+
+    // Known dark regions — populated after tick to ensure page content is in the DOM.
+    // .founder__media is only included on mobile (desktop layout doesn't scroll over it).
+    tick().then(() => {
+      const isMobile = window.matchMedia('(max-width: 759px)').matches;
+      const selector = isMobile
+        ? '.section--contrast, .hero__aside, .founder__media'
+        : '.section--contrast, .hero__aside';
+      darkSections = Array.from(document.querySelectorAll<HTMLElement>(selector));
+      detectHeaderLuminance();
+    });
 
     updateScrolled();
     window.addEventListener('scroll', updateScrolled, { passive: true });
@@ -155,6 +186,7 @@
     return () => {
       window.removeEventListener('scroll', updateScrolled);
       document.removeEventListener('keydown', handleEscape);
+      if (detectTimeout !== null) clearTimeout(detectTimeout);
     };
   });
 </script>
@@ -163,6 +195,7 @@
   class="site-header"
   class:site-header--scrolled={scrolled}
   class:site-header--menu-open={menuOpen}
+  class:site-header--on-dark={headerOnDark}
   bind:this={headerEl}
 >
   <div class="header-inner">
