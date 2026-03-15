@@ -218,12 +218,20 @@ h3 {
 }
 
 .site-header--scrolled {
-  border-color: transparent;
-  background: linear-gradient(135deg, var(--ink-overlay), var(--paper-overlay));
-  backdrop-filter: blur(18px) saturate(1.3);
+  color: oklch(1 0 0 / 0.92);
+  border-color: oklch(1 0 0 / 0.18);
+  background: linear-gradient(
+    165deg,
+    oklch(1 0 0 / 0.14) 0%,
+    color-mix(in oklab, var(--ink) 22%, transparent) 55%,
+    color-mix(in oklab, var(--ink) 32%, transparent) 100%
+  );
+  backdrop-filter: blur(14px) saturate(1.8);
+  -webkit-backdrop-filter: blur(14px) saturate(1.8);
   box-shadow:
-    0 8px 28px var(--line),
-    0 2px 4px var(--ink-faint);
+    0 8px 32px oklch(0 0 0 / 0.18),
+    0 2px 8px oklch(0 0 0 / 0.1),
+    inset 0 1px 0 oklch(1 0 0 / 0.65);
   /* Clip rim paint to rounded shape to avoid corner artifacts */
   overflow: hidden;
 }
@@ -232,47 +240,34 @@ h3 {
   overflow: visible;
 }
 
-/* Reflective sheen that sweeps across the glass rim as you scroll (edge-only).
-   Inset box-shadows keep the highlight on the rim only (no fill); opacity per
-   edge is driven by --reflect so the bright spot moves top → right → bottom → left. */
+/* Reflective sheen: static top-left catch-light + scroll-driven edge highlights.
+   --reflect is 0 at the top of the page and 1 at the bottom, set via JS inline style. */
 .site-header--scrolled::after {
   content: "";
   position: absolute;
   inset: 0;
   border-radius: inherit;
   pointer-events: none;
-  /* Strong rim; steep falloff (×8) keeps the bright spot short along each edge */
-  --rim-base: 0.35;
-  --rim-peak: 0.82;
-  --t: clamp(0, 1 - 8 * abs(0.125 - var(--reflect, 0)), 1);
-  --r: clamp(0, 1 - 8 * abs(0.375 - var(--reflect, 0)), 1);
-  --b: clamp(0, 1 - 8 * abs(0.625 - var(--reflect, 0)), 1);
-  --l: clamp(0, 1 - 8 * abs(0.875 - var(--reflect, 0)), 1);
-  /* Crisp layer to reduce corner/edge artifacts and subpixel blur */
+  /* Top-left catch-light: static specular from above */
+  background:
+    radial-gradient(
+      ellipse 100% 65% at 22% -10%,
+      oklch(1 0 0 / 0.4) 0%,
+      transparent 65%
+    ),
+    linear-gradient(170deg, oklch(1 0 0 / 0.12) 0%, transparent 50%);
   transform: translateZ(0);
   -webkit-backface-visibility: hidden;
   backface-visibility: hidden;
+  /* Rims driven directly by --reflect (0 = top of page, 1 = bottom).
+     Top rim: 0.92 when at top → 0.28 at bottom.
+     Bottom rim: 0.08 when at top → 0.80 at bottom.
+     Every scroll position shows a clear, different state. */
   box-shadow:
-    inset 0 1px 0 0
-      oklch(
-        1 0 0 /
-          calc(var(--rim-base) + (var(--rim-peak) - var(--rim-base)) * var(--t))
-      ),
-    inset -1px 0 0 0
-      oklch(
-        1 0 0 /
-          calc(var(--rim-base) + (var(--rim-peak) - var(--rim-base)) * var(--r))
-      ),
-    inset 0 -1px 0 0
-      oklch(
-        1 0 0 /
-          calc(var(--rim-base) + (var(--rim-peak) - var(--rim-base)) * var(--b))
-      ),
-    inset 1px 0 0 0
-      oklch(
-        1 0 0 /
-          calc(var(--rim-base) + (var(--rim-peak) - var(--rim-base)) * var(--l))
-      );
+    inset 0 1px 0 0 oklch(1 0 0 / calc(0.28 + 0.64 * (1 - var(--reflect, 0)))),
+    inset -1px 0 0 0 oklch(1 0 0 / 0.3),
+    inset 0 -1px 0 0 oklch(1 0 0 / calc(0.08 + 0.72 * var(--reflect, 0))),
+    inset 1px 0 0 0 oklch(1 0 0 / 0.35);
 }
 
 .header-inner {
@@ -1127,6 +1122,7 @@ h3 {
     background: transparent;
     color: inherit;
     cursor: pointer;
+    overflow: hidden;
   }
 
   .site-header__menu-btn-bar {
