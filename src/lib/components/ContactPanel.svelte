@@ -32,8 +32,8 @@
       <div class="contact__right">
         <p class="eyebrow">Get in touch</p>
         <div>
-          <a class="contact__phone" href="tel:{contact.phone}">{contact.phone}</a>
-          <a class="contact__email" href={contact.email.href} onclick={onEmailClick}>{contact.email.label}</a>
+          <a class="contact__phone link-accent-underline" href="tel:{contact.phone}">{contact.phone}</a>
+          <a class="contact__email link-accent-underline" href={contact.email.href} onclick={onEmailClick}>{contact.email.label}</a>
         </div>
       </div>
     </div>

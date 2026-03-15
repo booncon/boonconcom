@@ -19,16 +19,15 @@
   let indicatorStyle: { left: number; top: number; width: number; height: number } | null = null;
   let lastNavClickTime = 0;
   let headerOnDark = false;
-  // Computed once on mount: sections that have a dark background
-  let darkSections: HTMLElement[] = [];
 
   function detectHeaderLuminance() {
-    if (!headerEl || darkSections.length === 0) {
-      headerOnDark = false;
-      return;
-    }
+    if (!headerEl) return;
+    const isMobile = window.matchMedia('(max-width: 759px)').matches;
+    const selector = isMobile
+      ? '.section--contrast, .hero__aside, .founder__media'
+      : '.section--contrast, .hero__aside';
     const headerBottom = headerEl.getBoundingClientRect().bottom;
-    headerOnDark = darkSections.some((el) => {
+    headerOnDark = Array.from(document.querySelectorAll<HTMLElement>(selector)).some((el) => {
       const r = el.getBoundingClientRect();
       return r.top < headerBottom && r.bottom > 0;
     });
@@ -167,17 +166,6 @@
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') menuOpen = false;
     };
-
-    // Known dark regions — populated after tick to ensure page content is in the DOM.
-    // .founder__media is only included on mobile (desktop layout doesn't scroll over it).
-    tick().then(() => {
-      const isMobile = window.matchMedia('(max-width: 759px)').matches;
-      const selector = isMobile
-        ? '.section--contrast, .hero__aside, .founder__media'
-        : '.section--contrast, .hero__aside';
-      darkSections = Array.from(document.querySelectorAll<HTMLElement>(selector));
-      detectHeaderLuminance();
-    });
 
     updateScrolled();
     window.addEventListener('scroll', updateScrolled, { passive: true });

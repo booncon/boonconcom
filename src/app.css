@@ -116,6 +116,34 @@ a {
   text-decoration: none;
 }
 
+/* Reusable accent underline link style (e.g. "Visit site", contact links) */
+.link-accent-underline {
+  position: relative;
+  text-decoration: none;
+  z-index: 1;
+}
+
+.link-accent-underline::after {
+  content: "";
+  position: absolute;
+  left: 0;
+  bottom: 0.04em;
+  height: 0.14em;
+  width: 100%;
+  background: linear-gradient(
+    110deg,
+    var(--accent-strong),
+    var(--accent-light)
+  );
+  z-index: -1;
+  transition: height 0.25s cubic-bezier(0.6, 0, 0.4, 1);
+}
+
+.link-accent-underline:hover::after,
+.link-accent-underline:focus-visible::after {
+  height: 0.26em;
+}
+
 h1,
 h2,
 h3,
@@ -587,33 +615,9 @@ h3 {
     gap: 0.45rem;
     margin-top: auto;
     font-weight: 750;
-    position: relative;
-    text-decoration: none;
     color: inherit;
-    z-index: 1;
     justify-self: start;
     align-self: start;
-
-    &::after {
-      content: "";
-      position: absolute;
-      left: 0;
-      bottom: 0.04em;
-      height: 0.14em;
-      width: 100%;
-      background: linear-gradient(
-        110deg,
-        var(--accent-strong),
-        var(--accent-light)
-      );
-      z-index: -1;
-      transition: height 0.25s cubic-bezier(0.6, 0, 0.4, 1);
-    }
-
-    &:hover::after,
-    &:focus-visible::after {
-      height: 0.26em;
-    }
   }
 }
 
@@ -821,7 +825,7 @@ h3 {
 
 .contact {
   display: grid;
-  grid-template-columns: 2fr 1fr;
+  grid-template-columns: 1.4fr 1fr;
   gap: 2rem 4rem;
   align-items: end;
 }
@@ -853,12 +857,6 @@ h3 {
 .contact__email {
   font-size: 1.17rem;
   color: var(--ink-dark);
-  text-decoration: none;
-}
-
-.contact__phone:hover,
-.contact__email:hover {
-  color: var(--accent-strong);
 }
 
 .site-footer {
@@ -1132,6 +1130,7 @@ h3 {
     flex: 0 0 100%;
     display: flex;
     flex-direction: column;
+    flex-wrap: nowrap;
     align-items: stretch;
     gap: 0.25rem;
     /* Transparent — glass comes from header ::before; color inherits from header */
