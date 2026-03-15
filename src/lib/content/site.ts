@@ -122,7 +122,7 @@ export const site: SiteContent = {
     domain: "booncon.com",
     defaultTitle: "Working with friends. | booncon",
     defaultDescription:
-      "booncon is the Helsinki-based studio of Lukas Jakob Hafner. Pragmatic AI, automation and digital change work for companies that need sharper systems and better ways of working.",
+      "booncon is the Helsinki-based studio lead by Lukas Jakob Hafner. Pragmatic AI, automation and digital change work for companies that need sharper systems and better ways of working.",
     privacyTitle: "Privacy policy | booncon",
     privacyDescription:
       "Privacy information for booncon.com, including controller details, hosting, analytics and direct contact handling.",
@@ -141,7 +141,7 @@ export const site: SiteContent = {
   hero: {
     eyebrow: "booncon / Lukas Hafner",
     title:
-      "AI, automation, and digital change with less noise and more momentum.",
+      "AI, automation and digital change with less noise and more momentum.",
     summary:
       "booncon helps companies make better decisions about how work gets done and where automation belongs. We turn complex digital investments into tangible results. When the technology delivers, the professional experience becomes something people can actually love.",
     primaryCta: {

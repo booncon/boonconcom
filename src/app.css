@@ -201,6 +201,7 @@ h3 {
   border-radius: calc(var(--radius) + 8px);
   box-shadow: none;
   transition:
+    color 180ms ease,
     border-color 180ms ease,
     background-color 180ms ease,
     box-shadow 180ms ease,
@@ -217,27 +218,10 @@ h3 {
   }
 }
 
-.site-header--scrolled {
+/* White text whenever glass is active (mobile: ::before provides glass; desktop: element itself) */
+.site-header--scrolled,
+.site-header--menu-open {
   color: oklch(1 0 0 / 0.92);
-  border-color: oklch(1 0 0 / 0.18);
-  background: linear-gradient(
-    165deg,
-    oklch(1 0 0 / 0.14) 0%,
-    color-mix(in oklab, var(--ink) 22%, transparent) 55%,
-    color-mix(in oklab, var(--ink) 32%, transparent) 100%
-  );
-  backdrop-filter: blur(14px) saturate(1.8);
-  -webkit-backdrop-filter: blur(14px) saturate(1.8);
-  box-shadow:
-    0 8px 32px oklch(0 0 0 / 0.18),
-    0 2px 8px oklch(0 0 0 / 0.1),
-    inset 0 1px 0 oklch(1 0 0 / 0.65);
-  /* Clip rim paint to rounded shape to avoid corner artifacts */
-  overflow: hidden;
-}
-
-.site-header--scrolled.site-header--menu-open {
-  overflow: visible;
 }
 
 /* Reflective sheen: static top-left catch-light + scroll-driven edge highlights.
@@ -373,6 +357,24 @@ h3 {
   .site-header__menu-btn {
     display: none;
   }
+
+  /* Desktop glass — applied directly on the element (no ::before needed) */
+  .site-header--scrolled {
+    border-color: oklch(1 0 0 / 0.18);
+    background: linear-gradient(
+      165deg,
+      oklch(1 0 0 / 0.14) 0%,
+      color-mix(in oklab, var(--ink) 22%, transparent) 55%,
+      color-mix(in oklab, var(--ink) 32%, transparent) 100%
+    );
+    backdrop-filter: blur(14px) saturate(1.8);
+    -webkit-backdrop-filter: blur(14px) saturate(1.8);
+    box-shadow:
+      0 8px 32px oklch(0 0 0 / 0.18),
+      0 2px 8px oklch(0 0 0 / 0.10),
+      inset 0 1px 0 oklch(1 0 0 / 0.65);
+    overflow: hidden;
+  }
 }
 
 /* Shared UI Primitives */
@@ -387,7 +389,7 @@ h3 {
 }
 
 .site-footer__meta {
-  font-size: 1.28rem;
+  font-size: 1.08rem;
 }
 
 .site-footer__meta,
@@ -473,7 +475,6 @@ h3 {
 
 .contact__address {
   font-style: normal;
-  color: var(--ink-soft);
   font-size: 1.28rem;
   line-height: 1.4;
 
@@ -1076,37 +1077,87 @@ h3 {
 
   .header-inner {
     align-items: center;
+    flex-wrap: wrap;
+    row-gap: 0;
+  }
+
+  /* Glass panel on ::before — covers a variable portion of the header.
+     top: 100% = invisible; top: 3rem = nav-area-only; top: 0 = full pill */
+  .site-header::before {
+    content: "";
+    position: absolute;
+    left: 0;
+    right: 0;
+    bottom: 0;
+    top: 100%;
+    z-index: -1;
+    border-radius: inherit;
+    pointer-events: none;
+    background: linear-gradient(
+      165deg,
+      oklch(1 0 0 / 0.14) 0%,
+      color-mix(in oklab, var(--ink) 22%, transparent) 55%,
+      color-mix(in oklab, var(--ink) 32%, transparent) 100%
+    );
+    backdrop-filter: blur(14px) saturate(1.8);
+    -webkit-backdrop-filter: blur(14px) saturate(1.8);
+    border: 1px solid oklch(1 0 0 / 0.18);
+    box-shadow:
+      0 8px 32px oklch(0 0 0 / 0.18),
+      0 2px 8px oklch(0 0 0 / 0.10),
+      inset 0 1px 0 oklch(1 0 0 / 0.65);
+    /* Hidden by default — opacity prevents the border from rendering as a line */
+    opacity: 0;
+    transition:
+      top 320ms cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 180ms ease;
+  }
+
+  /* At top of page with menu open: glass covers nav area only.
+     3rem = 0.5rem top-padding + 2rem button-height + 0.5rem bottom-padding */
+  .site-header--menu-open:not(.site-header--scrolled)::before {
+    top: 3rem;
+    opacity: 1;
+  }
+
+  /* Scrolled (with or without menu): glass covers full header */
+  .site-header--scrolled::before {
+    top: 0;
+    opacity: 1;
   }
 
   .site-nav {
-    display: none;
-    position: absolute;
-    top: 100%;
-    left: 0;
-    right: 0;
-    margin-top: 0.35rem;
-    padding: 1rem;
+    /* In-flow: wraps to its own full-width row below logo + button */
+    flex: 0 0 100%;
+    display: flex;
     flex-direction: column;
     align-items: stretch;
     gap: 0.25rem;
-    background: var(--surface-strong);
-    backdrop-filter: blur(8px) saturate(1.2);
-    -webkit-backdrop-filter: blur(8px) saturate(1.2);
-    border-radius: calc(var(--radius) - 4px);
-    box-shadow:
-      0 8px 28px var(--line),
-      0 2px 4px var(--line);
-    border: 1px solid var(--line);
-    z-index: 20;
+    /* Transparent — glass comes from header ::before */
+    background: transparent;
+    color: var(--ink);
+    /* Slide-down animation — no border in default state to avoid stray lines */
+    max-height: 0;
+    overflow: hidden;
+    padding: 0;
+    opacity: 0;
+    pointer-events: none;
+    transition:
+      max-height 380ms cubic-bezier(0.4, 0, 0.2, 1),
+      padding 380ms cubic-bezier(0.4, 0, 0.2, 1),
+      opacity 220ms ease;
   }
 
   .site-header--menu-open .site-nav {
-    display: flex;
+    max-height: 320px;
+    padding: 0.75rem 0 0.5rem;
+    opacity: 1;
+    pointer-events: auto;
   }
 
   .site-nav__link {
     padding: 0.75rem 1rem;
-    border-radius: var(--radius-sm);
+    border-radius: 999px;
   }
 
   .site-header__menu-btn {
