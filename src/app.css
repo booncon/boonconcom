@@ -228,6 +228,10 @@ h3 {
   overflow: hidden;
 }
 
+.site-header--scrolled.site-header--menu-open {
+  overflow: visible;
+}
+
 /* Reflective sheen that sweeps across the glass rim as you scroll (edge-only).
    Inset box-shadows keep the highlight on the rim only (no fill); opacity per
    edge is driven by --reflect so the bright spot moves top → right → bottom → left. */
