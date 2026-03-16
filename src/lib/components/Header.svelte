@@ -19,6 +19,8 @@
   let indicatorStyle: { left: number; top: number; width: number; height: number } | null = null;
   let lastNavClickTime = 0;
   let headerOnDark = false;
+  let _updateActiveSection: (() => void) | null = null;
+  let menuOpenVersion = 0;
 
   function detectHeaderLuminance() {
     if (!headerEl) return;
@@ -34,6 +36,7 @@
   }
 
   $: if (typeof window !== 'undefined' && page.url.pathname === '/' && activeId) {
+    const _mv = menuOpenVersion; // subscribe — forces re-run after menu open animation
     tick().then(() => {
       const link = navEl?.querySelector<HTMLAnchorElement>(
         `a[href="#${activeId}"]`
@@ -106,6 +109,8 @@
       }
     };
     document.addEventListener('click', clickOutsideHandler);
+    _updateActiveSection?.();
+    setTimeout(() => { menuOpenVersion++; }, 390);
   } else {
     if (clickOutsideHandler) {
       document.removeEventListener('click', clickOutsideHandler);
@@ -148,6 +153,7 @@
       }
       activeId = current;
     };
+    _updateActiveSection = updateActiveSection;
 
     let detectTimeout: ReturnType<typeof setTimeout> | null = null;
 

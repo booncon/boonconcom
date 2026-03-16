@@ -133,6 +133,7 @@ export const site: SiteContent = {
     markSrc: "/icon-192x192.png",
   },
   nav: [
+    { label: "Intro", href: "#intro" },
     { label: "Services", href: "#services" },
     { label: "Experience", href: "#experience" },
     { label: "Team", href: "#team" },
@@ -253,10 +254,16 @@ export const site: SiteContent = {
       },
       { base: 5, referenceYear: 2024, label: "languages spoken" },
       {
-        base: 54,
+        base: 0,
         referenceYear: 2024,
-        ratePerYear: 3,
-        label: "board games owned",
+        ratePerYear: 0.01,
+        label: "robots gone rogue",
+      },
+      {
+        base: 127,
+        referenceYear: 2026,
+        ratePerYear: 8,
+        label: "but we've always done it this way' conversations",
       },
     ],
   },
