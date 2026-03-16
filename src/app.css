@@ -392,8 +392,10 @@ h3 {
   }
 
   /* Unscrolled desktop: blue text on hover instead of white */
-  .site-header:not(.site-header--scrolled) .site-nav__link:not(.site-nav__link--active):hover,
-  .site-header:not(.site-header--scrolled) .site-nav__link:not(.site-nav__link--active):focus-visible {
+  .site-header:not(.site-header--scrolled)
+    .site-nav__link:not(.site-nav__link--active):hover,
+  .site-header:not(.site-header--scrolled)
+    .site-nav__link:not(.site-nav__link--active):focus-visible {
     color: var(--accent);
   }
 
@@ -636,7 +638,7 @@ h3 {
 .hero__tags li,
 .founder__focus li,
 .card__tags li {
-  padding: 0.2rem 0.45rem 0.35rem;
+  padding: 0.2rem 0.45rem 0.25rem;
   border-radius: 999px;
   font-size: 0.84rem;
   font-weight: 650;
@@ -685,13 +687,12 @@ h3 {
 
 .hero__aside {
   display: grid;
-  gap: 1rem;
   align-self: start;
   justify-self: end;
-  padding: 1rem;
   border-radius: calc(var(--radius) / 2);
   background: var(--ink-dark);
   color: var(--paper-on-dark);
+  overflow: clip;
 }
 
 .hero__aside-media {
@@ -711,6 +712,7 @@ h3 {
 .hero__aside-body {
   display: grid;
   gap: 0.9rem;
+  padding: 1rem;
 }
 
 .hero__aside-note {
@@ -1236,6 +1238,10 @@ h3 {
   .hero__actions,
   .contact__actions {
     flex-direction: column;
+  }
+
+  .hero__actions {
+    margin-top: 1rem;
   }
 
   .button {

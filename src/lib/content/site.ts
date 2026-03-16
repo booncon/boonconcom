@@ -194,7 +194,7 @@ export const site: SiteContent = {
         bullets: ["Process redesign", "Team rituals", "Decision flow clarity"],
       },
       {
-        title: "Digital systems review",
+        title: "Core systems & data flows",
         summary:
           "Assess the current stack, internal tools and customer-facing touchpoints to understand what supports growth and what quietly gets in the way.",
         bullets: [
@@ -263,7 +263,7 @@ export const site: SiteContent = {
         base: 127,
         referenceYear: 2026,
         ratePerYear: 8,
-        label: "but we've always done it this way' conversations",
+        label: "'but we've always done it this way' conversations",
       },
     ],
   },
