@@ -268,9 +268,9 @@ export const site: SiteContent = {
     ],
   },
   founder: {
-    title: "The Bridge Between Strategy and Software",
+    title: "The bridge between strategy and software",
     name: "Lukas Jakob Hafner",
-    role: "Founder, Strategist & Builder",
+    role: "Master Maker",
     location: "Helsinki, Finland",
     imageAlt: "Portrait of Lukas Hafner",
     focus: [
