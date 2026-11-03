@@ -215,9 +215,13 @@ h3 {
   margin: 0 auto;
 }
 
+/* The logo sets the bar's height, so the open mobile menu wrapping onto a
+   second row can't squeeze the space around it. */
 .brand {
-  display: block;
+  display: flex;
+  align-items: center;
   width: 10rem;
+  height: var(--header-height);
 }
 
 .booncon-logo {
