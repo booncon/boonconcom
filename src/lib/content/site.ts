@@ -12,9 +12,10 @@ export interface ActionLink {
 export interface HeroContent {
   /** Trusted HTML: may contain <em>. */
   title: string;
+  /** Struck through one by one under the headline. */
+  chores: string[];
+  done: string;
   ctaLead: string;
-  byline: string;
-  imageAlt: string;
 }
 
 export interface ServiceItem {
@@ -145,9 +146,9 @@ export const site: SiteContent = {
   ],
   hero: {
     title: "I help companies put AI to work where it <em>actually</em> saves time.",
+    chores: ["Copy-paste", "re-typing", "chasing approvals", "monthly reports", "inbox triage"],
+    done: "Done.",
     ctaLead: "Email me at",
-    byline: "Lukas Jakob Hafner, Helsinki",
-    imageAlt: "Portrait of Lukas Hafner",
   },
   services: {
     items: [
