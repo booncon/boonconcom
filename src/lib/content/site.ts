@@ -188,7 +188,7 @@ export const site: SiteContent = {
         summary: "Long-term digital transformation",
       },
       {
-        name: "booncon PIXELS",
+        name: "booncon Pixels",
         href: "http://www.valve.fi/",
         role: "Co-founder",
         summary: "Digital agency, now Valve",
