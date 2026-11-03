@@ -256,7 +256,7 @@ export const site: SiteContent = {
     imageAlt: "Portrait of Lukas Hafner",
     lead: "I'm Lukas, a strategist and builder in Helsinki. Tinkerer at heart.",
     body: [
-      "booncon was founded by a group of friends, under the motto \"working with friends\". Through booncon I've co-founded a digital agency and an industrial tech company, and advised companies through long transformations.",
+      "booncon was founded by a group of friends. Through booncon I've co-founded a digital agency and an industrial tech company, and advised companies through long transformations.",
       "Along the way I learned where digital change usually gets stuck: between advice and implementation. I also learned to translate between leadership, operations and the people writing the code.",
       "Today the focus is AI and automation, but we still work the same way. You work directly with the person designing and building it, not with an account manager or a slide deck. Away from client work you'll find me trying new gadgets, throwing a frisbee or brewing the next batch of beer.",
     ],
