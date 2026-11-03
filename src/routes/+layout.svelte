@@ -3,6 +3,7 @@
   import { afterNavigate } from '$app/navigation';
 
   import '../app.css';
+  import newsreaderLatin from '@fontsource-variable/newsreader/files/newsreader-latin-wght-normal.woff2?url';
 
   import Footer from '$lib/components/Footer.svelte';
   import Header from '$lib/components/Header.svelte';
@@ -33,6 +34,7 @@
 </script>
 
 <svelte:head>
+  <link rel="preload" href={newsreaderLatin} as="font" type="font/woff2" crossorigin="anonymous" />
   <link rel="icon" type="image/png" href="/favicon-32x32.png" />
   <link rel="apple-touch-icon" href="/icon-192x192.png" />
   <link rel="manifest" href="/site.webmanifest" />
