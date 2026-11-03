@@ -146,7 +146,7 @@ export const site: SiteContent = {
   hero: {
     title: "I help companies put AI to work where it <em>actually</em> saves time.",
     ctaLead: "Email me at",
-    byline: "Lukas Jakob Hafner · booncon · Helsinki",
+    byline: "Lukas Jakob Hafner, Helsinki",
     imageAlt: "Portrait of Lukas Hafner",
   },
   services: {
