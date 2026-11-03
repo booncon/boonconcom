@@ -176,18 +176,6 @@ export const site: SiteContent = {
   experience: {
     items: [
       {
-        name: "booncon Pixels",
-        href: "http://www.valve.fi/",
-        role: "Co-founder",
-        summary: "Digital agency, now Valve",
-      },
-      {
-        name: "Tiny Tin Box",
-        href: "https://tinytinbox.com",
-        role: "Venture builder",
-        summary: "Interactive children's books",
-      },
-      {
         name: "SelectAM",
         href: "https://www.selectam.io",
         role: "Co-founder",
@@ -198,6 +186,12 @@ export const site: SiteContent = {
         href: "https://www.torggler.com",
         role: "Advisor",
         summary: "Long-term digital transformation",
+      },
+      {
+        name: "booncon PIXELS",
+        href: "http://www.valve.fi/",
+        role: "Co-founder",
+        summary: "Digital agency, now Valve",
       },
     ],
     kpis: [
