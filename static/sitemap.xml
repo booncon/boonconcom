@@ -4,6 +4,12 @@
     <loc>https://booncon.com</loc>
   </url>
   <url>
+    <loc>https://booncon.com/apps/</loc>
+  </url>
+  <url>
+    <loc>https://booncon.com/apps/example/</loc>
+  </url>
+  <url>
     <loc>https://booncon.com/privacy/</loc>
   </url>
 </urlset>

@@ -4,24 +4,15 @@
   export let content: SiteContent['services'];
 </script>
 
-<section class="section" id="services">
-  <div class="section__header">
-    <p class="eyebrow">Services</p>
-    <h2>{content.title}</h2>
-    <p class="section__intro">{content.intro}</p>
-  </div>
+<section class="row" id="services">
+  <h2 class="row__label">Services</h2>
 
-  <div class="cards-grid cards-grid--two">
+  <ul>
     {#each content.items as item}
-      <article class="card">
+      <li class="list__item">
         <h3>{item.title}</h3>
         <p>{item.summary}</p>
-        <ul class="card__tags" aria-label={`${item.title} details`}>
-          {#each item.bullets as bullet}
-            <li>{bullet}</li>
-          {/each}
-        </ul>
-      </article>
+      </li>
     {/each}
-  </div>
+  </ul>
 </section>

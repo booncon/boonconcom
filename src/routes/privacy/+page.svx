@@ -1,26 +1,10 @@
 <script lang="ts">
+  import PageHead from '$lib/components/PageHead.svelte';
   import PrivacyArticle from '$lib/components/PrivacyArticle.svelte';
   import { site } from '$lib/content/site';
-
-  const title = site.meta.privacyTitle;
-  const description = site.meta.privacyDescription;
-  const canonical = `${site.meta.url}/privacy/`;
 </script>
 
-<svelte:head>
-  <title>{title}</title>
-  <meta name="description" content={description} />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  <meta property="og:url" content={canonical} />
-  <meta property="og:image" content={site.meta.ogImage} />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={title} />
-  <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content={site.meta.ogImage} />
-  <link rel="canonical" href={canonical} />
-</svelte:head>
+<PageHead title={site.meta.privacyTitle} description={site.meta.privacyDescription} path="/privacy/" />
 
 <PrivacyArticle>
 

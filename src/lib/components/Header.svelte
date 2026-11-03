@@ -1,7 +1,6 @@
 <script lang="ts">
-  import { onMount, tick } from 'svelte';
+  import { onMount } from 'svelte';
   import { page } from '$app/state';
-  import { goto, replaceState } from '$app/navigation';
   import BoonconLogo from '$lib/components/BoonconLogo.svelte';
   import type { NavItem } from '$lib/content/site';
 
@@ -14,91 +13,9 @@
   let headerEl: HTMLElement | undefined;
   let clickOutsideHandler: ((e: MouseEvent) => void) | undefined;
   let activeId: string | null = null;
-  let scrollProgress = 0;
-  let navEl: HTMLElement | undefined;
-  let indicatorStyle: { left: number; top: number; width: number; height: number } | null = null;
-  let lastNavClickTime = 0;
-  let headerOnDark = false;
-  let _updateActiveSection: (() => void) | null = null;
-  let menuOpenVersion = 0;
 
-  function detectHeaderLuminance() {
-    if (!headerEl) return;
-    const isMobile = window.matchMedia('(max-width: 759px)').matches;
-    const selector = isMobile
-      ? '.section--contrast, .hero__aside, .founder__media'
-      : '.section--contrast, .hero__aside';
-    const headerBottom = headerEl.getBoundingClientRect().bottom;
-    headerOnDark = Array.from(document.querySelectorAll<HTMLElement>(selector)).some((el) => {
-      const r = el.getBoundingClientRect();
-      return r.top < headerBottom && r.bottom > 0;
-    });
-  }
-
-  $: if (typeof window !== 'undefined' && page.url.pathname === '/' && activeId) {
-    const _mv = menuOpenVersion; // subscribe — forces re-run after menu open animation
-    tick().then(() => {
-      const link = navEl?.querySelector<HTMLAnchorElement>(
-        `a[href="#${activeId}"]`
-      );
-      if (link && navEl) {
-        const r = link.getBoundingClientRect();
-        const navR = navEl.getBoundingClientRect();
-        indicatorStyle = {
-          left: r.left - navR.left,
-          top: r.top - navR.top,
-          width: r.width,
-          height: r.height,
-        };
-      } else {
-        indicatorStyle = null;
-      }
-    });
-  } else {
-    indicatorStyle = null;
-  }
-
-  const resolveHref = (href: string) => {
-    if (!href.startsWith('#')) {
-      return href;
-    }
-    return page.url.pathname === '/' ? href : `/${href}`;
-  };
-
-  function closeMenu() {
-    menuOpen = false;
-  }
-
-  function handleNavClick(e: MouseEvent, item: NavItem) {
-    const link = e.currentTarget as HTMLAnchorElement;
-    const href = link.getAttribute('href');
-    const hashOnly = href?.startsWith('#') ? href : href?.includes('#') ? '#' + href.split('#')[1] : null;
-    if (!hashOnly || hashOnly === '#') return;
-
-    if (page.url.pathname !== '/') {
-      e.preventDefault();
-      closeMenu();
-      goto(`/${hashOnly}`);
-      return;
-    }
-
-    if (!headerEl) return;
-    const target = document.querySelector(hashOnly);
-    if (!target || !(target instanceof HTMLElement)) return;
-
-    e.preventDefault();
-    closeMenu();
-
-    const sectionId = hashOnly.slice(1);
-    activeId = sectionId;
-    lastNavClickTime = Date.now();
-    replaceState(hashOnly, {});
-
-    const headerHeight = headerEl.getBoundingClientRect().height;
-    const gap = 12;
-    target.style.scrollMarginTop = `${headerHeight + gap}px`;
-    target.scrollIntoView({ behavior: 'smooth', block: 'start' });
-  }
+  const resolveHref = (href: string) =>
+    href.startsWith('#') && page.url.pathname !== '/' ? `/${href}` : href;
 
   $: if (page.url.pathname !== '/') activeId = null;
 
@@ -109,13 +26,9 @@
       }
     };
     document.addEventListener('click', clickOutsideHandler);
-    _updateActiveSection?.();
-    setTimeout(() => { menuOpenVersion++; }, 390);
-  } else {
-    if (clickOutsideHandler) {
-      document.removeEventListener('click', clickOutsideHandler);
-      clickOutsideHandler = undefined;
-    }
+  } else if (clickOutsideHandler) {
+    document.removeEventListener('click', clickOutsideHandler);
+    clickOutsideHandler = undefined;
   }
 
   onMount(() => {
@@ -123,64 +36,36 @@
       .filter((n) => n.href.startsWith('#'))
       .map((n) => n.href.slice(1));
 
-    const updateActiveSection = () => {
-      if (page.url.pathname !== '/' || !headerEl || sectionIds.length === 0) return;
-      if (Date.now() - lastNavClickTime < 800) return;
+    const onScroll = () => {
+      scrolled = window.scrollY > 8;
+      if (page.url.pathname !== '/') return;
 
+      // Snap to the last section only at the true scroll limit, otherwise short
+      // sections near the bottom never get a turn.
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-
-      // Only snap to last section when truly at the scroll limit. A loose threshold
-      // (like maxScroll - 120) fires before the penultimate section's top can reach
-      // triggerY, causing it to be skipped entirely.
       if (maxScroll > 0 && window.scrollY >= maxScroll - 5) {
         activeId = sectionIds[sectionIds.length - 1] ?? null;
         return;
       }
 
-      // Use 50% of viewport height as the trigger offset. A small fixed value (e.g.
-      // 40px) means sections near the bottom of the page (like #team) can have their
-      // top never reach the trigger before maxScroll is hit — so they get skipped.
-      // A percentage scales with the screen so every section gets a fair activation window.
-      const triggerY = headerEl.getBoundingClientRect().bottom + window.innerHeight * 0.5;
-
-      let current: string | null = null;
-      for (const id of sectionIds) {
-        const el = document.getElementById(id);
-        if (!el) continue;
-        if (el.getBoundingClientRect().top <= triggerY) {
-          current = id;
-        }
-      }
-      activeId = current;
-    };
-    _updateActiveSection = updateActiveSection;
-
-    let detectTimeout: ReturnType<typeof setTimeout> | null = null;
-
-    const updateScrolled = () => {
-      scrolled = window.scrollY > 8;
-      const max =
-        document.documentElement.scrollHeight - window.innerHeight;
-      scrollProgress = max > 0 ? Math.min(1, window.scrollY / max) : 0;
-      headerEl?.style.setProperty('--reflect', scrollProgress.toFixed(4));
-      updateActiveSection();
-      // Debounce color detection — only fires 200ms after scrolling stops
-      if (detectTimeout !== null) clearTimeout(detectTimeout);
-      detectTimeout = setTimeout(detectHeaderLuminance, 30);
+      const triggerY = window.innerHeight * 0.5;
+      activeId =
+        sectionIds
+          .filter((id) => (document.getElementById(id)?.getBoundingClientRect().top ?? Infinity) <= triggerY)
+          .at(-1) ?? null;
     };
 
     const handleEscape = (e: KeyboardEvent) => {
       if (e.key === 'Escape') menuOpen = false;
     };
 
-    updateScrolled();
-    window.addEventListener('scroll', updateScrolled, { passive: true });
+    onScroll();
+    window.addEventListener('scroll', onScroll, { passive: true });
     document.addEventListener('keydown', handleEscape);
 
     return () => {
-      window.removeEventListener('scroll', updateScrolled);
+      window.removeEventListener('scroll', onScroll);
       document.removeEventListener('keydown', handleEscape);
-      if (detectTimeout !== null) clearTimeout(detectTimeout);
     };
   });
 </script>
@@ -189,11 +74,10 @@
   class="site-header"
   class:site-header--scrolled={scrolled}
   class:site-header--menu-open={menuOpen}
-  class:site-header--on-dark={headerOnDark}
   bind:this={headerEl}
 >
   <div class="header-inner">
-    <a class:brand--scrolled={scrolled} class="brand" href="/" aria-label={`${name} home`}>
+    <a class="brand" href="/" aria-label={`${name} home`}>
       <BoonconLogo />
     </a>
 
@@ -212,26 +96,18 @@
       <span class="site-header__menu-btn-bar" aria-hidden="true"></span>
     </button>
 
-    <nav class="site-nav" aria-label="Primary" bind:this={navEl}>
-      {#if indicatorStyle && page.url.pathname === '/' && scrolled}
-        <span
-          class="site-nav__indicator"
-          style="left: {indicatorStyle.left}px; top: {indicatorStyle.top}px; width: {indicatorStyle.width}px; height: {indicatorStyle.height}px"
-          aria-hidden="true"
-        ></span>
-      {/if}
+    <nav class="site-nav" aria-label="Primary">
       {#each nav as item}
+        {@const isSection = item.href.startsWith('#')}
+        {@const active = isSection ? item.href === `#${activeId}` : page.url.pathname.startsWith(item.href)}
         <a
           class="site-nav__link"
-          class:site-nav__link--active={activeId != null && item.href === `#${activeId}`}
+          class:site-nav__link--active={active}
           href={resolveHref(item.href)}
-          aria-current={activeId != null && item.href === `#${activeId}` ? 'location' : undefined}
-          on:click={(e) => {
-            trackEvent?.('Menu link', {
-              label: item.label,
-              destination: item.href.startsWith('#') ? item.href : item.href,
-            });
-            handleNavClick(e, item);
+          aria-current={active ? (isSection ? 'location' : 'page') : undefined}
+          on:click={() => {
+            trackEvent?.('Menu link', { label: item.label, destination: item.href });
+            menuOpen = false;
           }}
         >
           {item.label}

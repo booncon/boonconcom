@@ -10,22 +10,16 @@ export interface ActionLink {
 }
 
 export interface HeroContent {
-  eyebrow: string;
+  /** Trusted HTML: may contain <em>. */
   title: string;
-  summary: string;
-  primaryCta: ActionLink;
-  panel: {
-    eyebrow: string;
-    summary: string;
-    imageAlt: string;
-    items: string[];
-  };
+  ctaLead: string;
+  byline: string;
+  imageAlt: string;
 }
 
 export interface ServiceItem {
   title: string;
   summary: string;
-  bullets: string[];
 }
 
 export interface ExperienceItem {
@@ -44,12 +38,11 @@ export interface KpiItem {
 }
 
 export interface FounderContent {
-  title: string;
   name: string;
   role: string;
   location: string;
   imageAlt: string;
-  focus: string[];
+  lead: string;
   body: string[];
 }
 
@@ -62,10 +55,17 @@ export interface ContactContent {
   linkedin: ActionLink;
 }
 
-export interface OverviewContent {
-  eyebrow: string;
-  title: string;
-  body: string[];
+export interface AppItem {
+  /** URL segment: /apps/<slug>/. Icon and screenshots live in src/lib/assets/apps/<slug>/. */
+  slug: string;
+  name: string;
+  tagline: string;
+  platforms: string[];
+  /** Omit until the app is live; the page then says "Coming soon". */
+  appStoreUrl?: string;
+  description: string[];
+  faq?: { question: string; answer: string }[];
+  privacy: string[];
 }
 
 export interface SiteContent {
@@ -76,6 +76,8 @@ export interface SiteContent {
     defaultDescription: string;
     privacyTitle: string;
     privacyDescription: string;
+    appsTitle: string;
+    appsDescription: string;
     ogImage: string;
   };
   brand: {
@@ -84,17 +86,16 @@ export interface SiteContent {
   };
   nav: NavItem[];
   hero: HeroContent;
-  overview: OverviewContent;
   services: {
-    title: string;
-    intro: string;
     items: ServiceItem[];
   };
   experience: {
-    title: string;
-    intro: string;
     items: ExperienceItem[];
     kpis?: KpiItem[];
+  };
+  apps: {
+    intro: string;
+    items: AppItem[];
   };
   founder: FounderContent;
   contact: ContactContent;
@@ -120,12 +121,15 @@ export const site: SiteContent = {
   meta: {
     url: "https://booncon.com",
     domain: "booncon.com",
-    defaultTitle: "AI, automation and digital change. | booncon",
+    defaultTitle: "booncon | AI and automation consulting in Helsinki",
     defaultDescription:
-      "booncon is the Helsinki-based studio led by Lukas Jakob Hafner. Pragmatic AI, automation and digital change work for companies that need sharper systems and better ways of working.",
+      "booncon is Lukas Jakob Hafner's consultancy in Helsinki. I help companies find where AI and automation actually save time, then build it with them.",
     privacyTitle: "Privacy policy | booncon",
     privacyDescription:
       "Privacy information for booncon.com, including controller details, hosting, analytics and direct contact handling.",
+    appsTitle: "Apps | booncon",
+    appsDescription:
+      "Small iPhone, iPad and Mac apps built and sold by booncon in Helsinki.",
     ogImage: "https://booncon.com/assets/hero-office-bw.jpg",
   },
   brand: {
@@ -133,116 +137,67 @@ export const site: SiteContent = {
     markSrc: "/icon-192x192.png",
   },
   nav: [
-    { label: "Intro", href: "#intro" },
     { label: "Services", href: "#services" },
-    { label: "Experience", href: "#experience" },
-    { label: "Team", href: "#team" },
+    { label: "Work", href: "#work" },
+    { label: "Apps", href: "/apps/" },
+    { label: "About", href: "#about" },
     { label: "Contact", href: "#contact" },
   ],
   hero: {
-    eyebrow: "booncon / Lukas Hafner",
-    title:
-      "AI, automation and digital change with less noise and more momentum.",
-    summary:
-      "booncon helps companies make better decisions about how work gets done and where automation belongs. We turn complex digital investments into tangible results. When the technology delivers, the professional experience becomes something people can actually love.",
-    primaryCta: {
-      label: "Start a conversation",
-      href: "mailto:hello@booncon.com?subject=Hi%20booncon!",
-    },
-    panel: {
-      eyebrow: "Typical focus areas",
-      summary:
-        "Independent strategy and hands-on delivery support for teams that want movement, not more deckware.",
-      imageAlt: "Desk and office details",
-      items: [
-        "AI opportunity mapping",
-        "Workflow automation",
-        "Digital operating models",
-        "Founder-level advisory",
-      ],
-    },
-  },
-  overview: {
-    eyebrow: "Overview",
-    title: "A small studio with a systems view",
-    body: [
-      "booncon is the consulting practice led by Lukas Jakob Hafner, a Helsinki-based strategist and maker working across business, product, technology and ways of working.",
-      "The studio grew out of years spent co-founding ventures, advising companies in transition and translating between leadership, operations and digital teams.",
-      "Today the work is focused on making AI and automation genuinely useful instead of decorative. While booncon operates as a lean studio, we regularly orchestrate trusted technical and design partners to scale implementation when a project demands it.",
-      "When change needs both clarity and someone who can help make it real, that is where booncon fits best.",
-    ],
+    title: "I help companies put AI to work where it <em>actually</em> saves time.",
+    ctaLead: "Email me at",
+    byline: "Lukas Jakob Hafner · booncon · Helsinki",
+    imageAlt: "Portrait of Lukas Hafner",
   },
   services: {
-    title: "Where booncon can help",
-    intro:
-      "The work usually starts with a sharp diagnostic and quickly turns into concrete priorities, experiments and implementation support.",
     items: [
       {
         title: "AI and automation strategy",
         summary:
-          "Map the highest-value use cases, define guardrails and turn broad AI ambition into a practical roadmap.",
-        bullets: [
-          "Use-case prioritisation",
-          "Tooling and governance",
-          "Experiment design",
-        ],
+          "Find the use cases that are worth it, set sensible guardrails, and turn the rest into a plan you can start on Monday.",
       },
       {
-        title: "Workflow and operating model design",
+        title: "Workflows and operating models",
         summary:
-          "Improve how decisions, information and responsibility move through the organisation so teams can work faster with less friction.",
-        bullets: ["Process redesign", "Team rituals", "Decision flow clarity"],
+          "Look at how decisions and information really move through the company, then remove the steps nobody would miss.",
       },
       {
-        title: "Core systems & data flows",
+        title: "Systems and data",
         summary:
-          "Assess the current stack, internal tools and customer-facing touchpoints to understand what supports growth and what quietly gets in the way.",
-        bullets: [
-          "Stack review",
-          "Content and data flows",
-          "Implementation priorities",
-        ],
+          "An honest look at your stack and internal tools: what helps, and what quietly slows you down.",
       },
       {
-        title: "Change sprints and trusted advisory",
+        title: "Hands-on advisory",
         summary:
-          "Work directly with decision makers through focused workshops, prototypes and follow-through that keeps the work moving.",
-        bullets: ["Leadership workshops", "Action plans", "Hands-on sparring"],
+          "Workshops, prototypes and follow-through with the people who make the calls. When a project needs more hands, I bring in partners I trust.",
       },
     ],
   },
   experience: {
-    title: "Selected experience",
-    intro:
-      "booncon draws on founder, operator and advisory work across digital products, service design and business transformation.",
     items: [
       {
         name: "booncon Pixels",
-        href: "https://pixels.fi",
+        href: "http://www.valve.fi/",
         role: "Co-founder",
-        summary:
-          "Built a digital agency practice around product thinking, design and delivery for ambitious client work.",
+        summary: "Digital agency, now Valve",
       },
       {
         name: "Tiny Tin Box",
         href: "https://tinytinbox.com",
         role: "Venture builder",
-        summary:
-          "Launched an interactive children's publishing concept that blended storytelling, product and digital production.",
+        summary: "Interactive children's books",
       },
       {
         name: "SelectAM",
         href: "https://www.selectam.io",
         role: "Co-founder",
-        summary:
-          "Shaped product, positioning and commercial thinking around a specialised industrial technology venture.",
+        summary: "Industrial technology",
       },
       {
         name: "Torggler",
         href: "https://www.torggler.com",
         role: "Advisor",
-        summary:
-          "Supported long-term digital transformation work with attention to systems, services and operational fit.",
+        summary: "Long-term digital transformation",
       },
     ],
     kpis: [
@@ -267,27 +222,48 @@ export const site: SiteContent = {
       },
     ],
   },
+  apps: {
+    intro: "Small tools I build and sell myself.",
+    items: [
+      // ponytail: placeholder until the first real app is listed. Replace before merging.
+      {
+        slug: "example",
+        name: "Example app",
+        tagline: "Placeholder until the first app is listed here.",
+        platforms: ["iPhone", "iPad", "Mac"],
+        description: [
+          "A short paragraph on what the app does and who it's for.",
+          "A second paragraph for the detail that makes it worth downloading.",
+        ],
+        faq: [
+          {
+            question: "How do I restore a purchase?",
+            answer: "Open Settings in the app and tap Restore purchases.",
+          },
+        ],
+        privacy: [
+          "Example app doesn't collect personal data. Everything you enter stays on your device and, if you use iCloud, in your own iCloud account.",
+          "The app doesn't use third-party analytics or advertising.",
+        ],
+      },
+    ],
+  },
   founder: {
-    title: "The bridge between strategy and software",
     name: "Lukas Jakob Hafner",
     role: "Master Maker",
     location: "Helsinki, Finland",
     imageAlt: "Portrait of Lukas Hafner",
-    focus: [
-      "AI and automation",
-      "Digital strategy",
-      "Product and systems thinking",
-    ],
+    lead: "I'm Lukas, a strategist and builder in Helsinki. Tinkerer at heart.",
     body: [
-      "Most digital change gets stuck in the gap between high-level advice and actual implementation. I started booncon to close that gap. With over a decade of experience co-founding ventures and advising companies in transition, I bring a background that merges systems thinking with hands-on technical execution.",
-      "My work is about pressure-testing constraints and helping teams move from intent to action. You don't get a junior account manager or a deck of slides; you get a direct partnership with the person designing and building your automation. booncon originally started under the motto 'Working with friends.' While the focus has shifted entirely to AI and digital systems, that ethos hasn't changed. Working with me is highly personal, direct, and built on the kind of trust you’d expect from a good friend.",
-      "I am a tinkerer at heart. Whether I'm mapping AI opportunities or refining a workflow, I look for the point where business design, internal culture, and practical automation meet. When I'm not building systems for clients, you'll likely find me trying out new gadgets, throwing a frisbee, or refining my next batch of craft beer.",
+      "Most digital change gets stuck between advice and implementation. I started booncon to close that gap. You work directly with the person designing and building your automation, not with an account manager or a slide deck.",
+      "Before booncon I co-founded a digital agency and a few ventures, and advised companies through long transformations. That's where I learned to translate between leadership, operations and the people writing the code.",
+      "booncon started under the motto \"working with friends\". The focus has moved to AI and systems; the way of working hasn't. Away from client work you'll find me trying new gadgets, throwing a frisbee or brewing the next batch of beer.",
     ],
   },
   contact: {
-    title: "Need a clearer next step?",
+    title: "Coffee or a call?",
     summary:
-      "If you are exploring AI, rethinking the way work flows through the company or trying to make digital change less vague, let's grab a coffee or jump on a call. I’m always happy to talk.",
+      "If you're looking at AI, rethinking how work moves through the company, or just want a second opinion, get in touch. I'm always happy to talk.",
     address:
       "booncon oy, Suvilahdenkatu 4 B 24, c/o Hafner, 00500 Helsinki, Finland",
     phone: "+358 45 8980609",
