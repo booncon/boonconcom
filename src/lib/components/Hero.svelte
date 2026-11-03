@@ -14,5 +14,6 @@
     <em class="hero__done">{hero.done}</em>
   </p>
 
+  <p class="cta-line hero__pitch">{hero.pitch}</p>
   <p class="cta-line">{hero.ctaLead} <a class="link" href={email.href}>{email.label}</a></p>
 </section>

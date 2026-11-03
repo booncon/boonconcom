@@ -15,6 +15,8 @@ export interface HeroContent {
   /** Struck through one by one under the headline. */
   chores: string[];
   done: string;
+  /** How working together goes; sits above the email line. */
+  pitch: string;
   ctaLead: string;
 }
 
@@ -79,7 +81,9 @@ export interface SiteContent {
     privacyDescription: string;
     appsTitle: string;
     appsDescription: string;
+    /** 1200×630. */
     ogImage: string;
+    ogImageAlt: string;
   };
   brand: {
     name: string;
@@ -123,6 +127,15 @@ export interface SiteContent {
 // Also add /apps/ and each app page back to static/sitemap.xml when turning it on.
 const showApps = false;
 
+// Finnish order: recipient, c/o, street, postcode and city, country.
+const address = {
+  careOf: "c/o Hafner",
+  street: "Suvilahdenkatu 4 B 24",
+  postalCode: "00500",
+  city: "Helsinki",
+  country: "Finland",
+};
+
 export const site: SiteContent = {
   meta: {
     url: "https://booncon.com",
@@ -136,7 +149,8 @@ export const site: SiteContent = {
     appsTitle: "Apps | booncon",
     appsDescription:
       "Small iPhone, iPad and Mac apps built and sold by booncon in Helsinki.",
-    ogImage: "https://booncon.com/assets/hero-office-bw.jpg",
+    ogImage: "https://booncon.com/assets/share.png",
+    ogImageAlt: "booncon: I help companies put AI to work where it actually saves time.",
   },
   brand: {
     name: "booncon",
@@ -151,8 +165,9 @@ export const site: SiteContent = {
   ],
   hero: {
     title: "I help companies put AI to work where it <em>actually</em> saves time.",
-    chores: ["Copy-paste", "re-typing", "chasing approvals", "monthly reports", "inbox triage"],
+    chores: ["Copying data between tools", "re-typing orders", "chasing approvals", "building reports by hand"],
     done: "Done.",
+    pitch: "You work directly with me: I help decide what to build, then build it with you.",
     ctaLead: "Email me at",
   },
   services: {
@@ -160,7 +175,7 @@ export const site: SiteContent = {
       {
         title: "AI and automation strategy",
         summary:
-          "Find the use cases that are worth it, set sensible guardrails, and turn the rest into a plan you can start on Monday.",
+          "Find the use cases worth testing, agree on guardrails, and decide what to try first. A plan you can start on Monday.",
       },
       {
         title: "Workflows and operating models",
@@ -170,7 +185,7 @@ export const site: SiteContent = {
       {
         title: "Systems and data",
         summary:
-          "An honest look at your stack and internal tools: what helps, and what quietly slows you down.",
+          "See where your tools create extra work, where data gets stuck, and what to fix first.",
       },
       {
         title: "Hands-on advisory",
@@ -256,17 +271,16 @@ export const site: SiteContent = {
     imageAlt: "Portrait of Lukas Hafner",
     lead: "I'm Lukas, a strategist and builder in Helsinki. Tinkerer at heart.",
     body: [
-      "booncon was founded by a group of friends. Through booncon I've co-founded a digital agency and an industrial tech company, and advised companies through long transformations.",
+      "With booncon I've co-founded a digital agency and an industrial tech company, and advised companies through long transformations.",
       "Along the way I learned where digital change usually gets stuck: between advice and implementation. I also learned to translate between leadership, operations and the people writing the code.",
-      "Today the focus is AI and automation, but we still work the same way. You work directly with the person designing and building it, not with an account manager or a slide deck. Away from client work you'll find me trying new gadgets, throwing a frisbee or brewing the next batch of beer.",
+      "Today the focus is AI and automation. Away from client work you'll find me trying new gadgets, throwing a frisbee or brewing the next batch of beer.",
     ],
   },
   contact: {
     title: "Coffee or a call?",
     summary:
       "If you're looking at AI, rethinking how work moves through the company, or just want a second opinion, get in touch. I'm always happy to talk.",
-    address:
-      "booncon oy, Suvilahdenkatu 4 B 24, c/o Hafner, 00500 Helsinki, Finland",
+    address: `booncon oy, ${address.careOf}, ${address.street}, ${address.postalCode} ${address.city}, ${address.country}`,
     phone: "+358 45 8980609",
     email: {
       label: "hello@booncon.com",
@@ -316,10 +330,23 @@ export const organizationJsonLd = {
   "@context": "https://schema.org",
   "@type": "ProfessionalService",
   name: site.brand.name,
+  legalName: site.legal.companyName,
+  description: site.meta.defaultDescription,
   url: site.meta.url,
+  logo: `${site.meta.url}/icon-512x512.png`,
+  image: site.meta.ogImage,
   email: site.legal.email.label,
+  telephone: site.contact.phone.replaceAll(" ", ""),
+  vatID: site.legal.vatId,
+  address: {
+    "@type": "PostalAddress",
+    streetAddress: address.street,
+    postalCode: address.postalCode,
+    addressLocality: address.city,
+    addressCountry: "FI",
+  },
   areaServed: "Europe",
-  sameAs: [site.legal.linkedin.href, site.legal.podcast.href],
+  sameAs: [site.legal.linkedin.href, site.legal.github.href, site.legal.podcast.href],
   founder: {
     "@type": "Person",
     name: site.founder.name,

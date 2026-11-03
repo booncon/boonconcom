@@ -36,7 +36,7 @@
   <link rel="icon" type="image/png" href="/favicon-32x32.png" />
   <link rel="apple-touch-icon" href="/icon-192x192.png" />
   <link rel="manifest" href="/site.webmanifest" />
-  <meta name="theme-color" content="#13222b" />
+  <meta name="theme-color" content="#f5f2e7" />
 </svelte:head>
 
 <a class="skip-link" href="#content">Skip to content</a>
