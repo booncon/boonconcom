@@ -1,42 +1,39 @@
 <script lang="ts">
+  import AppList from '$lib/components/AppList.svelte';
   import ContactPanel from '$lib/components/ContactPanel.svelte';
   import ExperienceGrid from '$lib/components/ExperienceGrid.svelte';
   import FounderPanel from '$lib/components/FounderPanel.svelte';
   import Hero from '$lib/components/Hero.svelte';
-  import SectionBlock from '$lib/components/SectionBlock.svelte';
+  import PageHead from '$lib/components/PageHead.svelte';
   import ServicesGrid from '$lib/components/ServicesGrid.svelte';
   import { organizationJsonLd, site } from '$lib/content/site';
   import { escapeInlineScript } from '$lib/utils/head';
 
-  const title = site.meta.defaultTitle;
-  const description = site.meta.defaultDescription;
-  const canonical = `${site.meta.url}/`;
   const organizationJson = escapeInlineScript(JSON.stringify(organizationJsonLd));
 </script>
 
+<PageHead title={site.meta.defaultTitle} description={site.meta.defaultDescription} path="/" />
+
 <svelte:head>
-  <title>{title}</title>
-  <meta name="description" content={description} />
-  <meta property="og:type" content="website" />
-  <meta property="og:title" content={title} />
-  <meta property="og:description" content={description} />
-  <meta property="og:url" content={canonical} />
-  <meta property="og:image" content={site.meta.ogImage} />
-  <meta name="twitter:card" content="summary_large_image" />
-  <meta name="twitter:title" content={title} />
-  <meta name="twitter:description" content={description} />
-  <meta name="twitter:image" content={site.meta.ogImage} />
-  <link rel="canonical" href={canonical} />
   {@html `<script type="application/ld+json">${organizationJson}</script>`}
 </svelte:head>
 
-<Hero hero={site.hero} />
-
-<SectionBlock id="intro" variant="intro" content={site.overview} />
+<Hero hero={site.hero} email={site.contact.email} />
 
 <ServicesGrid content={site.services} />
 
 <ExperienceGrid content={site.experience} />
+
+{#if site.apps.visible}
+  <section class="row" id="apps">
+    <h2 class="row__label">Apps</h2>
+    <div>
+      <p class="row__intro">{site.apps.intro}</p>
+      <AppList apps={site.apps.items} />
+      <p class="row__more"><a class="link" href="/apps/">All apps</a></p>
+    </div>
+  </section>
+{/if}
 
 <FounderPanel founder={site.founder} />
 

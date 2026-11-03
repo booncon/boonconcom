@@ -54,5 +54,5 @@
     </div>
   </main>
 
-  <Footer legal={site.legal} />
+  <Footer legal={site.legal} showApps={site.apps.visible} />
 </div>

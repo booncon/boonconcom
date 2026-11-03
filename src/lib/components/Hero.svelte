@@ -1,32 +1,18 @@
 <script lang="ts">
-  import type { HeroContent } from '$lib/content/site';
-  import heroImg from '$lib/assets/hero-office-bw.jpg?enhanced';
+  import Strike from '$lib/components/Strike.svelte';
+  import type { ActionLink, HeroContent } from '$lib/content/site';
 
   export let hero: HeroContent;
+  export let email: ActionLink;
 </script>
 
 <section class="hero" id="top">
-  <div class="hero__copy">
-    <h1>{hero.title}</h1>
-    <p class="hero__summary">{hero.summary}</p>
+  <h1>{@html hero.title}</h1>
 
-    <div class="hero__actions">
-      <a class="button button--primary" href={hero.primaryCta.href}>{hero.primaryCta.label}</a>
-    </div>
-  </div>
+  <p class="hero__chores muted" style="--n: {hero.chores.length}">
+    {#each hero.chores as chore, i}<Strike text={chore} index={i} />{i < hero.chores.length - 1 ? ', ' : '. '}{/each}
+    <em class="hero__done">{hero.done}</em>
+  </p>
 
-  <aside class="hero__aside" aria-label="Hero summary">
-    <div class="hero__aside-media">
-      <enhanced:img src={heroImg} alt={hero.panel.imageAlt} width="1200" height="900" fetchpriority="high" />
-    </div>
-
-    <div class="hero__aside-body">
-      <p class="hero__aside-note">{hero.panel.summary}</p>
-      <ul class="hero__tags" aria-label="Focus areas">
-        {#each hero.panel.items as item}
-          <li>{item}</li>
-        {/each}
-      </ul>
-    </div>
-  </aside>
+  <p class="cta-line">{hero.ctaLead} <a class="link" href={email.href}>{email.label}</a></p>
 </section>
