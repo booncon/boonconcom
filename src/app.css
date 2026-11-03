@@ -508,40 +508,47 @@ h3 {
   transition: transform 0.35s cubic-bezier(0.34, 1.56, 0.64, 1);
 }
 
-/* Day tooltip: a paper slip that crosses out one chore, like the hero */
+/* Day tooltip: a sheet of ruled notepad paper that crosses out one chore, like the hero */
 .footer-tip {
   --tip-x: -50%;
-  --arrow-x: 50%;
+  --rule: 1.75rem;
   position: absolute;
-  bottom: calc(100% + 12px);
+  bottom: calc(100% + 14px);
   left: 50%;
-  padding: 0.4rem 0.8rem 0.45rem;
-  border: 1px solid var(--line);
-  background: var(--paper);
+  padding: 0.9rem 1.2rem 1.6rem 2.5rem;
+  background:
+    /* red margin line */
+    linear-gradient(
+      to right,
+      transparent 1.6rem,
+      oklch(0.66 0.13 20 / 0.55) 1.6rem 1.7rem,
+      transparent 1.7rem
+    ),
+    /* blue rules, offset so the writing sits on one */
+    repeating-linear-gradient(
+        to bottom,
+        transparent 0 calc(var(--rule) - 1px),
+        color-mix(in oklab, var(--accent) 30%, transparent) calc(var(--rule) - 1px) var(--rule)
+      )
+      0 0.4rem,
+    oklch(0.99 0.006 95);
+  box-shadow:
+    0 1px 1px oklch(0 0 0 / 0.06),
+    0 8px 18px -8px oklch(0 0 0 / 0.25);
   color: var(--ink-soft);
   font-size: 1.05rem;
+  line-height: var(--rule);
   font-style: normal;
   white-space: nowrap;
   pointer-events: none;
   opacity: 0;
   translate: var(--tip-x) 4px;
+  rotate: -4deg;
+  transform-origin: 50% 100%;
   transition:
     opacity 0.2s ease,
-    translate 0.2s ease;
-
-  /* arrow: a rotated square sharing the slip's border */
-  &::after {
-    content: "";
-    position: absolute;
-    top: 100%;
-    left: var(--arrow-x);
-    width: 9px;
-    height: 9px;
-    border-right: 1px solid var(--line);
-    border-bottom: 1px solid var(--line);
-    background: var(--paper);
-    transform: translate(-50%, -50%) rotate(45deg);
-  }
+    translate 0.25s ease,
+    rotate 0.4s cubic-bezier(0.34, 1.56, 0.64, 1);
 
   /* drawn on hover instead of on load; thicker so it matches the hero's weight at this size */
   .chore path {
@@ -564,6 +571,7 @@ h3 {
   .footer-tip {
     opacity: 1;
     translate: var(--tip-x) 0;
+    rotate: -2deg;
   }
 
   .footer-tip .chore path {
@@ -673,8 +681,8 @@ h3 {
   /* The mark sits at the left edge here, so anchor the slip to it instead of centring. */
   .footer-tip {
     --tip-x: 0;
-    --arrow-x: 14px;
     left: 0;
+    transform-origin: 14px 100%;
   }
 
   .about {
