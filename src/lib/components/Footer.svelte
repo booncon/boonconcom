@@ -1,10 +1,28 @@
 <script lang="ts">
+  import { onMount } from 'svelte';
+  import Strike from '$lib/components/Strike.svelte';
   import type { SiteContent } from '$lib/content/site';
   import certBadgeImg from '$lib/assets/SV_LOGO_booncon_oy_EN_409937_web.jpg?enhanced';
 
   export let legal: SiteContent['legal'];
 
   const year = new Date().getFullYear();
+
+  // One small chore crossed out per weekday, Sunday first.
+  const dayTips = [
+    ['Sunday scaries', 'Happy Sunday.'],
+    ['Monday blues', 'Happy Monday.'],
+    ['Status meetings', 'Happy Tuesday.'],
+    ['Hump day', 'Happy Wednesday.'],
+    ['Weekly reports', 'Happy Thursday.'],
+    ['Friday deploys', 'Happy Friday.'],
+    ['Alarm clocks', 'Happy Saturday.'],
+  ];
+
+  // Prerendered at build time; re-read the visitor's own day once in the browser.
+  let day = new Date().getDay();
+  onMount(() => (day = new Date().getDay()));
+  $: [chore, greeting] = dayTips[day];
 </script>
 
 <footer class="site-footer">
@@ -17,7 +35,8 @@
     </div>
 
     <a href="/" class="site-footer__mark" aria-label="booncon home">
-      <svg class="footer-mark" viewBox="0 0 62 62" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
+      <span class="footer-mark-wrap">
+        <svg class="footer-mark" viewBox="0 0 62 62" aria-hidden="true" focusable="false" xmlns="http://www.w3.org/2000/svg">
             <g transform="translate(2,2)">
               <defs>
                 <path
@@ -44,6 +63,8 @@
               <polygon opacity="0.94" fill="#3B454F" points="36.489,35.228 34.338,21.121 34.322,21.134 20.582,29.016 23.045,29.977 19.32,32.898 34.287,38.913 34.299,34.373" />
             </g>
           </svg>
+        <span class="footer-tip" aria-hidden="true"><Strike text={chore} index={day} /> <em>{greeting}</em></span>
+      </span>
       <span>{legal.tagline}</span>
     </a>
 
