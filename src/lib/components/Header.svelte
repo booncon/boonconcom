@@ -58,7 +58,9 @@
         return;
       }
 
-      const triggerY = window.innerHeight * 0.5;
+      // 30% down the viewport: low enough for later sections to reach it, high
+      // enough that a short row (Apps) owns the underline once it's at the top.
+      const triggerY = window.innerHeight * 0.3;
       sectionId =
         sectionIds
           .filter((id) => (document.getElementById(id)?.getBoundingClientRect().top ?? Infinity) <= triggerY)
@@ -110,7 +112,9 @@
       {#each nav as item}
         {@const isSection = item.href.startsWith('#')}
         {@const active = isSection
-          ? onHome && item.href === `#${sectionId}`
+          ? onHome
+            ? item.href === `#${sectionId}`
+            : page.url.pathname.startsWith(`/${item.href.slice(1)}/`)
           : page.url.pathname.startsWith(item.href)}
         <a
           class="site-nav__link"

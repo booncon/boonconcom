@@ -9,7 +9,7 @@
 <section class="hero" id="top">
   <div>
     <h1>{@html hero.title}</h1>
-    <p class="hero__cta">{hero.ctaLead} <a class="link" href={email.href}>{email.label}</a></p>
+    <p class="cta-line">{hero.ctaLead} <a class="link" href={email.href}>{email.label}</a></p>
   </div>
 
   <figure class="hero__portrait">

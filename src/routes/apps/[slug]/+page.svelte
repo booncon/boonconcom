@@ -28,6 +28,8 @@
       {:else}
         Coming soon to the App Store
       {/if}
+      · <a class="link" href="#support">Support</a>
+      · <a class="link" href="#privacy">Privacy</a>
     </p>
   </div>
 </header>
@@ -55,7 +57,8 @@
 <section class="row" id="support">
   <h2 class="row__label">Support</h2>
   <div class="prose">
-    <p>Questions, bugs or ideas: email <a href={supportHref}>{site.contact.email.label}</a> and you'll hear back from me directly.</p>
+    <p class="cta-line">Email <a class="link" href={supportHref}>{site.contact.email.label}</a></p>
+    <p class="muted">Questions, bugs or ideas: you'll hear back from me directly.</p>
     {#each app.faq ?? [] as item}
       <h3>{item.question}</h3>
       <p>{item.answer}</p>

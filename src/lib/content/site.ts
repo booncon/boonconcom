@@ -139,7 +139,7 @@ export const site: SiteContent = {
   nav: [
     { label: "Services", href: "#services" },
     { label: "Work", href: "#work" },
-    { label: "Apps", href: "/apps/" },
+    { label: "Apps", href: "#apps" },
     { label: "About", href: "#about" },
     { label: "Contact", href: "#contact" },
   ],
