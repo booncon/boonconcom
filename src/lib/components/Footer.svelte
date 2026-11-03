@@ -5,6 +5,7 @@
   import certBadgeImg from '$lib/assets/SV_LOGO_booncon_oy_EN_409937_web.jpg?enhanced';
 
   export let legal: SiteContent['legal'];
+  export let showApps = false;
 
   const year = new Date().getFullYear();
 
@@ -69,7 +70,7 @@
     </a>
 
     <nav class="site-footer__links" aria-label="Footer">
-      <a href="/apps/">Apps</a>
+      {#if showApps}<a href="/apps/">Apps</a>{/if}
       <a href={legal.podcast.href} target="_blank" rel="noreferrer noopener">{legal.podcast.label}</a>
       <a href={legal.github.href} target="_blank" rel="noreferrer noopener">{legal.github.label}</a>
       <a href={legal.linkedin.href} target="_blank" rel="noreferrer noopener">{legal.linkedin.label}</a>

@@ -12,7 +12,9 @@ const config = {
     adapter: adapter({
       pages: 'build',
       assets: 'build',
-      strict: true,
+      // Off so pages can opt out of the build (the hidden /apps section);
+      // prerender.handleHttpError still fails the build on broken links.
+      strict: false,
     }),
     prerender: {
       entries: ['*'],

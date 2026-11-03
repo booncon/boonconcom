@@ -95,6 +95,7 @@ export interface SiteContent {
     kpis?: KpiItem[];
   };
   apps: {
+    visible: boolean;
     intro: string;
     items: AppItem[];
   };
@@ -118,6 +119,10 @@ export interface SiteContent {
   };
 }
 
+// Publishes the Apps section: menu item, homepage row, footer link and the /apps pages.
+// Also add /apps/ and each app page back to static/sitemap.xml when turning it on.
+const showApps = false;
+
 export const site: SiteContent = {
   meta: {
     url: "https://booncon.com",
@@ -140,7 +145,7 @@ export const site: SiteContent = {
   nav: [
     { label: "Services", href: "#services" },
     { label: "Work", href: "#work" },
-    { label: "Apps", href: "#apps" },
+    ...(showApps ? [{ label: "Apps", href: "#apps" }] : []),
     { label: "About", href: "#about" },
     { label: "Contact", href: "#contact" },
   ],
@@ -218,6 +223,7 @@ export const site: SiteContent = {
     ],
   },
   apps: {
+    visible: showApps,
     intro: "Small tools I build and sell myself.",
     items: [
       // ponytail: placeholder until the first real app is listed. Replace before merging.

@@ -24,14 +24,16 @@
 
 <ExperienceGrid content={site.experience} />
 
-<section class="row" id="apps">
-  <h2 class="row__label">Apps</h2>
-  <div>
-    <p class="row__intro">{site.apps.intro}</p>
-    <AppList apps={site.apps.items} />
-    <p class="row__more"><a class="link" href="/apps/">All apps</a></p>
-  </div>
-</section>
+{#if site.apps.visible}
+  <section class="row" id="apps">
+    <h2 class="row__label">Apps</h2>
+    <div>
+      <p class="row__intro">{site.apps.intro}</p>
+      <AppList apps={site.apps.items} />
+      <p class="row__more"><a class="link" href="/apps/">All apps</a></p>
+    </div>
+  </section>
+{/if}
 
 <FounderPanel founder={site.founder} />
 
