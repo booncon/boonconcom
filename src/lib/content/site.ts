@@ -129,7 +129,7 @@ export const site: SiteContent = {
     domain: "booncon.com",
     defaultTitle: "booncon | AI and automation consulting in Helsinki",
     defaultDescription:
-      "booncon is Lukas Jakob Hafner's consultancy in Helsinki. I help companies find where AI and automation actually save time, then build it with them.",
+      "booncon is a consultancy in Helsinki. I help companies find where AI and automation actually save time, then build it with them.",
     privacyTitle: "Privacy policy | booncon",
     privacyDescription:
       "Privacy information for booncon.com, including controller details, hosting, analytics and direct contact handling.",
@@ -256,9 +256,9 @@ export const site: SiteContent = {
     imageAlt: "Portrait of Lukas Hafner",
     lead: "I'm Lukas, a strategist and builder in Helsinki. Tinkerer at heart.",
     body: [
-      "Most digital change gets stuck between advice and implementation. I started booncon to close that gap. You work directly with the person designing and building your automation, not with an account manager or a slide deck.",
-      "Before booncon I co-founded a digital agency and a few ventures, and advised companies through long transformations. That's where I learned to translate between leadership, operations and the people writing the code.",
-      "booncon started under the motto \"working with friends\". The focus has moved to AI and systems; the way of working hasn't. Away from client work you'll find me trying new gadgets, throwing a frisbee or brewing the next batch of beer.",
+      "booncon was founded by a group of friends, under the motto \"working with friends\". Through booncon I've co-founded a digital agency and an industrial tech company, and advised companies through long transformations.",
+      "Along the way I learned where digital change usually gets stuck: between advice and implementation. I also learned to translate between leadership, operations and the people writing the code.",
+      "Today the focus is AI and automation, but we still work the same way. You work directly with the person designing and building it, not with an account manager or a slide deck. Away from client work you'll find me trying new gadgets, throwing a frisbee or brewing the next batch of beer.",
     ],
   },
   contact: {
