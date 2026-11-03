@@ -20,6 +20,9 @@
   let menuOpen = $state(false);
   let headerEl: HTMLElement | undefined = $state();
   let sectionId: string | null = $state(null);
+  // After a menu click, keep the clicked section underlined until the visitor scrolls
+  // themselves: near the bottom of a tall screen the page can't bring it to the top.
+  let pinned = false;
 
   const onHome = $derived(page.url.pathname === '/');
   const sectionIds = $derived(nav.filter((n) => n.href.startsWith('#')).map((n) => n.href.slice(1)));
@@ -35,6 +38,8 @@
     const reduceMotion = window.matchMedia('(prefers-reduced-motion: reduce)').matches;
     target.scrollIntoView({ behavior: reduceMotion ? 'auto' : 'smooth' });
     replaceState(href, {});
+    sectionId = target.id;
+    pinned = true;
   }
 
   $effect(() => {
@@ -49,35 +54,49 @@
   $effect(() => {
     const onScroll = () => {
       scrolled = window.scrollY > 8;
+      if (pinned) return;
 
-      // Snap to the last section only at the true scroll limit, otherwise short
-      // sections near the bottom never get a turn.
+      // A section is current once its top passes 30% down the viewport: low enough
+      // for later sections to reach it, high enough that a short row (Apps) owns the
+      // underline once it's at the top. starts[i] is the scroll position where that happens.
+      const triggerY = window.innerHeight * 0.3;
       const maxScroll = document.documentElement.scrollHeight - window.innerHeight;
-      if (maxScroll > 0 && window.scrollY >= maxScroll - 5) {
-        sectionId = sectionIds.at(-1) ?? null;
-        return;
+      let starts = sectionIds.map(
+        (id) => (document.getElementById(id)?.getBoundingClientRect().top ?? Infinity) + window.scrollY - triggerY,
+      );
+
+      // On a tall screen the page ends before the last sections get there, so they'd
+      // be skipped. Squeeze those starts into the last half-screen of scrolling instead,
+      // ending with the last section exactly at the bottom.
+      const last = starts.at(-1) ?? 0;
+      const end = maxScroll - 5;
+      if (last > end) {
+        const knee = Math.max(0, maxScroll - window.innerHeight / 2);
+        starts = starts.map((s) => (s <= knee ? s : knee + ((s - knee) * (end - knee)) / (last - knee)));
       }
 
-      // 30% down the viewport: low enough for later sections to reach it, high
-      // enough that a short row (Apps) owns the underline once it's at the top.
-      const triggerY = window.innerHeight * 0.3;
-      sectionId =
-        sectionIds
-          .filter((id) => (document.getElementById(id)?.getBoundingClientRect().top ?? Infinity) <= triggerY)
-          .at(-1) ?? null;
+      const current = starts.findLastIndex((s) => s <= window.scrollY);
+      sectionId = current >= 0 ? sectionIds[current] : null;
     };
 
-    const handleEscape = (e: KeyboardEvent) => {
+    // Scrolling by hand releases a section pinned by a menu click.
+    const unpin = () => (pinned = false);
+    const handleKeydown = (e: KeyboardEvent) => {
+      unpin();
       if (e.key === 'Escape') menuOpen = false;
     };
 
     onScroll();
     window.addEventListener('scroll', onScroll, { passive: true });
-    document.addEventListener('keydown', handleEscape);
+    window.addEventListener('wheel', unpin, { passive: true });
+    window.addEventListener('touchstart', unpin, { passive: true });
+    document.addEventListener('keydown', handleKeydown);
 
     return () => {
       window.removeEventListener('scroll', onScroll);
-      document.removeEventListener('keydown', handleEscape);
+      window.removeEventListener('wheel', unpin);
+      window.removeEventListener('touchstart', unpin);
+      document.removeEventListener('keydown', handleKeydown);
     };
   });
 </script>

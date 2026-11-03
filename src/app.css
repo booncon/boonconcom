@@ -380,6 +380,14 @@ h3 {
   margin-top: 2.5rem;
 }
 
+.hero .hero__pitch {
+  max-width: 30ch;
+
+  + .cta-line {
+    margin-top: 0.75rem;
+  }
+}
+
 .hero__chores {
   margin-top: clamp(2rem, 4vw, 3rem);
   max-width: 46ch;
