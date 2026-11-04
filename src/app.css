@@ -38,25 +38,25 @@
 }
 
 body {
+  position: relative;
   margin: 0;
   min-width: 320px;
+  min-height: 100svh;
   background: var(--paper);
 }
 
-/* Fine film grain over the whole page. Two SVG noise tiles with different seeds and sizes
-   (240px and 317px don't line up for ~76,000px) so the pattern never visibly repeats. Each is
-   drawn at 2x and shown at half size to stay crisp on phones; only the brighter part of the
-   noise becomes dark specks, so it reads as grain without greying the paper. */
+/* Fine film grain over the whole page: a seamless 160px tile of dark specks, drawn at 2x to stay
+   crisp and baked from two feTurbulence layers. It's a bitmap because Safari renders feTurbulence
+   SVG tiles unevenly (a light-to-dark gradient per tile, which shows as a checkerboard). It covers
+   the whole body, so it scrolls with the page like paper texture. */
 body::after {
   content: "";
-  position: fixed;
+  position: absolute;
   inset: 0;
   z-index: 100;
   pointer-events: none;
-  background-image:
-    url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27480%27%20height%3D%27480%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.5%27%20numOctaves%3D%271%27%20seed%3D%273%27%20stitchTiles%3D%27stitch%27/%3E%3CfeColorMatrix%20values%3D%270%200%200%200%200%20%200%200%200%200%200%20%200%200%200%200%200%20%205%200%200%200%20-3%27/%3E%3C/filter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url%28%23n%29%27/%3E%3C/svg%3E"),
-    url("data:image/svg+xml,%3Csvg%20xmlns%3D%27http%3A//www.w3.org/2000/svg%27%20width%3D%27634%27%20height%3D%27634%27%3E%3Cfilter%20id%3D%27n%27%3E%3CfeTurbulence%20type%3D%27fractalNoise%27%20baseFrequency%3D%270.5%27%20numOctaves%3D%271%27%20seed%3D%2711%27%20stitchTiles%3D%27stitch%27/%3E%3CfeColorMatrix%20values%3D%270%200%200%200%200%20%200%200%200%200%200%20%200%200%200%200%200%20%205%200%200%200%20-3%27/%3E%3C/filter%3E%3Crect%20width%3D%27100%25%27%20height%3D%27100%25%27%20filter%3D%27url%28%23n%29%27/%3E%3C/svg%3E");
-  background-size: 240px, 317px;
+  background-image: url("./lib/assets/grain.webp");
+  background-size: 160px;
   opacity: 0.12;
 }
 
