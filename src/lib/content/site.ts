@@ -113,6 +113,7 @@ export interface SiteContent {
     email: ActionLink;
     linkedin: ActionLink;
     podcast: ActionLink;
+    sftsk: ActionLink;
     github: ActionLink;
     asiakastieto: ActionLink;
   };
@@ -309,6 +310,11 @@ export const site: SiteContent = {
     podcast: {
       label: "bitsandpieces.fm",
       href: "https://bitsandpieces.fm",
+      external: true,
+    },
+    sftsk: {
+      label: "sftsk.com",
+      href: "https://sftsk.com/",
       external: true,
     },
     github: {
