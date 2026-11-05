@@ -71,7 +71,6 @@
 
     <nav class="site-footer__links" aria-label="Footer">
       {#if showApps}<a href="/apps/">Apps</a>{/if}
-      <a href={legal.podcast.href} target="_blank" rel="noreferrer noopener">{legal.podcast.label}</a>
       <a href={legal.sftsk.href} target="_blank" rel="noreferrer noopener">{legal.sftsk.label}</a>
       <a href={legal.github.href} target="_blank" rel="noreferrer noopener">{legal.github.label}</a>
       <a href={legal.linkedin.href} target="_blank" rel="noreferrer noopener">{legal.linkedin.label}</a>
