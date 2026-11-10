@@ -159,7 +159,7 @@ export const site: SiteContent = {
   },
   nav: [
     { label: "Services", href: "#services" },
-    { label: "Work", href: "#work" },
+    { label: "Currently", href: "#work" },
     ...(showApps ? [{ label: "Apps", href: "#apps" }] : []),
     { label: "About", href: "#about" },
     { label: "Contact", href: "#contact" },
@@ -208,12 +208,6 @@ export const site: SiteContent = {
         href: "https://www.torggler.com",
         role: "Advisor",
         summary: "Long-term digital transformation",
-      },
-      {
-        name: "booncon Pixels",
-        href: "http://www.valve.fi/",
-        role: "Co-founder",
-        summary: "Digital agency, now Valve",
       },
     ],
     kpis: [

@@ -21,7 +21,7 @@
       <p class="list__meta">
         <span>{app.tagline}</span>
         {#if app.appStoreUrl}
-          <a class="link" href={app.appStoreUrl} target="_blank" rel="noreferrer noopener">App Store ↗</a>
+          <a class="link" href={app.appStoreUrl} target="_blank" rel="noreferrer noopener">App Store</a>
         {:else}
           <span class="muted">Coming soon</span>
         {/if}
