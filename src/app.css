@@ -141,6 +141,18 @@ h3 {
   }
 }
 
+/* External links get a short drawn arrow; the ↗ glyph turns into an emoji or a long thin arrow on iOS. */
+.link[target="_blank"]::after {
+  content: "";
+  display: inline-block;
+  width: 0.5em;
+  height: 0.5em;
+  margin-left: 0.3em;
+  vertical-align: 0.3em;
+  background: currentColor;
+  mask: url("data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 10 10' fill='none' stroke='black' stroke-width='1.5' stroke-linecap='round' stroke-linejoin='round'%3E%3Cpath d='M1.5 8.5l7-7M3 1.5h5.5V7'/%3E%3C/svg%3E") center / contain no-repeat;
+}
+
 .prose {
   max-width: 38rem;
   font-size: 1.125rem;

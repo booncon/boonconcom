@@ -24,7 +24,7 @@
     <p class="muted">
       {app.platforms.join(', ')} ·
       {#if app.appStoreUrl}
-        <a class="link" href={app.appStoreUrl} target="_blank" rel="noreferrer noopener">App Store ↗&#xFE0E;</a>
+        <a class="link" href={app.appStoreUrl} target="_blank" rel="noreferrer noopener">App Store</a>
       {:else}
         Coming soon to the App Store
       {/if}

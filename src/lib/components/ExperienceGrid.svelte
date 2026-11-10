@@ -24,7 +24,7 @@
     <ul>
       {#each content.items as item}
         <li class="list__item">
-          <h3><a class="link" href={item.href} target="_blank" rel="noreferrer noopener">{item.name} ↗&#xFE0E;</a></h3>
+          <h3><a class="link" href={item.href} target="_blank" rel="noreferrer noopener">{item.name}</a></h3>
           <p class="list__meta muted"><span>{item.summary}</span><span>{item.role}</span></p>
         </li>
       {/each}
