@@ -209,12 +209,6 @@ export const site: SiteContent = {
         role: "Advisor",
         summary: "Long-term digital transformation",
       },
-      {
-        name: "booncon Pixels",
-        href: "http://www.valve.fi/",
-        role: "Co-founder",
-        summary: "Digital agency, now Valve",
-      },
     ],
     kpis: [
       {
