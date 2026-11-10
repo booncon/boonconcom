@@ -293,7 +293,7 @@ h3 {
   text-align: right;
 }
 
-/* Lists share two columns so Services, Work and Apps line up */
+/* Lists share two columns so Services, Currently and Apps line up */
 
 .list__item {
   display: grid;

@@ -18,7 +18,7 @@
 </script>
 
 <section class="row" id="work">
-  <h2 class="row__label">Work</h2>
+  <h2 class="row__label">Currently</h2>
 
   <div>
     <ul>
